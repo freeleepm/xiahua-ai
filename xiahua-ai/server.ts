@@ -3,7 +3,7 @@ import { serveDir } from "https://deno.land/std@0.178.0/http/file_server.ts";
 
 serve((req) => {
   return serveDir(req, {
-    fsRoot: "./dist",  // 使用相对路径，指向xiahua-ai目录下的dist文件夹
+    fsRoot: "../xiahua-ai/dist",  // 使用相对路径，指向xiahua-ai目录下的dist文件夹
     urlRoot: "",
     showDirListing: false,
     enableCors: true,
