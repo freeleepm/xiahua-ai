@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-gray-900;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl leading-tight;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  ::selection {
+    @apply bg-primary-500/30 text-primary-900;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-5 py-2.5 rounded-lg font-medium transition-all duration-300 relative overflow-hidden shadow-sm;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0;
+  }
+  
+  .btn-outline {
+    @apply border border-primary-500 text-primary-500 hover:bg-primary-50 hover:shadow-sm hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-500 text-white hover:bg-secondary-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-accent {
+    @apply bg-accent-500 text-white hover:bg-accent-600 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100;
+  }
+
+  .card-glass {
+    @apply bg-white/80 backdrop-blur-sm rounded-xl shadow-md border border-white/20 overflow-hidden;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+  
+  .nav-link {
+    @apply text-gray-700 hover:text-primary-500 font-medium transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-primary-500 after:transition-all after:duration-300 hover:after:w-full;
+  }
+  
+  .nav-link-active {
+    @apply text-primary-500 font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-primary-500;
+  }
+
+  .tech-gradient {
+    @apply bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 animate-gradient-x bg-clip-text text-transparent;
+  }
+
+  .tech-box {
+    @apply relative border border-gray-200 bg-white rounded-xl p-6 overflow-hidden;
+  }
+
+  .tech-box::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 opacity-0 transition-opacity duration-300;
+  }
+
+  .tech-box:hover::before {
+    @apply opacity-100;
+  }
+
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-sm rounded-xl border border-white/20;
+  }
+
+  .glow-effect {
+    @apply relative after:absolute after:inset-0 after:rounded-xl after:shadow-neon after:opacity-0 after:transition-opacity after:duration-300 hover:after:opacity-100;
+  }
+
+  .glow-purple {
+    @apply relative after:absolute after:inset-0 after:rounded-xl after:shadow-neon-purple after:opacity-0 after:transition-opacity after:duration-300 hover:after:opacity-100;
+  }
+
+  .circuit-bg {
+    background-image: 
+      radial-gradient(circle at 25px 25px, rgba(59, 130, 246, 0.15) 2px, transparent 0),
+      linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 via-secondary-500 to-primary-400;
+}
+
+.bg-gradient-tech {
+  @apply bg-gradient-to-r from-primary-600 via-secondary-500 to-primary-400;
+}
+
+.grid-pattern {
+  background-image: radial-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.8) 50%, 
+    rgba(255, 255, 255, 0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-300 rounded-full hover:bg-primary-400;
+}
+
+/* 打字机效果 */
+.typing-effect {
+  width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid;
+  animation: typing 3.5s steps(40, end), blink .75s step-end infinite;
+}
+
+/* 背景网格效果 */
+.dot-grid {
+  background-image: 
+    radial-gradient(rgba(59, 130, 246, 0.2) 1px, transparent 0),
+    radial-gradient(rgba(59, 130, 246, 0.2) 1px, transparent 0);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
