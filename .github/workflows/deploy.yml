@@ -38,7 +38,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "xiahua-ai-88"
-          entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
-          root: "xiahua-ai"
+          entrypoint: "server.ts"
+          root: ""
           
           
