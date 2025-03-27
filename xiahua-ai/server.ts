@@ -1,29 +1,53 @@
+// 文件: server.ts
 import { serve } from "https://deno.land/std@0.178.0/http/server.ts";
-import { serveDir } from "https://deno.land/std@0.178.0/http/file_server.ts";
 
-// 导入你的静态资源
-import indexHtml from "./dist/index.html" assert { type: "text" };
-// 其他资源同理导入
+// 创建静态资源映射
+const staticFiles = {
+  "/": "/index.html",
+  "/index.html": "/index.html",
+  // 添加其他关键静态资源的映射
+};
 
-serve((req) => {
+serve(async (req) => {
   const url = new URL(req.url);
-  const path = url.pathname;
+  let path = url.pathname;
   
-  // 路由处理
-  if (path === "/" || path === "/index.html") {
-    return new Response(indexHtml, {
-      headers: { "content-type": "text/html" },
-    });
+  // 处理根路径
+  if (path === "/") path = "/index.html";
+  
+  // 对于单页应用，所有非静态资源请求都返回index.html
+  if (!path.includes(".")) {
+    path = "/index.html";
   }
   
-  // 处理其他静态资源...
+  // 返回静态资源
+  try {
+    // 尝试从GitHub Pages等CDN获取静态资源
+    // 替换为您的实际静态资源托管地址
+    const res = await fetch(`https://您的GitHub用户名.github.io/xiahua-ai${path}`);
+    
+    if (res.ok) {
+      return new Response(res.body, {
+        headers: res.headers,
+      });
+    }
+  } catch (e) {
+    console.error(e);
+  }
   
-  // 默认返回404
+  // 找不到资源时返回index.html（对SPA很重要）
+  if (!path.endsWith(".js") && !path.endsWith(".css") && !path.endsWith(".png") && !path.endsWith(".jpg")) {
+    try {
+      const indexRes = await fetch(`https://您的GitHub用户名.github.io/xiahua-ai/index.html`);
+      if (indexRes.ok) {
+        return new Response(indexRes.body, {
+          headers: { "Content-Type": "text/html" },
+        });
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  
   return new Response("Not Found", { status: 404 });
-}, { 
-  port: 8000,
-  // 添加主机配置，使其在任何网络接口上可访问
-  hostname: "0.0.0.0"
 });
-
-console.log("服务器运行在 http://localhost:8000/");
