@@ -38,7 +38,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "xiahua-ai-98"
-          entrypoint: "server.ts"
+          entrypoint: ""
           root: "dist"
           
           
