@@ -64,6 +64,7 @@
 
       <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
         <p>© {{ new Date().getFullYear() }} 小华同学AI. 保留所有权利.</p>
+        <p class="mt-2 text-sm text-gray-500">网页设计 by 小华同学AI团队</p>
         <div class="mt-3 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
           <router-link to="/sitemap.xml" class="hover:text-primary-500 transition-colors">网站地图</router-link>
           <router-link to="/privacy" class="hover:text-primary-500 transition-colors">隐私政策</router-link>

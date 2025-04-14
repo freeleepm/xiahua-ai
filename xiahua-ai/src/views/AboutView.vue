@@ -60,7 +60,7 @@
             
             <!-- 社交链接 -->
             <div class="flex flex-wrap gap-4 justify-center lg:justify-start opacity-0 animate-fade-in-up animation-delay-600">
-              <a href="#" class="group flex items-center gap-3 px-6 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-105 hover:shadow-glow">
+              <a href="https://github.com/freeleepm" target="_blank" class="group flex items-center gap-3 px-6 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-105 hover:shadow-glow">
                 <svg class="w-5 h-5 group-hover:scale-110 transition-transform group-hover:text-primary-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
                 </svg>
@@ -68,10 +68,9 @@
               </a>
               
               <!-- Gitee (替换Twitter) -->
-              <a href="#" class="group flex items-center gap-3 px-6 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-105 hover:shadow-glow">
-                <svg class="w-5 h-5 group-hover:scale-110 transition-transform group-hover:text-primary-300" viewBox="0 0 1024 1024" fill="currentColor">
-                  <path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="currentColor"></path>
-                  <path d="M771.168 636.064c-3.392 0-6.784-0.064-10.24-0.128H464.96a25.6 25.6 0 0 0-25.6 25.6v12.864c0 14.144 11.456 25.6 25.6 25.6h296.032c110.656 0 180.736-36.48 180.736-166.528V419.456c0-13.312-10.816-24.128-24.192-24.128h-13.824a24.128 24.128 0 0 0-24.128 24.128v98.048c0 84.864-43.648 118.56-108.416 118.56z m-257.088-435.2c-3.2 0-6.4 0.064-9.536 0.128H262.656a25.6 25.6 0 0 0-25.6 25.6v12.864c0 14.144 11.456 25.6 25.6 25.6h241.792a119.36 119.36 0 0 1 119.36 119.36v18.496c0 14.08 11.456 25.6 25.6 25.6h14.784c14.144 0 25.6-11.52 25.6-25.6v-18.496c0-123.84-100.48-184.064-175.712-184.064z" fill="white"></path>
+              <a href="https://gitee.com/leepm" target="_blank" class="group flex items-center gap-3 px-6 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-105 hover:shadow-glow">
+                <svg t="1743604432509" class="w-5 h-5 group-hover:scale-110 transition-transform group-hover:text-primary-300" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1997" width="200" height="200">
+                  <path d="M896.3052803 427.59336267H465.08398823c-20.69630173 0-37.49062554 16.79432382-37.49062556 37.49062555l-0.02636472 93.75292941c0 20.69630173 16.76795911 37.49062554 37.49062556 37.51699027h262.51347546c20.69630173 0 37.49062554 16.79432382 37.49062555 37.49062638v18.74531277a112.49824219 112.49824219 0 0 1-112.49824219 112.49824219H296.32344217a37.49062554 37.49062554 0 0 1-37.49062554-37.49062556V371.38378824a112.49824219 112.49824219 0 0 1 112.49824218-112.49824219L896.22618615 258.85918133c20.69630173 0 37.49062554-16.76795911 37.49062557-37.46426165L933.79590585 127.64199027h0.02636472A37.49062554 37.49062554 0 0 0 896.35800973 90.125h-0.02636471L371.38378824 90.15136472C216.06924714 90.15136472 90.15136472 216.06924714 90.15136472 371.38378824v524.94785678c0 20.69630173 16.79432382 37.49062554 37.49062555 37.49062555h553.07900829a253.101272 253.101272 0 0 0 253.10127201-253.10127201v-215.61064563c0-20.69630173-16.79432382-37.49062554-37.49062555-37.49062554z" p-id="1998" fill="currentColor"></path>
                 </svg>
                 <span>Gitee</span>
               </a>
@@ -332,7 +331,7 @@
             </div>
           </a>
           
-          <a href="https://github.com/freeleepm/" target="_blank" 
+          <a href="https://github.com/freeleepm" target="_blank" 
              class="group bg-white p-10 text-center rounded-2xl border border-gray-100 shadow-lg shadow-primary-100/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl relative overflow-hidden opacity-0 animate-fade-in-up animation-delay-500">
             <!-- 背景装饰 -->
             <div class="absolute inset-0 bg-gradient-to-br from-primary-50 to-white opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
