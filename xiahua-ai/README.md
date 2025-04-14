@@ -1,7 +1,7 @@
 # 小华同学AI官网
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
-[![GitHub stars](https://img.shields.io/github/stars/yourname/xiahua-ai.svg?style=social)](https://github.com/yourname/xiahua-ai) 
+[![GitHub stars](https://img.shields.io/github/stars/freeleepm/xiahua-ai.svg?style=social)](https://github.com/freeleepm/xiahua-ai) 
 
 一个免费开源的现代化博客/官网模板，基于Vue 3 + Vite开发，帮助开发者快速搭建专业级网站。
 
