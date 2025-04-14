@@ -119,7 +119,9 @@ npm run preview
 
 ## 截图展示
 
-效果:[www.leepm.com](www.leepm.com)
+**最终效果**
+
+[www.leepm.com](https://www.leepm.com)
 
 网站设计以现代科技感为主题，展示了小华同学AI的技术实力和产品理念。以下是各页面的截图：
 
