@@ -162,3 +162,13 @@ npm run preview
 
 - 邮箱：[contact@xiahua-ai.com](mailto:contact@xiahua-ai.com)
 - 官网：[https://xiahua-ai.com](https://xiahua-ai.com)
+
+## 技术交流
+
+如果你有任何对 xiaohua-ai 产品上的想法、意见或建议，或商务上的合作需求，请扫码添加 xiaohua-ai 项目团队进一步沟通：
+![输入图片说明](./xiahua-ai/public/images/screenshots/shawn_huangxing_qrcode.png)
+
+
+## 给个鼓励
+
+如果觉得还不错，请 Watching，Starred，Fork 吧 ☺
