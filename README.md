@@ -33,7 +33,7 @@
 ## 快速开始
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/yourname/xiahua-ai.git
+git clone https://github.com/freeleepm/xiahua-ai.git
 
 # 2. 安装依赖
 npm install
@@ -119,19 +119,21 @@ npm run preview
 
 ## 截图展示
 
+效果:[www.leepm.com](www.leepm.com)
+
 网站设计以现代科技感为主题，展示了小华同学AI的技术实力和产品理念。以下是各页面的截图：
 
 ### 首页截图
-![首页](./public/images/screenshots/homepage.png)
+![首页](./xiahua-ai/public/images/screenshots/homepage.png)
 
 ### 产品页截图
-![产品页](./public/images/screenshots/products.png)
+![产品页](./xiahua-ai/public/images/screenshots/products.png)
 
 ### 开源项目页截图
-![开源项目](./public/images/screenshots/projects.png)
+![开源项目](./xiahua-ai/public/images/screenshots/projects.png)
 
 ### 关于我们页截图
-![关于我们](./public/images/screenshots/about.png)
+![关于我们](./xiahua-ai/public/images/screenshots/about.png)
 
 ## 产品优势
 
