@@ -1,0 +1,26 @@
+[build]
+  base = "xiahua-ai/"
+  command = "npm run build"
+  publish = "dist"
+
+# 处理SPA路由
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# 优化缓存设置
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable" 
