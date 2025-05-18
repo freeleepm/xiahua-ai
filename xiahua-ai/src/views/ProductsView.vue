@@ -200,12 +200,44 @@ const categories = [
 // 产品数据 - 添加更多详细信息
 const products = [
   {
+    id: 'watermark',
+    title: '证件水印',
+    description: '智能证件水印防伪系统，为您的重要证件提供专业的数字水印保护，有效防止证件被盗用或篡改。支持身份证、证书等多种证件类型，确保文件安全性与真实性。',
+    image: 'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    categoryId: 'assist',
+    isFree: false
+  },
+  {
+    id: 'id-photo',
+    title: '小花证件照',
+    description: '智能证件照制作工具，一键生成符合各类规格的证件照。支持智能修图美化、背景更换、规格自动调整等功能，让您轻松获得专业级证件照。适用于身份证、护照、签证等多种场景。',
+    image: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    categoryId: 'assist',
+    isFree: false
+  },
+  {
     id: 'ai-writing',
     title: 'AI写作助手',
-    description: '基于大型语言模型的智能写作工具，提升您的文字创作效率，支持多种文体和风格定制。',
-    image: 'https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    description: '基于大型语言模型的智能写作工具，提升您的文字创作效率。',
+    image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600',
     categoryId: 'ai',
     isFree: false
+  },
+  {
+    id: 'legal-eye',
+    title: '法眼',
+    description: '法眼AI智能合同审核平台利用先进的人工智能技术，对合同进行全方位分析',
+    image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600',
+    categoryId: 'ai',
+    isFree: false
+  },
+  {
+    id: 'mcp-hub',
+    title: 'MCP中文资源中心',
+    description: '发现并推荐AI优质MCP服务',
+    image: 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600',
+    categoryId: 'ai',
+    isFree: true
   },
   {
     id: 'data-analysis',
