@@ -76,58 +76,57 @@
       
       <div class="container-custom relative z-10">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div v-for="product in filteredProducts" :key="product.id" class="card group glow-effect backdrop-blur-sm bg-white/95 border border-gray-100 hover:border-primary-100 transition-all duration-300 rounded-xl overflow-hidden">
-            <div class="h-52 bg-gray-100 overflow-hidden relative">
-              <!-- 产品图片 -->
-              <img :src="product.image" :alt="product.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-              
-              <!-- 状态标签 -->
-              <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-primary-700 font-medium border border-primary-100 shadow-sm">
-                {{ getCategoryName(product.categoryId) }}
+          <div v-for="product in filteredProducts" :key="product.id" class="group relative">
+            <!-- 卡片主体 -->
+            <div class="relative flex flex-col h-full bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-100">
+              <div class="h-52 bg-gray-100 overflow-hidden relative">
+                <!-- 产品图片 -->
+                <img :src="product.image" :alt="product.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                
+                <!-- 状态标签 -->
+                <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-primary-700 font-medium border border-primary-100 shadow-sm">
+                  {{ getCategoryName(product.categoryId) }}
+                </div>
               </div>
               
-              <!-- 渐变叠加 -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              <!-- 产品图片边框装饰 -->
-              <div class="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-white/60 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div class="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-white/60 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="p-6 flex flex-col flex-grow">
+                <h3 class="text-xl font-bold mb-3 group-hover:text-primary-600 transition-colors">
+                  {{ product.title }}
+                </h3>
+                
+                <p class="text-gray-600 mb-6 flex-grow">{{ product.description }}</p>
+                
+                <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                  <div class="flex items-center">
+                    <span v-if="product.isFree" class="flex items-center text-green-600 font-medium bg-green-50 px-3 py-1.5 rounded-full text-xs">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      免费使用
+                    </span>
+                    <span v-else class="flex items-center text-primary-600 font-medium bg-primary-50 px-3 py-1.5 rounded-full text-xs">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      付费产品
+                    </span>
+                  </div>
+                  
+                  <router-link 
+                    :to="`/products/${product.id}`" 
+                    class="inline-flex items-center px-4 py-2 rounded-lg bg-primary-50 hover:bg-primary-100 text-primary-600 font-medium text-sm transition-all duration-200 hover:shadow-md"
+                  >
+                    了解详情
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </router-link>
+                </div>
+              </div>
             </div>
             
-            <div class="p-6 relative">
-              <!-- 科技感装饰元素 -->
-              <div class="absolute top-0 right-0 w-20 h-20 opacity-5 circuit-bg"></div>
-              
-              <h3 class="text-xl font-bold mb-3 group-hover:text-primary-600 transition-colors flex items-center">
-                {{ product.title }}
-                <div class="ml-2 w-1.5 h-1.5 rounded-full bg-primary-500 opacity-80"></div>
-              </h3>
-              
-              <p class="text-gray-600 mb-6">{{ product.description }}</p>
-              
-              <div class="flex justify-between items-center pt-2 border-t border-gray-100">
-                <div class="flex items-center">
-                  <span v-if="product.isFree" class="flex items-center text-green-600 font-medium bg-green-50 px-3 py-1.5 rounded-full text-xs">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    免费使用
-                  </span>
-                  <span v-else class="flex items-center text-primary-600 font-medium bg-primary-50 px-3 py-1.5 rounded-full text-xs">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    付费产品
-                  </span>
-                </div>
-                <router-link :to="`/products/${product.id}`" class="btn-primary-outline btn-sm group">
-                  了解详情
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 inline-block transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </router-link>
-              </div>
-            </div>
+            <!-- 悬浮效果遮罩 -->
+            <div class="absolute inset-0 pointer-events-none bg-gradient-to-tr from-primary-500/0 to-primary-500/0 group-hover:from-primary-500/5 group-hover:to-primary-500/10 rounded-xl transition-colors duration-300"></div>
           </div>
         </div>
 
@@ -201,7 +200,7 @@ const categories = [
 // 产品数据 - 添加更多详细信息
 const products = [
   {
-    id: 1,
+    id: 'ai-writing',
     title: 'AI写作助手',
     description: '基于大型语言模型的智能写作工具，提升您的文字创作效率，支持多种文体和风格定制。',
     image: 'https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1080',
@@ -209,7 +208,7 @@ const products = [
     isFree: false
   },
   {
-    id: 2,
+    id: 'data-analysis',
     title: '智能数据分析平台',
     description: '利用AI处理和分析海量数据，发现隐藏的商业洞见，助力企业做出更明智的决策。',
     image: 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080',
@@ -217,7 +216,7 @@ const products = [
     isFree: false
   },
   {
-    id: 3,
+    id: 'voice-assistant',
     title: '智能语音助手',
     description: '自然交互的语音助手，为您提供全方位的智能服务，打造无缝的人机交互体验。',
     image: 'https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg?auto=compress&cs=tinysrgb&w=1080',
@@ -225,7 +224,7 @@ const products = [
     isFree: true
   },
   {
-    id: 4,
+    id: 'code-assistant',
     title: '代码辅助工具',
     description: '智能代码补全与优化工具，提高开发效率，减少错误，适合各种编程语言。',
     image: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1080',
@@ -233,7 +232,7 @@ const products = [
     isFree: true
   },
   {
-    id: 5,
+    id: 'data-viz',
     title: '数据可视化工具',
     description: '直观展示复杂数据关系，定制各类图表与仪表盘，让数据更易理解。',
     image: 'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=1080',
@@ -241,7 +240,7 @@ const products = [
     isFree: false
   },
   {
-    id: 6,
+    id: 'creative-inspiration',
     title: '创意灵感生成器',
     description: '突破创意瓶颈，获取新鲜灵感，适用于设计师、作家、营销人员等创意工作者。',
     image: 'https://images.pexels.com/photos/3758105/pexels-photo-3758105.jpeg?auto=compress&cs=tinysrgb&w=1080',
@@ -332,39 +331,26 @@ onMounted(() => {
   background: linear-gradient(135deg, #3a66db 0%, #2e51bb 100%);
 }
 
-/* 卡片光效 */
-.glow-effect:hover {
+/* 卡片基础样式 */
+.card {
+  background: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
   box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
 }
 
-/* 按钮小号尺寸 */
-.btn-sm {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
+/* 隐藏滚动条但保持功能 */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* 轮廓按钮样式 */
-.btn-primary-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  border-radius: 0.375rem;
-  padding: 0.375rem 0.75rem;
-  background-color: transparent;
-  color: #3b82f6;
-  border: 1px solid #3b82f6;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn-primary-outline:hover {
-  background-color: rgba(59, 130, 246, 0.05);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
-}
-
-.btn-primary-outline:active {
-  transform: translateY(0);
-  box-shadow: none;
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 </style> 

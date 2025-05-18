@@ -1,0 +1,35 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 路由和导航
+
+本项目使用Vue Router进行页面导航和路由管理。
+
+## 路由配置
+主要路由配置文件：[xiahua-ai/src/router/index.js](mdc:xiahua-ai/src/router/index.js)
+
+## 路由结构
+- `/`: 首页
+- `/products`: 产品列表页
+- `/products/:id`: 产品详情页（动态路由）
+- `/projects`: 项目展示页
+- `/about`: 关于页面
+- `/:pathMatch(.*)`: 404页面（捕获所有未匹配路由）
+
+## 路由功能
+1. 动态路由参数：使用`:id`参数从URL中获取产品ID
+2. 组件懒加载：使用`() => import()`动态导入组件，提高首屏加载速度
+3. 路由元信息：使用`meta`字段设置页面标题和描述，用于SEO优化
+4. 滚动行为：页面切换时自动回到顶部
+
+## 页面间导航
+- `<router-link>`：声明式导航组件，如产品列表页到详情页
+- `router.push()`：编程式导航，如处理错误时重定向到其他页面
+- 返回按钮：从详情页返回列表页等
+
+## 实际应用
+- 产品列表到详情页导航：`<router-link :to="/products/${product.id}">`
+- 产品详情页获取ID：`const productId = route.params.id`
+- 错误处理导航：`router.push('/products')`

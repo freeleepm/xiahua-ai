@@ -371,7 +371,7 @@
                          index === 1 ? 'bg-secondary-100 text-secondary-700' : 
                          'bg-accent-100 text-accent-700'
                        ]">
-                      <span class="sr-only">版本</span>{{ ['1.0', '2.1', '3.5'][index] }}
+                      <span class="sr-only">版本</span>{{ ['1.0', '2.1', '3.5','1.0', '2.1', '3.5','1.0', '3.5'][index] }}
                     </span>
                   </h3>
                   <span class="inline-block px-3 py-1 rounded-full text-xs font-medium"
@@ -392,13 +392,13 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                     </svg>
-                    {{ [124, 78, 92][index] }} Stars
+                    {{ project.stars || [124, 78, 92][index] }} Stars
                   </div>
                   <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                     </svg>
-                    {{ [35, 22, 18][index] }} Forks
+                    {{ project.forks || [35, 22, 18][index] }} Forks
                   </div>
                   <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -785,6 +785,75 @@ const techStack = [
 // 项目数据
 const projects = [
   {
+    name: 'Litemes',
+    description: '一个轻量级的MES生产制造执行系统',
+    image: 'https://images.pexels.com/photos/3862605/pexels-photo-3862605.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    status: '积极开发中',
+    technologies: [
+      { name: 'Python', color: 'blue' },
+      { name: 'Django', color: 'green' },
+    ],
+    github: 'https://github.com/freeleepm/LiteMES',
+    demo: null,
+    stars: 128,
+    forks: 42
+  },
+  {
+    name: 'Mini-Contract',
+    description: '一个迷你的电子签合同管理系统。',
+    image: 'https://images.pexels.com/photos/48148/document-agreement-documents-sign-48148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    status: '积极开发中',
+    technologies: [
+      { name: 'Python', color: 'blue' },
+      { name: 'Flask', color: 'gray' },
+    ],
+    github: 'https://github.com/freeleepm/mini-contract',
+    demo: null,
+    stars: 86,
+    forks: 24
+  },
+  {
+    name: 'Freesign',
+    description: '一个免费的电子签名应用（金融）',
+    image: 'https://images.pexels.com/photos/8970290/pexels-photo-8970290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    status: '概念验证',
+    technologies: [
+      { name: 'JavaScript', color: 'yellow' },
+      { name: 'Vue.js', color: 'green' },
+    ],
+    github: 'https://github.com/freeleepm/freesign',
+    demo: null,
+    stars: 65,
+    forks: 18
+  },
+  {
+    name: 'EPUB to HTML Converter',
+    description: '将 EPUB 文件转换为 HTML 格式。',
+    image: 'https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    status: '维护中',
+    technologies: [
+      { name: 'Python', color: 'blue' },
+    ],
+    github: 'https://github.com/freeleepm/epub-to-html',
+    demo: null,
+    stars: 92,
+    forks: 31
+  },
+  {
+    name: 'xiaohua-ai',
+    description: '免费开源个人博客网站（xiaohua-ai）',
+    image: 'https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    status: '积极开发中',
+    technologies: [
+      { name: 'Python', color: 'blue' },
+      { name: 'Tkinter', color: 'purple' },
+    ],
+    github: 'https://github.com/freeleepm/xiahua-ai',
+    demo: null,
+    stars: 156,
+    forks: 47
+  },
+  {
     name: 'AI-Text-Generator',
     description: '基于深度学习的文本生成工具，支持多种语言和风格定制。可用于内容创作、自动写作和文案生成等场景。集成了多种先进的NLP模型，提供API和Web界面。',
     image: 'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600',
@@ -1022,4 +1091,4 @@ onMounted(() => {
     0 0 10px rgba(59, 130, 246, 0.3),
     0 0 15px rgba(59, 130, 246, 0.1);
 }
-</style> 
+</style>

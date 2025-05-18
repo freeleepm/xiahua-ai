@@ -53,7 +53,7 @@ const navItems = [
   { label: '首页', path: '/' },
   { label: '产品', path: '/products' },
   { label: '开源项目', path: '/projects' },
-  { label: '关于我', path: '/about' }
+  { label: '关于我们', path: '/about' }
 ]
 </script>
 

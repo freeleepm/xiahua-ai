@@ -20,6 +20,15 @@ const routes = [
     }
   },
   {
+    path: '/products/:id',
+    name: 'product-detail',
+    component: () => import('../views/ProductDetailView.vue'),
+    meta: { 
+      title: '产品详情 - 小华同学AI', 
+      description: '了解小华同学AI产品的详细信息、功能特点和技术规格，选择最适合您需求的智能解决方案。' 
+    }
+  },
+  {
     path: '/projects',
     name: 'projects',
     component: () => import('../views/ProjectsView.vue'),
@@ -35,6 +44,24 @@ const routes = [
     meta: { 
       title: '关于我 - 小华同学AI', 
       description: '了解小华同学AI的故事、团队和技术理念，以及我们如何通过技术创新推动行业发展。' 
+    }
+  },
+  {
+    path: '/privacy',
+    name: 'privacy',
+    component: () => import('../views/PrivacyView.vue'),
+    meta: { 
+      title: '隐私政策 - 小华同学AI',
+      description: '了解小华同学AI如何保护您的隐私和个人信息，以及我们的数据收集和使用政策。' 
+    }
+  },
+  {
+    path: '/terms',
+    name: 'terms',
+    component: () => import('../views/TermsView.vue'),
+    meta: { 
+      title: '服务条款 - 小华同学AI',
+      description: '查看小华同学AI的服务条款，了解使用我们服务时的权利和义务。' 
     }
   },
   {

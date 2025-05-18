@@ -37,13 +37,13 @@
             <li><router-link to="/" class="text-gray-400 hover:text-primary-500 transition-colors">首页</router-link></li>
             <li><router-link to="/products" class="text-gray-400 hover:text-primary-500 transition-colors">产品</router-link></li>
             <li><router-link to="/projects" class="text-gray-400 hover:text-primary-500 transition-colors">开源项目</router-link></li>
-            <li><router-link to="/about" class="text-gray-400 hover:text-primary-500 transition-colors">关于我</router-link></li>
+            <li><router-link to="/about" class="text-gray-400 hover:text-primary-500 transition-colors">关于我们</router-link></li>
           </ul>
         </div>
 
         <!-- 联系方式 -->
         <div>
-          <h3 class="text-white text-lg font-semibold mb-4">联系我</h3>
+          <h3 class="text-white text-lg font-semibold mb-4">联系我们</h3>
           <ul class="space-y-2">
             <li class="flex items-center gap-2 text-gray-400">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +64,7 @@
 
       <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
         <p>© {{ new Date().getFullYear() }} 小华同学AI. 保留所有权利.</p>
-        <p class="mt-2 text-sm text-gray-500">网页设计 by 小华同学AI团队</p>
+        <p class="mt-2 text-sm text-gray-500">Designed by Xiaohua AI Team</p>
         <div class="mt-3 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
           <router-link to="/sitemap.xml" class="hover:text-primary-500 transition-colors">网站地图</router-link>
           <router-link to="/privacy" class="hover:text-primary-500 transition-colors">隐私政策</router-link>

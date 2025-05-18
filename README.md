@@ -144,6 +144,24 @@ npm run preview
 - **AI应用定制**：根据企业需求提供定制化AI解决方案，助力业务创新和效率提升
 - **开源生态**：积极参与开源社区，推动AI技术的开放和共享
 
+## 🌟 其他开源项目
+
+除了本项目 (小华同学AI官网) 外，我还维护了以下优秀的开源项目，欢迎大家 Star 和 Fork：
+
+- **[LiteMES](https://github.com/freeleepm/LiteMES)**: 免费开源MES(小型生产制造系统)，一款专为广大中小型企业量身打造的生产制造全链路执行系统。 <mcreference link="https://github.com/freeleepm/LiteMES" index="0">0</mcreference>
+  [![LiteMES Screenshot](https://via.placeholder.com/400x200.png?text=LiteMES)](https://github.com/freeleepm/LiteMES)
+
+- **[Mini-Contract](https://github.com/freeleepm/mini-contract)**: 商业级的免费开源电子合同产品，提供全方位的合同签署体验，独创“证据链”与“非证据链”两种签署模式。 <mcreference link="https://github.com/freeleepm/mini-contract" index="1">1</mcreference>
+  [![Mini-Contract Screenshot](https://via.placeholder.com/400x200.png?text=Mini-Contract)](https://github.com/freeleepm/mini-contract)
+
+- **[FreeSign](https://github.com/freeleepm/freesign)**: 方便签，一款创新的在线电子合同签署产品，集成金融级安全功能，如“人脸识别、人证对比”。 <mcreference link="https://github.com/freeleepm/freesign" index="3">3</mcreference>
+  [![FreeSign Screenshot](https://via.placeholder.com/400x200.png?text=FreeSign)](https://github.com/freeleepm/freesign)
+
+- **[EPUB to HTML Converter](https://github.com/freeleepm/epub-to-html)**: 一个 Python 脚本，用于将 EPUB 文件转换为 HTML 格式，支持单文件或多文件输出。 <mcreference link="https://github.com/freeleepm/epub-to-html" index="4">4</mcreference>
+  [![EPUB to HTML Screenshot](https://via.placeholder.com/400x200.png?text=EPUB+to+HTML)](https://github.com/freeleepm/epub-to-html)
+
+*注：本项目 (小华同学AI官网) 的 GitHub 仓库是 [freeleepm/xiahua-ai](https://github.com/freeleepm/xiahua-ai)。*
+
 ## 贡献指南
 
 欢迎对本项目进行贡献，请遵循以下步骤：

@@ -200,44 +200,36 @@
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div v-for="(product, index) in featuredProducts" :key="index" class="card group glow-effect">
-            <div class="h-48 bg-gray-100 overflow-hidden relative">
-              <!-- 图片 -->
-              <img :src="product.image" :alt="product.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-              
-              <!-- 顶部状态指示器 -->
-              <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-primary-700 font-medium border border-primary-100 shadow-sm">
-                {{ ['新品', '热门', '推荐'][index] }}
+          <div v-for="(product, index) in featuredProducts" :key="index" class="group relative">
+            <!-- 卡片主体 -->
+            <div class="card h-full flex flex-col bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+              <div class="h-48 bg-gray-100 overflow-hidden relative">
+                <!-- 图片 -->
+                <img :src="product.image" :alt="product.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                
+                <!-- 顶部状态指示器 -->
+                <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-primary-700 font-medium border border-primary-100 shadow-sm">
+                  {{ ['新品', '热门', '推荐'][index] }}
+                </div>
               </div>
               
-              <!-- 技术指示叠加层 -->
-              <div class="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                <div class="p-4 w-full">
-                  <div class="flex gap-2 mb-2">
-                    <span v-for="(tag, tagIndex) in ['AI', '云端', '数据'][index].split(' ')" :key="tagIndex" class="text-xs py-1 px-2 bg-white/20 text-white rounded-full backdrop-blur-sm">{{ tag }}</span>
-                  </div>
-                </div>
+              <div class="p-6 flex flex-col flex-grow">
+                <h3 class="text-xl font-bold mb-2 group-hover:text-primary-600 transition-colors">{{ product.title }}</h3>
+                <p class="text-gray-600 mb-4 flex-grow">{{ product.description }}</p>
+                <router-link 
+                  :to="`/products/${product.id}`" 
+                  class="inline-flex items-center text-primary-500 font-medium hover:text-primary-600 transition-colors group-hover:translate-x-1 transition-transform duration-300"
+                >
+                  了解更多
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </router-link>
               </div>
             </div>
             
-            <div class="p-6 relative">
-              <!-- 科技感装饰元素 -->
-              <div class="absolute top-0 right-0 w-16 h-16 opacity-10 circuit-bg"></div>
-              
-              <h3 class="text-xl font-bold mb-2 flex items-center">
-                {{ product.title }}
-                <span class="ml-2 inline-flex items-center justify-center w-5 h-5 bg-primary-100 text-primary-700 rounded-full text-xs">
-                  <span class="sr-only">版本</span>{{ ['1.0', '2.1', '3.5'][index] }}
-                </span>
-              </h3>
-              <p class="text-gray-600 mb-4">{{ product.description }}</p>
-              <router-link :to="`/products/${product.id}`" class="text-primary-500 font-medium hover:text-primary-600 transition-colors flex items-center group-hover:translate-x-1 transition-transform duration-300">
-                了解更多
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </router-link>
-            </div>
+            <!-- 悬浮效果遮罩 -->
+            <div class="absolute inset-0 bg-primary-500/0 group-hover:bg-primary-500/5 transition-colors duration-300 pointer-events-none rounded-xl"></div>
           </div>
         </div>
         
@@ -543,43 +535,46 @@ import { onMounted } from 'vue';
 // 模拟数据
 const featuredProducts = [
   {
-    id: 1,
+    id: 'ai-writing',
     title: 'AI写作助手',
     description: '基于大型语言模型的智能写作工具，提升您的文字创作效率。',
-    image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600'
+    image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600',
+    category: 'ai-tools'
   },
   {
-    id: 2,
-    title: '智能数据分析平台',
-    description: '利用AI处理和分析海量数据，发现隐藏的商业洞见。',
-    image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600'
+    id: 'legal-eye',
+    title: '法眼',
+    description: '法眼AI智能合同审核平台利用先进的人工智能技术，对合同进行全方位分析',
+    image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600',
+    category: 'enterprise'
   },
   {
-    id: 3,
-    title: '智能语音助手',
-    description: '自然交互的语音助手，为您提供全方位的智能服务。',
-    image: 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600'
+    id: 'mcp-hub',
+    title: 'MCP中文资源中心',
+    description: '发现并推荐AI优质MCP服务',
+    image: 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600',
+    category: 'platform'
   }
 ]
 
 const openSourceProjects = [
   {
-    name: 'AI-Text-Generator',
-    description: '开源的AI文本生成工具，支持多种语言和风格定制。',
-    tags: ['JavaScript', 'Python', 'AI', 'NLP'],
-    link: 'https://github.com'
+    name: 'Litemes',
+    description: '一个轻量级的MES生产制造执行系统',
+    tags: ['JavaScript', 'Vue'],
+    link: 'https://github.com/freeleepm/LiteMES'
   },
   {
-    name: 'Data-Viz-Library',
-    description: '强大的数据可视化库，使数据展示更加直观美观。',
-    tags: ['Vue', 'D3.js', 'Data Visualization'],
-    link: 'https://github.com'
+    name: 'Freesign',
+    description: '一个免费的电子签名应用（金融）',
+    tags: ['Vue', 'D3.js'],
+    link: 'https://github.com/freeleepm/freesign'
   },
   {
-    name: 'Smart-IoT-Framework',
-    description: '轻量级IoT设备管理框架，简化智能设备开发流程。',
-    tags: ['IoT', 'Embedded Systems', 'C++'],
-    link: 'https://github.com'
+    name: 'Mini-Contract',
+    description: '一个迷你的电子签合同管理系统',
+    tags: ['Vue'],
+    link: 'https://github.com/freeleepm/mini-contract'
   }
 ]
 
