@@ -19,10 +19,10 @@
             探索AI技术落地应用
           </span>
         </div>
-        <h1 class="text-white mb-4">我的<span class="relative inline-block">
+        <h1 class="text-white mb-4">我们的<span class="relative inline-block">
           <span class="absolute inset-0 bg-white/10 transform -skew-x-12 -z-10 rounded"></span>产品
         </span></h1>
-        <p class="text-white text-opacity-90 text-xl max-w-2xl">探索小华同学AI开发的创新产品，体验科技带来的智能生活方式</p>
+        <p class="text-white text-opacity-90 text-xl max-w-2xl">探索小华同学AI团队开发的创新产品，体验科技带来的智能生活方式</p>
       </div>
     </section>
 
@@ -174,7 +174,7 @@
           </p>
           
           <router-link to="/about" class="btn bg-white text-primary-600 hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-1 active:translate-y-0">
-            联系我
+            联系我们
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>

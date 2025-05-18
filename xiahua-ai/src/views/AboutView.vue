@@ -281,7 +281,7 @@
           <span class="inline-block text-primary-500 text-sm font-medium tracking-wider uppercase mb-3 opacity-0 animate-fade-in-up">保持联系</span>
           <h2 class="text-4xl font-light mb-6 opacity-0 animate-fade-in-up animation-delay-100">
             联系<span class="relative inline-block mx-2">
-              <span class="text-primary-600 font-bold">我</span>
+              <span class="text-primary-600 font-bold">我们</span>
               <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary-500 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 animate-width-grow"></span>
             </span>
           </h2>
