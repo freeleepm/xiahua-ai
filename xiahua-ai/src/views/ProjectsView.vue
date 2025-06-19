@@ -19,7 +19,7 @@
             <span class="flex items-center">
               <span class="inline-block w-2 h-2 rounded-full bg-primary-500 mr-2 animate-pulse"></span>
               <span class="relative">
-                开源驱动创新
+                {{ t('projects.openSourceDriven') }}
                 <span class="absolute -bottom-0.5 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></span>
               </span>
             </span>
@@ -32,12 +32,12 @@
                 <!-- 装饰线条 -->
                 <span class="hidden md:inline-block w-8 h-px bg-gradient-to-r from-transparent to-white/70 mr-3 vertical-middle"></span>
                 <span class="relative hover:-translate-y-1 transition-transform duration-300 group">
-                  开
+                  {{ t('projects.title').charAt(0) }}
                   <span class="absolute -top-1 -right-1 w-1.5 h-1.5 bg-primary-300 rounded-full animate-ping"></span>
                   <span class="absolute bottom-0 left-0 right-0 h-0.5 w-0 group-hover:w-full bg-white/40 transition-all duration-300"></span>
                 </span>
                 <span class="relative hover:-translate-y-1 transition-transform duration-300 group" style="transition-delay: 50ms">
-                  源
+                  {{ t('projects.title').charAt(1) }}
                   <span class="absolute -bottom-1 -right-1 w-1.5 h-1.5 bg-primary-300 rounded-full animate-ping" style="animation-delay: 0.5s"></span>
                   <span class="absolute bottom-0 left-0 right-0 h-0.5 w-0 group-hover:w-full bg-white/40 transition-all duration-300"></span>
                 </span>
@@ -51,7 +51,7 @@
                 
                 <!-- 文字内部有微妙的渐变和闪光效果 -->
                 <span class="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white font-extrabold px-3 py-1.5 flex items-center overflow-hidden">
-                  项目
+                  {{ t('projects.title').substring(2) }}
                   <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out"></span>
                 </span>
                 
@@ -99,7 +99,7 @@
           </div>
           
           <p class="text-white/90 text-xl max-w-2xl mb-8 leading-relaxed relative">
-            探索小华同学AI的开源贡献，与技术社区共同成长，共创智能化未来。
+            {{ t('projects.subtitle') }}
             <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary-300/50 to-transparent"></span>
           </p>
           
@@ -124,7 +124,7 @@
                 </svg>
               </div>
               <div>
-                <div class="text-white/80 text-sm font-light">开源项目</div>
+                <div class="text-white/80 text-sm font-light">{{ t('projects.uiElements.openSourceProjects') }}</div>
                 <div class="text-white font-bold text-xl">15+</div>
               </div>
             </div>
@@ -136,7 +136,7 @@
                 </svg>
               </div>
               <div>
-                <div class="text-white/80 text-sm font-light">社区贡献者</div>
+                <div class="text-white/80 text-sm font-light">{{ t('projects.uiElements.communityContributors') }}</div>
                 <div class="text-white font-bold text-xl">120+</div>
               </div>
             </div>
@@ -167,7 +167,7 @@
           <div class="inline-flex items-center justify-center mb-3">
             <span class="h-px w-12 bg-gradient-to-r from-transparent to-primary-300"></span>
             <span class="mx-3 text-sm font-semibold text-primary-600 uppercase tracking-wide relative px-4 py-1.5 group">
-              <span class="relative z-10">核心技能</span>
+              <span class="relative z-10">{{ t('projects.coreSkills') }}</span>
               <span class="absolute inset-0 bg-primary-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </span>
             <span class="h-px w-12 bg-gradient-to-l from-transparent to-primary-300"></span>
@@ -175,15 +175,12 @@
           
           <!-- 炫酷标题 -->
           <h2 class="mb-4 relative inline-block">
-            技术
-            <span class="tech-gradient relative">
-              栈
-              <span class="absolute -right-1 -top-1 w-1.5 h-1.5 bg-primary-400 rounded-full animate-ping opacity-70"></span>
-            </span>
+            {{ t('projects.techStack') }}
+            <span class="absolute -right-1 -top-1 w-1.5 h-1.5 bg-primary-400 rounded-full animate-ping opacity-70"></span>
             <span class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary-100 to-transparent"></span>
           </h2>
           
-          <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">我们在开源项目中使用的主要技术栈，持续探索前沿技术与创新应用场景。</p>
+          <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ t('projects.techStackDesc') }}</p>
         </div>
         
         <!-- 技术栈卡片 - 更现代化设计 -->
@@ -255,29 +252,29 @@
         <div class="text-center mb-12">
           <div class="inline-flex items-center justify-center mb-3">
             <span class="h-px w-8 bg-gradient-to-r from-transparent to-secondary-300"></span>
-            <span class="mx-3 text-sm font-semibold text-secondary-600 uppercase tracking-wide">开放共享</span>
+            <span class="mx-3 text-sm font-semibold text-secondary-600 uppercase tracking-wide">{{ t('projects.communityParticipation') }}</span>
             <span class="h-px w-8 bg-gradient-to-l from-transparent to-secondary-300"></span>
           </div>
-          <h2 class="mb-4">开源<span class="tech-gradient">项目</span></h2>
-          <p class="text-gray-600 max-w-2xl mx-auto">我们秉持开放共享的理念，积极参与开源社区，推动技术创新与发展。</p>
+          <h2 class="mb-4">{{ t('projects.openSource') }}</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">{{ t('projects.openSourceDesc') }}</p>
         </div>
         
         <!-- 项目筛选控件 - 增强设计感 -->
         <div class="flex flex-wrap justify-center gap-3 mb-12">
           <button class="px-5 py-2.5 rounded-full bg-white border border-primary-200 text-primary-700 text-sm font-medium hover:bg-primary-50 active:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-200 transition-all duration-300 shadow-sm hover:shadow group relative overflow-hidden">
-            <span class="relative z-10">全部项目</span>
+            <span class="relative z-10">{{ t('projects.allProjects') }}</span>
             <span class="absolute bottom-0 left-0 h-full w-full bg-primary-100 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full"></span>
           </button>
           <button class="px-5 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 active:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all duration-300 shadow-sm hover:shadow group relative overflow-hidden">
-            <span class="relative z-10">AI应用</span>
+            <span class="relative z-10">{{ t('projects.aiApps') }}</span>
             <span class="absolute bottom-0 left-0 h-full w-full bg-gray-100 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full"></span>
           </button>
           <button class="px-5 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 active:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all duration-300 shadow-sm hover:shadow group relative overflow-hidden">
-            <span class="relative z-10">数据分析</span>
+            <span class="relative z-10">{{ t('projects.dataAnalysis') }}</span>
             <span class="absolute bottom-0 left-0 h-full w-full bg-gray-100 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full"></span>
           </button>
           <button class="px-5 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 active:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all duration-300 shadow-sm hover:shadow group relative overflow-hidden">
-            <span class="relative z-10">工具库</span>
+            <span class="relative z-10">{{ t('projects.toolLibrary') }}</span>
             <span class="absolute bottom-0 left-0 h-full w-full bg-gray-100 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full"></span>
           </button>
         </div>
@@ -350,8 +347,8 @@
                   <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-200">
                     <div class="px-2 py-0.5 rounded-full text-xs font-medium bg-white/90"
                        :class="[
-                         project.status.includes('活跃') ? 'text-green-700' : 
-                         project.status.includes('稳定') ? 'text-blue-700' : 
+                         project.status.includes(t('projects.activeDevelopment')) ? 'text-green-700' : 
+                         project.status.includes(t('projects.stableVersion')) ? 'text-blue-700' : 
                          'text-gray-700'
                        ]">
                       {{ project.status }}
@@ -376,8 +373,8 @@
                   </h3>
                   <span class="inline-block px-3 py-1 rounded-full text-xs font-medium"
                      :class="[
-                       project.status.includes('活跃') ? 'bg-green-100 text-green-800' : 
-                       project.status.includes('稳定') ? 'bg-blue-100 text-blue-800' : 
+                       project.status.includes(t('projects.activeDevelopment')) ? 'bg-green-100 text-green-800' : 
+                       project.status.includes(t('projects.stableVersion')) ? 'bg-blue-100 text-blue-800' : 
                        'bg-gray-100 text-gray-800'
                      ]">
                     {{ project.status }}
@@ -392,19 +389,21 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                     </svg>
-                    {{ project.stars || [124, 78, 92][index] }} Stars
+                    {{ project.stars || [124, 78, 92][index] }} {{ t('projects.uiElements.stars') }}
                   </div>
                   <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                     </svg>
-                    {{ project.forks || [35, 22, 18][index] }} Forks
+                    {{ project.forks || [35, 22, 18][index] }} {{ t('projects.uiElements.forks') }}
                   </div>
                   <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    {{ ['3天前', '1周前', '2周前'][index] }}更新
+                    {{ index === 0 ? '3' + t('projects.uiElements.daysAgo') : 
+                       index === 1 ? '1' + t('projects.uiElements.weeksAgo') : 
+                       '2' + t('projects.uiElements.weeksAgo') }} {{ t('projects.uiElements.updated') }}
                   </div>
                 </div>
                 
@@ -424,13 +423,13 @@
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.031 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
                     </svg>
-                    GitHub代码库
+                    {{ t('projects.githubRepo') }}
                   </a>
                   <a v-if="project.demo" 
                      :href="project.demo" 
                      target="_blank" 
                      class="btn btn-outline group">
-                    查看演示
+                    {{ t('projects.viewDemo') }}
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -445,7 +444,7 @@
         <div class="mt-16 text-center">
           <button class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white border border-gray-200 text-gray-800 hover:text-primary-600 text-sm font-medium transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 active:translate-y-0 relative overflow-hidden group">
             <span class="relative z-10 flex items-center">
-              加载更多项目
+              {{ t('projects.loadMore') }}
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:rotate-180 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
@@ -471,7 +470,7 @@
           <div class="inline-flex items-center justify-center mb-3">
             <span class="h-px w-12 bg-gradient-to-r from-transparent to-primary-300"></span>
             <span class="mx-3 text-sm font-semibold text-primary-600 uppercase tracking-wide relative px-4 py-1.5 group">
-              <span class="relative z-10">参与社区</span>
+              <span class="relative z-10">{{ t('projects.communityParticipation') }}</span>
               <span class="absolute inset-0 bg-primary-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </span>
             <span class="h-px w-12 bg-gradient-to-l from-transparent to-primary-300"></span>
@@ -479,15 +478,12 @@
           
           <!-- 炫酷标题 -->
           <h2 class="mb-4 relative inline-block">
-            开源
-            <span class="tech-gradient relative">
-              贡献
-              <span class="absolute -right-1 -top-1 w-1.5 h-1.5 bg-primary-400 rounded-full animate-ping opacity-70"></span>
-            </span>
+            {{ t('projects.contributions') }}
+            <span class="absolute -right-1 -top-1 w-1.5 h-1.5 bg-primary-400 rounded-full animate-ping opacity-70"></span>
             <span class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary-100 to-transparent"></span>
           </h2>
           
-          <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">我们坚信开源精神的价值，不仅创建自己的项目，也积极参与其他开源项目的贡献。</p>
+          <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ t('projects.contributionsDesc') }}</p>
         </div>
         
         <div class="relative">
@@ -496,7 +492,7 @@
           
           <div class="relative z-10 space-y-24">
             <div v-for="(contribution, index) in contributions" :key="index" 
-                 class="flex flex-col md:flex-row items-center md:items-start gap-8 relative">
+                 class="flex flex-col md:flex-row items-center md:items-start gap-8 relative md:min-h-[100px]">
                  
               <!-- 左侧内容 -->
               <div :class="[index % 2 === 0 ? 'md:w-1/2 md:text-right md:pr-12' : 'md:w-1/2 md:order-3 md:pl-12']" 
@@ -559,7 +555,7 @@
                   
                   <!-- 技术标签 - 更精致的设计 -->
                   <div class="flex flex-wrap gap-2 mt-4">
-                    <span v-for="(tag, tagIndex) in ['代码', '文档', 'PR'][index % 3].split(' ')" :key="tagIndex" 
+                    <span v-for="(tag, tagIndex) in [t('projects.uiElements.code'), t('projects.uiElements.docs'), t('projects.uiElements.pr')][index % 3].split(' ')" :key="tagIndex" 
                       class="text-xs py-1 px-3 rounded-full bg-gray-50 border border-gray-100 shadow-sm transform hover:scale-105 transition-transform duration-300 flex items-center">
                       <span class="w-1.5 h-1.5 rounded-full mr-1.5"
                            :class="[
@@ -575,7 +571,7 @@
               </div>
               
               <!-- 中间节点 - 增强视觉效果 -->
-              <div class="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center z-10 shadow-lg relative"
+              <div class="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center z-10 shadow-lg relative md:absolute md:left-1/2 md:top-0 md:transform md:-translate-x-1/2"
                    :class="[
                      index === 0 ? 'bg-gradient-to-br from-primary-400 to-primary-600' : 
                      index === 1 ? 'bg-gradient-to-br from-secondary-400 to-secondary-600' : 
@@ -607,7 +603,9 @@
               </div>
               
               <!-- 右侧内容（或左侧，取决于index） -->
-              <div :class="[index % 2 === 0 ? 'md:w-1/2 md:order-3 md:pl-12' : 'md:w-1/2 md:text-right md:pr-12']"></div>
+              <div :class="[index % 2 === 0 ? 'md:w-1/2 md:order-3 md:pl-12' : 'md:w-1/2 md:text-right md:pr-12']">
+                <!-- 这里保留一个空的div，以确保布局平衡 -->
+              </div>
             </div>
           </div>
         </div>
@@ -637,7 +635,7 @@
           <span class="flex items-center">
             <span class="inline-block w-2 h-2 rounded-full bg-white mr-2 animate-pulse"></span>
             <span class="relative">
-              共同创造未来
+              {{ t('projects.createTogether') }}
               <span class="absolute -bottom-0.5 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent"></span>
             </span>
           </span>
@@ -645,19 +643,15 @@
         
         <!-- 震撼标题 -->
         <h2 class="mb-8 text-white text-4xl md:text-5xl font-bold tracking-tight">
-          一起
-          <span class="relative inline-block">
-            <span class="absolute inset-x-0 bottom-0 h-3 bg-white/20 -z-10 transform skew-x-3"></span>
-            <span class="relative">贡献</span>
-            <!-- 装饰光点 -->
-            <span class="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full animate-ping opacity-70"></span>
-            <!-- 装饰线条 -->
-            <span class="absolute -bottom-1 -right-1 w-6 h-px bg-white"></span>
-          </span>
+          {{ t('projects.contributeTogether') }}
+          <!-- 装饰光点 -->
+          <span class="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full animate-ping opacity-70"></span>
+          <!-- 装饰线条 -->
+          <span class="absolute -bottom-1 -right-1 w-6 h-px bg-white"></span>
         </h2>
         
         <p class="text-white/90 text-xl mb-12 max-w-2xl mx-auto leading-relaxed neon-text">
-          开源不仅是代码，更是一种文化和信念。无论你是贡献代码、提交issue还是改进文档，我们都欢迎你的参与！
+          {{ t('projects.contributionDesc') }}
         </p>
         
         <!-- 贡献方式卡片 - 更高级的设计 -->
@@ -682,10 +676,10 @@
             
             <!-- 标题和描述 -->
             <h3 class="text-white font-bold text-xl mb-3 relative inline-block">
-              贡献代码
+              {{ t('projects.contributeCode') }}
               <span class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"></span>
             </h3>
-            <p class="text-white/80 leading-relaxed">帮助我们改进现有功能或添加新特性，一起打造更强大的开源项目。</p>
+            <p class="text-white/80 leading-relaxed">{{ t('projects.contributeCodeDesc') }}</p>
             
             <!-- 高光扫过效果 -->
             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1500 ease-in-out"></div>
@@ -711,10 +705,10 @@
             
             <!-- 标题和描述 -->
             <h3 class="text-white font-bold text-xl mb-3 relative inline-block">
-              完善文档
+              {{ t('projects.improveDocumentation') }}
               <span class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"></span>
             </h3>
-            <p class="text-white/80 leading-relaxed">优质的文档让项目更易理解和使用，帮助我们完善教程和API文档。</p>
+            <p class="text-white/80 leading-relaxed">{{ t('projects.improveDocumentationDesc') }}</p>
             
             <!-- 高光扫过效果 -->
             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1500 ease-in-out"></div>
@@ -740,10 +734,10 @@
             
             <!-- 标题和描述 -->
             <h3 class="text-white font-bold text-xl mb-3 relative inline-block">
-              报告问题
+              {{ t('projects.reportIssues') }}
               <span class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"></span>
             </h3>
-            <p class="text-white/80 leading-relaxed">发现bug或提出改进建议，帮助我们不断优化项目质量。</p>
+            <p class="text-white/80 leading-relaxed">{{ t('projects.reportIssuesDesc') }}</p>
             
             <!-- 高光扫过效果 -->
             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1500 ease-in-out"></div>
@@ -755,7 +749,7 @@
            class="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-600 rounded-full font-medium text-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:-translate-y-1 active:translate-y-0 relative overflow-hidden group">
           <!-- 按钮内容 -->
           <span class="relative z-10 flex items-center">
-            立即加入贡献
+            {{ t('projects.joinNow') }}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -770,175 +764,242 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
+
+// 检查翻译键是否存在
+const hasTranslation = (key) => {
+  const message = t(key)
+  // 如果返回的是键名本身，说明没有对应的翻译
+  return message !== key && message !== ''
+}
 
 // 技术栈数据
-const techStack = [
-  { name: 'JavaScript', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z', color: 'yellow' },
-  { name: 'Vue.js', icon: 'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25', color: 'green' },
-  { name: 'Python', icon: 'M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', color: 'blue' },
-  { name: 'Node.js', icon: 'M17.25 6.75L12 12l-5.25-5.25m10.5 10.5L12 12l5.25-5.25M6.75 17.25L12 12l5.25 5.25', color: 'green' },
-  { name: 'React', icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4', color: 'blue' },
-  { name: 'TensorFlow', icon: 'M21 7v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7m16 0a2 2 0 002-2V3a2 2 0 00-2-2H5a2 2 0 00-2 2v2a2 2 0 002 2h16z', color: 'orange' }
-]
-
-// 项目数据
-const projects = [
+const techStack = computed(() => ([
   {
-    name: 'Litemes',
-    description: '一个轻量级的MES生产制造执行系统',
-    image: 'https://images.pexels.com/photos/3862605/pexels-photo-3862605.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    status: '积极开发中',
-    technologies: [
-      { name: 'Python', color: 'blue' },
-      { name: 'Django', color: 'green' },
-    ],
-    github: 'https://github.com/freeleepm/LiteMES',
-    demo: null,
-    stars: 128,
-    forks: 42
+    name: t('projects.technologies.vue'),
+    color: 'green',
+    icon: 'M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0'
   },
   {
-    name: 'Mini-Contract',
-    description: '一个迷你的电子签合同管理系统。',
-    image: 'https://images.pexels.com/photos/48148/document-agreement-documents-sign-48148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    status: '积极开发中',
+    name: t('projects.technologies.react'),
+    color: 'blue',
+    icon: 'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+  },
+  {
+    name: t('projects.technologies.node'),
+    color: 'teal',
+    icon: 'M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01'
+  },
+  {
+    name: t('projects.technologies.python'),
+    color: 'blue',
+    icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
+  },
+  {
+    name: t('projects.technologies.tensorflow'),
+    color: 'orange',
+    icon: 'M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z'
+  },
+  {
+    name: t('projects.technologies.aws'),
+    color: 'yellow',
+    icon: 'M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z'
+  },
+  {
+    name: t('projects.technologies.docker'),
+    color: 'blue',
+    icon: 'M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12'
+  },
+  {
+    name: t('projects.technologies.mongodb'),
+    color: 'green',
+    icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4'
+  },
+  {
+    name: t('projects.technologies.typescript'),
+    color: 'blue',
+    icon: 'M4.871 4A17.926 17.926 0 003 12c0 2.874.673 5.59 1.871 8m14.13 0a17.926 17.926 0 001.87-8c0-2.874-.673-5.59-1.87-8M9 9h1.246a1 1 0 01.961.725l1.586 5.55a1 1 0 00.961.725H15m1-7h-.08a2 2 0 00-1.519.698L9.6 15.302A2 2 0 018.08 16H8'
+  },
+  {
+    name: t('projects.technologies.graphql'),
+    color: 'pink',
+    icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
+  },
+  {
+    name: t('projects.technologies.kubernetes'),
+    color: 'blue',
+    icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z'
+  },
+  {
+    name: t('projects.technologies.flutter'),
+    color: 'blue',
+    icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'
+  }
+]))
+
+// 项目数据 - 使用计算属性以便响应语言变化
+const projects = computed(() => [
+  {
+    id: 'litemes',
+    name: hasTranslation('projects.projectItems.litemes.name') ? t('projects.projectItems.litemes.name') : 'Litemes',
+    description: hasTranslation('projects.projectItems.litemes.description') ? t('projects.projectItems.litemes.description') : '一个轻量级的MES生产制造执行系统',
+    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    github: 'https://github.com/xiahua-ai/litemes',
+    demo: 'https://litemes.xiahua-ai.com',
     technologies: [
-      { name: 'Python', color: 'blue' },
-      { name: 'Flask', color: 'gray' },
+      { name: t('projects.technologies.vue'), color: 'green' },
+      { name: t('projects.technologies.node'), color: 'teal' }
     ],
-    github: 'https://github.com/freeleepm/mini-contract',
-    demo: null,
-    stars: 86,
+    status: t('projects.activeDevelopment'),
+    stars: 128,
+    forks: 32
+  },
+  {
+    id: 'freesign',
+    name: hasTranslation('projects.projectItems.freesign.name') ? t('projects.projectItems.freesign.name') : 'Freesign',
+    description: hasTranslation('projects.projectItems.freesign.description') ? t('projects.projectItems.freesign.description') : '一个免费的电子签名应用（金融）',
+    image: 'https://images.pexels.com/photos/5849592/pexels-photo-5849592.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    github: 'https://github.com/xiahua-ai/freesign',
+    demo: 'https://freesign.xiahua-ai.com',
+    technologies: [
+      { name: t('projects.technologies.react'), color: 'blue' },
+      { name: t('projects.technologies.node'), color: 'teal' }
+    ],
+    status: t('projects.stableVersion'),
+    stars: 95,
     forks: 24
   },
   {
-    name: 'Freesign',
-    description: '一个免费的电子签名应用（金融）',
-    image: 'https://images.pexels.com/photos/8970290/pexels-photo-8970290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    status: '概念验证',
+    id: 'mini-contract',
+    name: hasTranslation('projects.projectItems.miniContract.name') ? t('projects.projectItems.miniContract.name') : 'Mini-Contract',
+    description: hasTranslation('projects.projectItems.miniContract.description') ? t('projects.projectItems.miniContract.description') : '一个迷你的电子签合同管理系统',
+    image: 'https://images.pexels.com/photos/5849591/pexels-photo-5849591.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    github: 'https://github.com/xiahua-ai/mini-contract',
+    demo: 'https://mini-contract.xiahua-ai.com',
     technologies: [
-      { name: 'JavaScript', color: 'yellow' },
-      { name: 'Vue.js', color: 'green' },
+      { name: t('projects.technologies.vue'), color: 'green' },
+      { name: t('projects.technologies.node'), color: 'teal' }
     ],
-    github: 'https://github.com/freeleepm/freesign',
-    demo: null,
-    stars: 65,
+    status: t('projects.activeDevelopment'),
+    stars: 76,
     forks: 18
   },
   {
-    name: 'EPUB to HTML Converter',
-    description: '将 EPUB 文件转换为 HTML 格式。',
-    image: 'https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    status: '维护中',
+    id: 'data-vis',
+    name: hasTranslation('projects.projectItems.dataVis.name') ? t('projects.projectItems.dataVis.name') : 'Data-Vis',
+    description: hasTranslation('projects.projectItems.dataVis.description') ? t('projects.projectItems.dataVis.description') : '数据可视化组件库，支持多种图表和仪表盘',
+    image: 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    github: 'https://github.com/xiahua-ai/data-vis',
+    demo: 'https://data-vis.xiahua-ai.com',
     technologies: [
-      { name: 'Python', color: 'blue' },
+      { name: t('projects.technologies.react'), color: 'blue' },
+      { name: t('projects.technologies.typescript'), color: 'blue' }
     ],
-    github: 'https://github.com/freeleepm/epub-to-html',
-    demo: null,
-    stars: 92,
-    forks: 31
+    status: t('projects.stableVersion'),
+    stars: 112,
+    forks: 28
   },
   {
-    name: 'xiaohua-ai',
-    description: '免费开源个人博客网站（xiaohua-ai）',
-    image: 'https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    status: '积极开发中',
+    id: 'ai-toolkit',
+    name: hasTranslation('projects.projectItems.aiToolkit.name') ? t('projects.projectItems.aiToolkit.name') : 'AI-Toolkit',
+    description: hasTranslation('projects.projectItems.aiToolkit.description') ? t('projects.projectItems.aiToolkit.description') : 'AI应用开发工具包，简化AI模型的集成和部署',
+    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    github: 'https://github.com/xiahua-ai/ai-toolkit',
+    demo: 'https://ai-toolkit.xiahua-ai.com',
     technologies: [
-      { name: 'Python', color: 'blue' },
-      { name: 'Tkinter', color: 'purple' },
+      { name: t('projects.technologies.python'), color: 'blue' },
+      { name: t('projects.technologies.typescript'), color: 'blue' }
     ],
-    github: 'https://github.com/freeleepm/xiahua-ai',
-    demo: null,
-    stars: 156,
-    forks: 47
+    status: t('projects.activeDevelopment'),
+    stars: 203,
+    forks: 45
   },
   {
-    name: 'AI-Text-Generator',
-    description: '基于深度学习的文本生成工具，支持多种语言和风格定制。可用于内容创作、自动写作和文案生成等场景。集成了多种先进的NLP模型，提供API和Web界面。',
-    image: 'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600',
-    status: '活跃维护中',
+    id: 'flutter-ui',
+    name: hasTranslation('projects.projectItems.flutterUi.name') ? t('projects.projectItems.flutterUi.name') : 'Flutter-UI',
+    description: hasTranslation('projects.projectItems.flutterUi.description') ? t('projects.projectItems.flutterUi.description') : 'Flutter UI组件库，提供美观且高性能的移动应用界面组件',
+    image: 'https://images.pexels.com/photos/214574/pexels-photo-214574.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    github: 'https://github.com/xiahua-ai/flutter-ui',
+    demo: 'https://flutter-ui.xiahua-ai.com',
     technologies: [
-      { name: 'Python', color: 'blue' },
-      { name: 'TensorFlow', color: 'orange' },
-      { name: 'NLP', color: 'green' }
+      { name: t('projects.technologies.flutter'), color: 'blue' }
     ],
-    github: 'https://github.com',
-    demo: 'https://demo.example.com'
-  },
-  {
-    name: 'Data-Viz-Library',
-    description: '强大的数据可视化库，使数据展示更加直观美观。包含多种图表类型和交互功能，简化数据分析和展示流程。支持响应式设计，适用于各种设备。',
-    image: 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=600',
-    status: '活跃维护中',
-    technologies: [
-      { name: 'JavaScript', color: 'yellow' },
-      { name: 'Vue', color: 'green' },
-      { name: 'D3.js', color: 'purple' }
-    ],
-    github: 'https://github.com',
-    demo: 'https://demo.example.com'
-  },
-  {
-    name: 'Smart-IoT-Framework',
-    description: '轻量级IoT设备管理框架，简化智能设备开发流程。提供完整的设备连接、数据处理和远程控制解决方案。适用于智能家居、工业物联网等多种场景。',
-    image: 'https://images.pexels.com/photos/8294597/pexels-photo-8294597.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    status: '稳定版',
-    technologies: [
-      { name: 'C++', color: 'blue' },
-      { name: 'MQTT', color: 'red' },
-      { name: 'Embedded', color: 'gray' }
-    ],
-    github: 'https://github.com',
-    demo: null
+    status: t('projects.maintenance'),
+    stars: 87,
+    forks: 19
   }
-]
+])
 
-// 开源贡献数据
-const contributions = [
+// 添加getProjects计算属性，确保项目数据正确显示
+const getProjects = computed(() => {
+  return projects.value.map(project => ({
+    ...project,
+    technologies: project.technologies || [
+      { name: t('projects.technologies.vue'), color: 'green' },
+      { name: t('projects.technologies.node'), color: 'teal' }
+    ],
+    status: project.status || t('projects.activeDevelopment')
+  }))
+})
+
+// 贡献数据 - 使用计算属性以便响应语言变化
+const contributions = computed(() => [
   {
-    date: '2023年12月',
-    project: 'Vue.js',
-    description: '修复了文档中的错误并提交了一个性能优化PR，该贡献已被合并到主分支。'
+    id: 'vue',
+    project: hasTranslation('projects.contributionItems.vuejs.project') ? t('projects.contributionItems.vuejs.project') : 'Vue.js',
+    description: hasTranslation('projects.contributionItems.vuejs.description') ? t('projects.contributionItems.vuejs.description') : '修复了Vue.js中的一个关键性能问题，优化了大型列表的渲染速度。',
+    date: hasTranslation('projects.contributionItems.vuejs.date') ? t('projects.contributionItems.vuejs.date') : '2023年9月',
+    image: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    githubUrl: 'https://github.com/vuejs/vue',
+    pullRequests: 8,
+    issues: 12
   },
   {
-    date: '2023年9月',
-    project: 'TensorFlow',
-    description: '为自然语言处理模块贡献了新功能，提升了模型训练速度和准确性。'
+    id: 'react',
+    project: hasTranslation('projects.contributionItems.reactNative.project') ? t('projects.contributionItems.reactNative.project') : 'React Native',
+    description: hasTranslation('projects.contributionItems.reactNative.description') ? t('projects.contributionItems.reactNative.description') : '开发了一个新的无障碍功能组件，使应用更易于被视障用户使用。',
+    date: hasTranslation('projects.contributionItems.reactNative.date') ? t('projects.contributionItems.reactNative.date') : '2023年6月',
+    image: 'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    githubUrl: 'https://github.com/facebook/react',
+    pullRequests: 5,
+    issues: 9
   },
   {
-    date: '2023年5月',
-    project: 'OpenAI Gym',
-    description: '改进了强化学习环境的文档和示例代码，帮助开发者更容易上手。'
-  },
-  {
-    date: '2023年2月',
-    project: 'React Native',
-    description: '解决了Android平台上的一个UI渲染问题，优化了跨平台兼容性。'
+    id: 'tensorflow',
+    project: hasTranslation('projects.contributionItems.tensorflow.project') ? t('projects.contributionItems.tensorflow.project') : 'TensorFlow',
+    description: hasTranslation('projects.contributionItems.tensorflow.description') ? t('projects.contributionItems.tensorflow.description') : '参与了模型优化和API改进',
+    date: hasTranslation('projects.contributionItems.tensorflow.date') ? t('projects.contributionItems.tensorflow.date') : '2023年12月',
+    image: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    githubUrl: 'https://github.com/tensorflow/tensorflow',
+    pullRequests: 3,
+    issues: 7
   }
-]
+])
 
-// 添加结构化数据
-onMounted(() => {
+// 结构化数据生成时也使用条件渲染
+const updateStructuredData = () => {
+  // 移除之前的结构化数据脚本
+  const oldScripts = document.querySelectorAll('script[data-structured-data]')
+  oldScripts.forEach(script => script.remove())
+  
   // 项目列表结构化数据
   const projectListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "itemListElement": projects.map((project, index) => ({
+    "itemListElement": projects.value.map((project, index) => ({
       "@type": "ListItem",
       "position": index + 1,
       "item": {
-        "@type": "SoftwareSourceCode",
+        "@type": "SoftwareApplication",
         "name": project.name,
         "description": project.description,
         "image": project.image,
-        "codeRepository": project.repo,
-        "programmingLanguage": project.tech && Array.isArray(project.tech) ? project.tech.join(", ") : "",
-        "keywords": project.tags && Array.isArray(project.tags) ? project.tags.join(", ") : "",
-        "author": {
-          "@type": "Person",
-          "name": "小华同学"
-        }
+        "url": project.githubUrl,
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All"
       }
     }))
   };
@@ -951,13 +1012,13 @@ onMounted(() => {
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "首页",
+        "name": t('nav.home'),
         "item": "https://xiahua-ai.com"
       },
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "开源项目",
+        "name": t('nav.projects'),
         "item": "https://xiahua-ai.com/projects"
       }
     ]
@@ -967,12 +1028,24 @@ onMounted(() => {
   let projectListScript = document.createElement('script');
   projectListScript.type = 'application/ld+json';
   projectListScript.textContent = JSON.stringify(projectListSchema);
+  projectListScript.setAttribute('data-structured-data', 'project-list');
   document.head.appendChild(projectListScript);
   
   let breadcrumbScript = document.createElement('script');
   breadcrumbScript.type = 'application/ld+json';
   breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
+  breadcrumbScript.setAttribute('data-structured-data', 'breadcrumb');
   document.head.appendChild(breadcrumbScript);
+}
+
+// 监听语言变化，重新生成结构化数据
+watch(locale, () => {
+  updateStructuredData()
+})
+
+// 初始化结构化数据
+onMounted(() => {
+  updateStructuredData();
 });
 </script>
 
@@ -1024,7 +1097,7 @@ onMounted(() => {
 }
 
 .circuit-bg {
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232563eb' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232563eb' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 /* 点状网格背景 */
