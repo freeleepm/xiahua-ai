@@ -889,7 +889,7 @@ const projects = computed(() => [
   },
   {
     id: 'data-vis',
-    name: hasTranslation('projects.projectItems.dataVis.name') ? t('projects.projectItems.dataVis.name') : 'Data-Vis',
+    name: hasTranslation('projects.projectItems.dataViz.name') ? t('projects.projectItems.dataViz.name') : 'Data-Vis',
     description: hasTranslation('projects.projectItems.dataVis.description') ? t('projects.projectItems.dataVis.description') : '数据可视化组件库，支持多种图表和仪表盘',
     image: 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080',
     github: 'https://github.com/xiahua-ai/data-vis',
@@ -911,7 +911,7 @@ const projects = computed(() => [
     demo: 'https://ai-toolkit.xiahua-ai.com',
     technologies: [
       { name: t('projects.technologies.python'), color: 'blue' },
-      { name: t('projects.technologies.typescript'), color: 'blue' }
+      { name: t('projects.technologies.tensorflow'), color: 'orange' }
     ],
     status: t('projects.activeDevelopment'),
     stars: 203,
@@ -930,43 +930,38 @@ const projects = computed(() => [
     status: t('projects.maintenance'),
     stars: 87,
     forks: 19
+  },
+  {
+    id: 'epub-converter',
+    name: hasTranslation('projects.projectItems.epubConverter.name') ? t('projects.projectItems.epubConverter.name') : 'EPUB to HTML Converter',
+    description: hasTranslation('projects.projectItems.epubConverter.description') ? t('projects.projectItems.epubConverter.description') : '将EPUB文件转换为HTML格式',
+    image: 'https://images.pexels.com/photos/159751/book-read-literature-pages-159751.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    github: 'https://github.com/xiahua-ai/epub-converter',
+    demo: 'https://epub-converter.xiahua-ai.com',
+    technologies: [
+      { name: t('projects.technologies.nodejs'), color: 'teal' },
+      { name: t('projects.technologies.typescript'), color: 'blue' }
+    ],
+    status: t('projects.maintenance'),
+    stars: 64,
+    forks: 15
+  },
+  {
+    id: 'xiaohua-ai',
+    name: hasTranslation('projects.projectItems.xiahuaAi.name') ? t('projects.projectItems.xiahuaAi.name') : 'xiaohua-ai',
+    description: hasTranslation('projects.projectItems.xiahuaAi.description') ? t('projects.projectItems.xiahuaAi.description') : '免费开源个人博客网站（xiaohua-ai）',
+    image: 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    github: 'https://github.com/xiahua-ai/xiaohua-ai',
+    demo: 'https://xiahua-ai.com',
+    technologies: [
+      { name: t('projects.technologies.vue'), color: 'green' },
+      { name: t('projects.technologies.typescript'), color: 'blue' }
+    ],
+    status: t('projects.activeDevelopment'),
+    stars: 156,
+    forks: 37
   }
 ])
-
-// 添加getProjects计算属性，确保项目数据正确显示
-const getProjects = computed(() => {
-  return projects.value.map(project => ({
-    ...project,
-    technologies: project.technologies || [
-      { name: t('projects.technologies.vue'), color: 'green' },
-      { name: t('projects.technologies.node'), color: 'teal' }
-    ],
-    status: project.status || t('projects.activeDevelopment')
-  }))
-})
-
-// 贡献数据 - 使用计算属性以便响应语言变化
-const contributions = computed(() => [
-  {
-    id: 'vue',
-    project: hasTranslation('projects.contributionItems.vuejs.project') ? t('projects.contributionItems.vuejs.project') : 'Vue.js',
-    description: hasTranslation('projects.contributionItems.vuejs.description') ? t('projects.contributionItems.vuejs.description') : '修复了Vue.js中的一个关键性能问题，优化了大型列表的渲染速度。',
-    date: hasTranslation('projects.contributionItems.vuejs.date') ? t('projects.contributionItems.vuejs.date') : '2023年9月',
-    image: 'https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    githubUrl: 'https://github.com/vuejs/vue',
-    pullRequests: 8,
-    issues: 12
-  },
-  {
-    id: 'react',
-    project: hasTranslation('projects.contributionItems.reactNative.project') ? t('projects.contributionItems.reactNative.project') : 'React Native',
-    description: hasTranslation('projects.contributionItems.reactNative.description') ? t('projects.contributionItems.reactNative.description') : '开发了一个新的无障碍功能组件，使应用更易于被视障用户使用。',
-    date: hasTranslation('projects.contributionItems.reactNative.date') ? t('projects.contributionItems.reactNative.date') : '2023年6月',
-    image: 'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    githubUrl: 'https://github.com/facebook/react',
-    pullRequests: 5,
-    issues: 9
-  },
   {
     id: 'tensorflow',
     project: hasTranslation('projects.contributionItems.tensorflow.project') ? t('projects.contributionItems.tensorflow.project') : 'TensorFlow',
