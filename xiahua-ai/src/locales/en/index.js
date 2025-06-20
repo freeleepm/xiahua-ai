@@ -319,6 +319,154 @@ export default {
       cloud: 'Encrypted Cloud Storage',
       highEncryption: 'High-level Encryption'
     },
+    // Application scenario title translations
+    scenarioTitles: {
+      document: 'Document Authentication',
+      lock: 'File Protection',
+      copyright: 'Copyright Protection',
+      academic: 'Academic Documents',
+      card: 'ID Photos',
+      briefcase: 'Business Documents',
+      template: 'Template Usage',
+      check: 'Quality Inspection'
+    },
+    // Product specific features and content
+    idPhoto: {
+      features: {
+        aiBeautify: 'AI Smart Beautification',
+        autoSizing: 'Automatic Size Adjustment',
+        backgroundOptions: 'Multiple Background Options',
+        batchProcessing: 'Batch Processing',
+        cloudStorage: 'Cloud Storage',
+        freeUse: 'Free to Use',
+        noRegistration: 'No Registration Required'
+      },
+      specs: {
+        supportedIdTypes: 'Supported ID Types',
+        processingTime: 'Processing Time',
+        photoSpecs: 'Photo Specifications',
+        usageLimit: 'Usage Limit',
+        storageTime: 'Storage Time',
+        forever: 'Permanent'
+      },
+      technical: {
+        aiBeauty: 'AI Beautification',
+        backgroundReplacement: 'Background Replacement',
+        batchProcessing: 'Batch Processing',
+        cloudBackup: 'Cloud Backup',
+        freeUse: 'Free Forever'
+      },
+      useCases: {
+        idProcessing: 'ID Document Processing',
+        idDesc: 'Quickly generate standard photos for ID cards, passports, etc.',
+        jobApplication: 'Job Applications',
+        jobDesc: 'Create professional resume photos',
+        studentId: 'Student ID Documents',
+        studentDesc: 'Create photos for student IDs, campus cards, etc.'
+      },
+      reviews: {
+        user1: 'Wang Xiaoming',
+        review1: 'Completely free ID photo tool with natural AI beautification effects. Great!',
+        user2: 'Li Xiao',
+        review2: 'Very convenient to use, professional photo editing, saved a lot of money.'
+      },
+      faqs: {
+        reallyFree: 'Is it really completely free?',
+        freeAnswer: 'Yes, all features of XiaoHua ID Photo are completely free to use.',
+        officialUse: 'Are the photos suitable for official documents?',
+        officialAnswer: 'Yes, our photo specifications comply with standard requirements for various official documents.',
+        storageQuestion: 'How long will my photos be saved?',
+        storageAnswer: 'Your photos will be permanently stored in your cloud account.'
+      },
+      // Technical specifications detailed fields
+      techSpecs: {
+        supportedIdTypes: 'Supported ID Types',
+        processingTime: 'Processing Time',
+        photoSpecs: 'Photo Specifications',
+        storageTime: 'Storage Time',
+        aiBeauty: 'AI Beautification',
+        backgroundReplacement: 'Background Replacement',
+        batchProcessing: 'Batch Processing',
+        cloudBackup: 'Cloud Backup',
+        freeUse: 'Free to Use',
+        standardCustom: 'Standard/Custom',
+        seconds: 'seconds',
+        supported: 'Supported',
+        unlimited: 'Unlimited'
+      }
+    },
+    watermark: {
+      features: {
+        smartEmbedding: 'Smart Watermark Embedding',
+        multiDocSupport: 'Multiple Document Types Support',
+        batchProcessing: 'Batch Processing',
+        verification: 'Watermark Verification System',
+        antiCounterfeit: 'Anti-counterfeiting',
+        freeUse: 'Completely Free to Use',
+        noRegistration: 'No Registration Required'
+      },
+      specs: {
+        supportedFormats: 'Supported Formats',
+        processingSpeed: 'Processing Speed',
+        maxFileSize: 'Maximum File Size',
+        usageLimit: 'Usage Limit',
+        watermarkType: 'Watermark Type',
+        invisibleDigital: 'Invisible Digital Watermark'
+      },
+      technical: {
+        batchProcessing: 'Batch Processing',
+        verification: 'Watermark Verification',
+        securityLevel: 'Security Level',
+        bankGrade: 'Bank Grade',
+        dataEncryption: 'Data Encryption',
+        freeUse: 'Free Forever'
+      },
+      useCases: {
+        certificateProtection: 'Certificate Protection',
+        certificateDesc: 'Add anti-counterfeiting watermarks to academic certificates and qualification certificates',
+        fileProtection: 'File Protection',
+        fileDesc: 'Protect company confidential files from leakage and tampering',
+        copyrightProtection: 'Copyright Protection',
+        copyrightDesc: 'Add copyright watermarks to digital works to protect intellectual property'
+      },
+      reviews: {
+        user1: 'Manager Zhang',
+        review1: 'Completely free and works so well! The watermark is completely invisible but easy to verify authenticity.',
+        user2: 'Teacher Li',
+        review2: 'The school uses it to process student certificates. The batch processing function is very convenient, and it\'s completely free, saving a lot of budget.'
+      },
+      faqs: {
+        reallyFree: 'Is this product really free?',
+        freeAnswer: 'Yes, the Document Watermark system is completely free, and all functions can be used without payment.',
+        affectAppearance: 'Will the watermark affect the appearance of documents?',
+        appearanceAnswer: 'No, we use invisible digital watermark technology that does not affect the visual appearance of documents.',
+        verification: 'How to verify watermarked documents?',
+        verificationAnswer: 'They can be verified through our provided validator by simply scanning the document.'
+      },
+      // Page titles and section headings
+      sections: {
+        technicalSpecs: 'Technical Specifications',
+        generalInfo: 'General Information',
+        technicalParams: 'Technical Parameters',
+        coreFeatures: 'Core Features',
+        pricingLicensing: 'Pricing & Licensing'
+      },
+      // Technical specifications detailed fields
+      techSpecs: {
+        supportFormats: 'Supported Formats',
+        processingSpeed: 'Processing Speed',
+        maxFileSize: 'Maximum File Size',
+        watermarkType: 'Watermark Type',
+        batchProcessing: 'Batch Processing',
+        watermarkVerification: 'Watermark Verification',
+        securityLevel: 'Security Level',
+        dataEncryption: 'Data Encryption',
+        freeUse: 'Free to Use',
+        internalVerifier: 'Internal Verifier',
+        secsPerDoc: 'sec/document',
+        unlimited: 'Unlimited'
+      }
+    },
     defaultFeature1Title: 'Intelligent AI Processing',
     defaultFeature1Desc: 'Utilizing the latest AI technology to provide intelligent processing and results',
     defaultFeature2Title: 'High Efficiency',
@@ -386,6 +534,7 @@ export default {
       react: 'React',
       nodejs: 'Node.js',
       python: 'Python',
+      mcp: 'MCP Protocol',
       tensorflow: 'TensorFlow',
       aws: 'AWS',
       docker: 'Docker',
@@ -410,6 +559,11 @@ export default {
         name: 'Smart Document Analyzer',
         description: 'An intelligent document analysis tool that can automatically extract key information, classify documents, recognize entities, and generate summaries.',
         status: 'Testing Phase'
+      },
+      jimengAiMcp: {
+        name: 'Jimeng AI Multimodal MCP',
+        description: 'A multimodal generation service based on Volcengine Jimeng AI, supporting image and video generation, accessible via MCP protocol',
+        status: 'Active Development'
       },
       litemes: {
         name: 'Litemes',

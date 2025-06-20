@@ -281,7 +281,7 @@
         
         <!-- 项目列表 - 增强现代感设计 -->
         <div class="space-y-12">
-          <div v-for="(project, index) in projects" :key="index" 
+          <div v-for="(project, index) in getProjects" :key="index" 
                class="bg-white/95 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden rounded-xl border border-gray-100">
             
             <!-- 顶部装饰条 - 更精致的设计 -->
@@ -347,11 +347,15 @@
                   <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-200">
                     <div class="px-2 py-0.5 rounded-full text-xs font-medium bg-white/90"
                        :class="[
-                         project.status.includes(t('projects.activeDevelopment')) ? 'text-green-700' : 
-                         project.status.includes(t('projects.stableVersion')) ? 'text-blue-700' : 
+                         typeof project.status === 'string' && 
+                           (project.status === t('projects.activeDevelopment') || 
+                            project.status.includes(t('projects.activeDevelopment'))) ? 'text-green-700' : 
+                         typeof project.status === 'string' && 
+                           (project.status === t('projects.stableVersion') || 
+                            project.status.includes(t('projects.stableVersion'))) ? 'text-blue-700' : 
                          'text-gray-700'
                        ]">
-                      {{ project.status }}
+                      {{ typeof project.status === 'function' ? project.status() : project.status }}
                     </div>
                   </div>
                 </div>
@@ -373,11 +377,15 @@
                   </h3>
                   <span class="inline-block px-3 py-1 rounded-full text-xs font-medium"
                      :class="[
-                       project.status.includes(t('projects.activeDevelopment')) ? 'bg-green-100 text-green-800' : 
-                       project.status.includes(t('projects.stableVersion')) ? 'bg-blue-100 text-blue-800' : 
+                       typeof project.status === 'string' && 
+                         (project.status === t('projects.activeDevelopment') || 
+                          project.status.includes(t('projects.activeDevelopment'))) ? 'bg-green-100 text-green-800' : 
+                       typeof project.status === 'string' && 
+                         (project.status === t('projects.stableVersion') || 
+                          project.status.includes(t('projects.stableVersion'))) ? 'bg-blue-100 text-blue-800' : 
                        'bg-gray-100 text-gray-800'
                      ]">
-                    {{ project.status }}
+                    {{ typeof project.status === 'function' ? project.status() : project.status }}
                   </span>
                 </div>
                 
@@ -407,19 +415,20 @@
                   </div>
                 </div>
                 
-                <!-- 技术标签 -->
+                                  <!-- 技术标签 -->
                 <div class="flex flex-wrap gap-2 mb-6">
                   <span v-for="(tag, i) in project.technologies" :key="i" 
                     class="text-xs py-1 px-3 rounded-full transition-colors"
-                    :class="`bg-${tag.color}-100 text-${tag.color}-800`">
-                    {{ tag.name }}
+                    :class="tag.color ? `bg-${tag.color}-100 text-${tag.color}-800` : 'bg-gray-100 text-gray-800'">
+                    {{ tag.name || t(`projects.technologies.${tag.name}`) || '' }}
                   </span>
                 </div>
                 
                 <!-- 按钮 -->
                 <div class="flex flex-wrap gap-4">
-                  <a :href="project.github" target="_blank" 
-                     class="btn btn-primary glow-effect group">
+                  <a :href="project.github" target="_blank" rel="noopener noreferrer"
+                     @click.prevent="safeOpenLink(project.github)"
+                     class="btn btn-primary glow-effect group cursor-pointer">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.031 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
                     </svg>
@@ -428,7 +437,9 @@
                   <a v-if="project.demo" 
                      :href="project.demo" 
                      target="_blank" 
-                     class="btn btn-outline group">
+                     rel="noopener noreferrer"
+                     @click.prevent="safeOpenLink(project.demo)"
+                     class="btn btn-outline group cursor-pointer">
                     {{ t('projects.viewDemo') }}
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -593,7 +604,7 @@
                 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path v-if="index === 0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  <path v-else-if="index === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                  <path v-else-if="index === 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 001 1H7a1 1 0 01-1-1V7a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V4z" />
                   <path v-else-if="index === 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                   <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                 </svg>
@@ -745,8 +756,9 @@
         </div>
         
         <!-- 行动按钮 - 高级感设计 -->
-        <a href="https://github.com" target="_blank" 
-           class="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-600 rounded-full font-medium text-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:-translate-y-1 active:translate-y-0 relative overflow-hidden group">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+           @click.prevent="safeOpenLink('https://github.com')"
+           class="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-600 rounded-full font-medium text-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:-translate-y-1 active:translate-y-0 relative overflow-hidden group cursor-pointer">
           <!-- 按钮内容 -->
           <span class="relative z-10 flex items-center">
             {{ t('projects.joinNow') }}
@@ -779,7 +791,7 @@ const hasTranslation = (key) => {
 // 技术栈数据
 const techStack = computed(() => ([
   {
-    name: t('projects.technologies.vue'),
+    name: t('projects.technologies.vuejs'),
     color: 'green',
     icon: 'M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0'
   },
@@ -789,7 +801,7 @@ const techStack = computed(() => ([
     icon: 'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
   },
   {
-    name: t('projects.technologies.node'),
+    name: t('projects.technologies.nodejs'),
     color: 'teal',
     icon: 'M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01'
   },
@@ -838,109 +850,81 @@ const techStack = computed(() => ([
     color: 'blue',
     icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'
   }
-]))
+]));
 
 // 项目数据 - 使用计算属性以便响应语言变化
 const projects = computed(() => [
   {
+    id: 'jimeng-ai-mcp',
+    name: hasTranslation('projects.projectItems.jimengAiMcp.name') ? t('projects.projectItems.jimengAiMcp.name') : '即梦AI多模态MCP',
+    description: hasTranslation('projects.projectItems.jimengAiMcp.description') ? t('projects.projectItems.jimengAiMcp.description') : '基于火山引擎即梦AI的多模态生成服务，支持图像生成、视频生成等功能',
+    image: '/images/screenshots/ai-multimodal.jpg',
+    github: 'https://github.com/freeleepm/jimeng-ai-mcp',
+    demo: 'https://jimeng-ai-mcp.xiahua-ai.com',
+    technologies: [
+      { name: 'python', color: 'blue' },
+      { name: 'typescript', color: 'blue' },
+      { name: 'mcp', color: 'green' }
+    ],
+    status: t('projects.activeDevelopment'),
+    stars: 87,
+    forks: 23
+  },
+  {
     id: 'litemes',
     name: hasTranslation('projects.projectItems.litemes.name') ? t('projects.projectItems.litemes.name') : 'Litemes',
     description: hasTranslation('projects.projectItems.litemes.description') ? t('projects.projectItems.litemes.description') : '一个轻量级的MES生产制造执行系统',
-    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    github: 'https://github.com/xiahua-ai/litemes',
+    image: 'https://images.pexels.com/photos/3862605/pexels-photo-3862605.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    github: 'https://github.com/freeleepm/LiteMES',
     demo: 'https://litemes.xiahua-ai.com',
     technologies: [
-      { name: t('projects.technologies.vue'), color: 'green' },
-      { name: t('projects.technologies.node'), color: 'teal' }
+      { name: 'vuejs', color: 'green' },
+      { name: 'nodejs', color: 'teal' }
     ],
     status: t('projects.activeDevelopment'),
     stars: 128,
     forks: 32
   },
   {
-    id: 'freesign',
-    name: hasTranslation('projects.projectItems.freesign.name') ? t('projects.projectItems.freesign.name') : 'Freesign',
-    description: hasTranslation('projects.projectItems.freesign.description') ? t('projects.projectItems.freesign.description') : '一个免费的电子签名应用（金融）',
-    image: 'https://images.pexels.com/photos/5849592/pexels-photo-5849592.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    github: 'https://github.com/xiahua-ai/freesign',
-    demo: 'https://freesign.xiahua-ai.com',
-    technologies: [
-      { name: t('projects.technologies.react'), color: 'blue' },
-      { name: t('projects.technologies.node'), color: 'teal' }
-    ],
-    status: t('projects.stableVersion'),
-    stars: 95,
-    forks: 24
-  },
-  {
     id: 'mini-contract',
     name: hasTranslation('projects.projectItems.miniContract.name') ? t('projects.projectItems.miniContract.name') : 'Mini-Contract',
     description: hasTranslation('projects.projectItems.miniContract.description') ? t('projects.projectItems.miniContract.description') : '一个迷你的电子签合同管理系统',
-    image: 'https://images.pexels.com/photos/5849591/pexels-photo-5849591.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    github: 'https://github.com/xiahua-ai/mini-contract',
+    image: 'https://images.pexels.com/photos/48148/document-agreement-documents-sign-48148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    github: 'https://github.com/freeleepm/mini-contract',
     demo: 'https://mini-contract.xiahua-ai.com',
     technologies: [
-      { name: t('projects.technologies.vue'), color: 'green' },
-      { name: t('projects.technologies.node'), color: 'teal' }
+      { name: 'vuejs', color: 'green' },
+      { name: 'nodejs', color: 'teal' }
     ],
     status: t('projects.activeDevelopment'),
     stars: 76,
     forks: 18
   },
   {
-    id: 'data-vis',
-    name: hasTranslation('projects.projectItems.dataViz.name') ? t('projects.projectItems.dataViz.name') : 'Data-Vis',
-    description: hasTranslation('projects.projectItems.dataVis.description') ? t('projects.projectItems.dataVis.description') : '数据可视化组件库，支持多种图表和仪表盘',
-    image: 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    github: 'https://github.com/xiahua-ai/data-vis',
-    demo: 'https://data-vis.xiahua-ai.com',
+    id: 'freesign',
+    name: hasTranslation('projects.projectItems.freesign.name') ? t('projects.projectItems.freesign.name') : 'Freesign',
+    description: hasTranslation('projects.projectItems.freesign.description') ? t('projects.projectItems.freesign.description') : '一个免费的电子签名应用（金融）',
+    image: 'https://images.pexels.com/photos/8970290/pexels-photo-8970290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    github: 'https://gitee.com/leepm/free-sign',
+    demo: 'https://freesign.xiahua-ai.com',
     technologies: [
-      { name: t('projects.technologies.react'), color: 'blue' },
-      { name: t('projects.technologies.typescript'), color: 'blue' }
+      { name: 'react', color: 'blue' },
+      { name: 'nodejs', color: 'teal' }
     ],
     status: t('projects.stableVersion'),
-    stars: 112,
-    forks: 28
-  },
-  {
-    id: 'ai-toolkit',
-    name: hasTranslation('projects.projectItems.aiToolkit.name') ? t('projects.projectItems.aiToolkit.name') : 'AI-Toolkit',
-    description: hasTranslation('projects.projectItems.aiToolkit.description') ? t('projects.projectItems.aiToolkit.description') : 'AI应用开发工具包，简化AI模型的集成和部署',
-    image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    github: 'https://github.com/xiahua-ai/ai-toolkit',
-    demo: 'https://ai-toolkit.xiahua-ai.com',
-    technologies: [
-      { name: t('projects.technologies.python'), color: 'blue' },
-      { name: t('projects.technologies.tensorflow'), color: 'orange' }
-    ],
-    status: t('projects.activeDevelopment'),
-    stars: 203,
-    forks: 45
-  },
-  {
-    id: 'flutter-ui',
-    name: hasTranslation('projects.projectItems.flutterUi.name') ? t('projects.projectItems.flutterUi.name') : 'Flutter-UI',
-    description: hasTranslation('projects.projectItems.flutterUi.description') ? t('projects.projectItems.flutterUi.description') : 'Flutter UI组件库，提供美观且高性能的移动应用界面组件',
-    image: 'https://images.pexels.com/photos/214574/pexels-photo-214574.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    github: 'https://github.com/xiahua-ai/flutter-ui',
-    demo: 'https://flutter-ui.xiahua-ai.com',
-    technologies: [
-      { name: t('projects.technologies.flutter'), color: 'blue' }
-    ],
-    status: t('projects.maintenance'),
-    stars: 87,
-    forks: 19
+    stars: 95,
+    forks: 24
   },
   {
     id: 'epub-converter',
     name: hasTranslation('projects.projectItems.epubConverter.name') ? t('projects.projectItems.epubConverter.name') : 'EPUB to HTML Converter',
     description: hasTranslation('projects.projectItems.epubConverter.description') ? t('projects.projectItems.epubConverter.description') : '将EPUB文件转换为HTML格式',
-    image: 'https://images.pexels.com/photos/159751/book-read-literature-pages-159751.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    github: 'https://github.com/xiahua-ai/epub-converter',
+    image: 'https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    github: 'https://gitee.com/leepm/epub-to-html',
     demo: 'https://epub-converter.xiahua-ai.com',
     technologies: [
-      { name: t('projects.technologies.nodejs'), color: 'teal' },
-      { name: t('projects.technologies.typescript'), color: 'blue' }
+      { name: 'nodejs', color: 'teal' },
+      { name: 'typescript', color: 'blue' }
     ],
     status: t('projects.maintenance'),
     stars: 64,
@@ -950,95 +934,143 @@ const projects = computed(() => [
     id: 'xiaohua-ai',
     name: hasTranslation('projects.projectItems.xiahuaAi.name') ? t('projects.projectItems.xiahuaAi.name') : 'xiaohua-ai',
     description: hasTranslation('projects.projectItems.xiahuaAi.description') ? t('projects.projectItems.xiahuaAi.description') : '免费开源个人博客网站（xiaohua-ai）',
-    image: 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=1080',
-    github: 'https://github.com/xiahua-ai/xiaohua-ai',
+    image: 'https://images.pexels.com/photos/518543/pexels-photo-518543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    github: 'https://gitee.com/leepm/xiaohua-ai',
     demo: 'https://xiahua-ai.com',
     technologies: [
-      { name: t('projects.technologies.vue'), color: 'green' },
-      { name: t('projects.technologies.typescript'), color: 'blue' }
+      { name: 'vuejs', color: 'green' },
+      { name: 'typescript', color: 'blue' }
     ],
     status: t('projects.activeDevelopment'),
     stars: 156,
     forks: 37
   }
-])
+]);
+
+// 改进getProjects计算属性，确保项目数据正确显示并响应语言变化
+const getProjects = computed(() => {
+  return projects.value.map(project => {
+    // 安全获取技术标签
+    const technologies = Array.isArray(project.technologies) ? project.technologies.map(tech => ({
+      ...tech,
+      name: typeof tech.name === 'string' && t(`projects.technologies.${tech.name}`)
+    })) : [];
+
+    // 安全获取状态
+    let status = project.status;
+    if (typeof status === 'function') {
+      try {
+        status = status();
+      } catch (e) {
+        console.error('Error getting status:', e);
+        status = '';
+      }
+    } else if (status && typeof status === 'object' && 'value' in status) {
+      status = status.value;
+    }
+
+    return {
+      ...project,
+      technologies,
+      status
+    };
+  });
+})
+
+// 安全的打开链接方法
+const safeOpenLink = (url) => {
+  if (url && typeof window !== 'undefined' && window.open) {
+    try {
+      window.open(url, '_blank');
+    } catch (e) {
+      console.error('Error opening URL:', e);
+      // 回退方案 - 直接设置 location
+      if (typeof window !== 'undefined' && window.location) {
+        window.location.href = url;
+      }
+    }
+  }
+}
+
+// 贡献数据 - 使用计算属性以便响应语言变化
+const contributions = computed(() => [
+  {
+    id: 'vue',
+    project: hasTranslation('projects.contributionItems.vuejs.project') ? t('projects.contributionItems.vuejs.project') : 'Vue.js',
+    description: hasTranslation('projects.contributionItems.vuejs.description') ? t('projects.contributionItems.vuejs.description') : '修复了Vue.js中的一个关键性能问题，优化了大型列表的渲染速度。',
+    date: hasTranslation('projects.contributionItems.vuejs.date') ? t('projects.contributionItems.vuejs.date') : '2023年9月',
+    image: '/images/screenshots/homepage.png',
+    githubUrl: 'https://github.com/vuejs/vue',
+    pullRequests: 8,
+    issues: 12
+  },
+  {
+    id: 'react',
+    project: hasTranslation('projects.contributionItems.reactNative.project') ? t('projects.contributionItems.reactNative.project') : 'React Native',
+    description: hasTranslation('projects.contributionItems.reactNative.description') ? t('projects.contributionItems.reactNative.description') : '开发了一个新的无障碍功能组件，使应用更易于被视障用户使用。',
+    date: hasTranslation('projects.contributionItems.reactNative.date') ? t('projects.contributionItems.reactNative.date') : '2023年6月',
+    image: '/images/screenshots/products.png',
+    githubUrl: 'https://github.com/facebook/react',
+    pullRequests: 5,
+    issues: 9
+  },
   {
     id: 'tensorflow',
     project: hasTranslation('projects.contributionItems.tensorflow.project') ? t('projects.contributionItems.tensorflow.project') : 'TensorFlow',
     description: hasTranslation('projects.contributionItems.tensorflow.description') ? t('projects.contributionItems.tensorflow.description') : '参与了模型优化和API改进',
     date: hasTranslation('projects.contributionItems.tensorflow.date') ? t('projects.contributionItems.tensorflow.date') : '2023年12月',
-    image: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    image: '/images/screenshots/about.png',
     githubUrl: 'https://github.com/tensorflow/tensorflow',
     pullRequests: 3,
     issues: 7
   }
-])
+]);
 
 // 结构化数据生成时也使用条件渲染
 const updateStructuredData = () => {
-  // 移除之前的结构化数据脚本
-  const oldScripts = document.querySelectorAll('script[data-structured-data]')
-  oldScripts.forEach(script => script.remove())
-  
-  // 项目列表结构化数据
-  const projectListSchema = {
+  const projectData = getProjects.value.map(project => ({
+    "@type": "SoftwareSourceCode",
+    "name": project.name,
+    "description": project.description,
+    "codeRepository": project.github,
+    "programmingLanguage": project.technologies.map(tech => tech.name).join(", "),
+    "image": project.image
+  }));
+
+  const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": projects.value.map((project, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "SoftwareApplication",
-        "name": project.name,
-        "description": project.description,
-        "image": project.image,
-        "url": project.githubUrl,
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "All"
-      }
-    }))
-  };
-  
-  // 面包屑导航结构化数据
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
+    "@type": "CollectionPage",
+    "name": t('projects.title'),
+    "description": t('projects.subtitle'),
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": projectData.map((project, index) => ({
         "@type": "ListItem",
-        "position": 1,
-        "name": t('nav.home'),
-        "item": "https://xiahua-ai.com"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": t('nav.projects'),
-        "item": "https://xiahua-ai.com/projects"
-      }
-    ]
+        "position": index + 1,
+        "item": project
+      }))
+    }
   };
-  
-  // 注入结构化数据
-  let projectListScript = document.createElement('script');
-  projectListScript.type = 'application/ld+json';
-  projectListScript.textContent = JSON.stringify(projectListSchema);
-  projectListScript.setAttribute('data-structured-data', 'project-list');
-  document.head.appendChild(projectListScript);
-  
-  let breadcrumbScript = document.createElement('script');
-  breadcrumbScript.type = 'application/ld+json';
-  breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
-  breadcrumbScript.setAttribute('data-structured-data', 'breadcrumb');
-  document.head.appendChild(breadcrumbScript);
-}
+
+  // 更新页面上的JSON-LD
+  const existingScript = document.getElementById('projects-structured-data');
+  if (existingScript) {
+    existingScript.textContent = JSON.stringify(jsonLd);
+  } else {
+    const script = document.createElement('script');
+    script.id = 'projects-structured-data';
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+  }
+};
 
 // 监听语言变化，重新生成结构化数据
 watch(locale, () => {
-  updateStructuredData()
-})
+  updateStructuredData();
+});
 
-// 初始化结构化数据
+// 当组件挂载后初始化结构化数据
 onMounted(() => {
   updateStructuredData();
 });
@@ -1092,7 +1124,7 @@ onMounted(() => {
 }
 
 .circuit-bg {
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232563eb' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm-6 60c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232563eb' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 /* 点状网格背景 */

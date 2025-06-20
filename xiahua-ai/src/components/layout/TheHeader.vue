@@ -12,19 +12,23 @@
           <router-link v-for="item in navItems" :key="item.path" :to="item.path" 
             class="nav-link" 
             :class="{ 'nav-link-active': $route.path === item.path }">
-            {{ item.label }}
+            {{ t(item.i18nKey) }}
           </router-link>
+          <LanguageSwitcher class="ml-4" />
         </nav>
 
         <!-- 触发移动端菜单按钮 -->
-        <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="md:hidden text-gray-700 p-2">
-          <svg v-if="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <div class="md:hidden flex items-center">
+          <LanguageSwitcher class="mr-2" />
+          <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="text-gray-700 p-2">
+            <svg v-if="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -36,7 +40,7 @@
             class="nav-link block py-2" 
             :class="{ 'nav-link-active': $route.path === item.path }"
             @click="isMobileMenuOpen = false">
-            {{ item.label }}
+            {{ t(item.i18nKey) }}
           </router-link>
         </nav>
       </div>
@@ -46,14 +50,17 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import LanguageSwitcher from '../ui/LanguageSwitcher.vue'
 
+const { t } = useI18n()
 const isMobileMenuOpen = ref(false)
 
 const navItems = [
-  { label: '首页', path: '/' },
-  { label: '产品', path: '/products' },
-  { label: '开源项目', path: '/projects' },
-  { label: '关于我们', path: '/about' }
+  { i18nKey: 'nav.home', path: '/' },
+  { i18nKey: 'nav.products', path: '/products' },
+  { i18nKey: 'nav.projects', path: '/projects' },
+  { i18nKey: 'nav.about', path: '/about' }
 ]
 </script>
 

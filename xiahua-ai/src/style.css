@@ -166,3 +166,74 @@
   background-size: 30px 30px;
   background-position: 0 0, 15px 15px;
 }
+
+@keyframes borderPulse {
+  0% {
+    opacity: 0.3;
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3), 0 0 3px 1px rgba(79, 70, 229, 0.3);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.6), 0 0 5px 1px rgba(79, 70, 229, 0.5);
+  }
+  100% {
+    opacity: 0.3;
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3), 0 0 3px 1px rgba(79, 70, 229, 0.3);
+  }
+}
+
+/* 科技边缘效果 */
+.tech-border {
+  position: relative;
+  overflow: hidden;
+}
+.tech-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1.5px solid transparent;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(79, 70, 229, 0.5), rgba(99, 102, 241, 0.6), rgba(67, 56, 202, 0.5));
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  animation: borderPulse 3s infinite alternate;
+  pointer-events: none;
+  z-index: 20;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.4), 0 0 3px 1px rgba(79, 70, 229, 0.3);
+    opacity: 0.5;
+  }
+  50% {
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.7), 0 0 8px 3px rgba(79, 70, 229, 0.5);
+    opacity: 0.8;
+  }
+  100% {
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.4), 0 0 3px 1px rgba(79, 70, 229, 0.3);
+    opacity: 0.5;
+  }
+}
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  z-index: 15;
+  pointer-events: none;
+  animation: glowPulse 2s ease-in-out infinite;
+}

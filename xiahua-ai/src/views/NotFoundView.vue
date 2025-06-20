@@ -2,12 +2,12 @@
   <div class="min-h-[80vh] flex flex-col justify-center items-center py-16">
     <div class="container-custom text-center">
       <div class="text-9xl font-bold text-primary-500 mb-6">404</div>
-      <h1 class="text-4xl font-bold mb-4">页面未找到</h1>
+      <h1 class="text-4xl font-bold mb-4">{{ t('notFound.title') }}</h1>
       <p class="text-lg text-gray-600 mb-8 max-w-md mx-auto">
-        抱歉，您访问的页面不存在或已被移动。
+        {{ t('notFound.description') }}
       </p>
       <router-link to="/" class="btn btn-primary">
-        返回首页
+        {{ t('notFound.backHome') }}
       </router-link>
     </div>
   </div>
@@ -15,6 +15,9 @@
 
 <script setup>
 import { onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 // 添加结构化数据
 onMounted(() => {
@@ -26,13 +29,13 @@ onMounted(() => {
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "首页",
+        "name": t('nav.home'),
         "item": "https://xiahua-ai.com"
       },
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "页面未找到"
+        "name": t('notFound.title')
       }
     ]
   };

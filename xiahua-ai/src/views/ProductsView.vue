@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 页面标题区域 - 增加科技感背景和动态元素 -->
-    <section class="relative overflow-hidden bg-gradient-to-r from-primary-700 to-primary-500 py-16 md:py-20">
+    <section class="relative overflow-hidden bg-gradient-to-r from-primary-700 to-primary-500 py-20 md:py-24">
       <!-- 科技感网格背景 -->
       <div class="absolute inset-0 circuit-bg opacity-20"></div>
       
@@ -13,16 +13,38 @@
       <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-secondary-400/30 rounded-full blur-3xl opacity-40"></div>
       
       <div class="container-custom relative z-10">
-        <div class="inline-block px-3 py-1 mb-6 rounded-full bg-white/20 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
+        <div class="inline-block px-4 py-1.5 mb-8 rounded-full bg-white/20 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
           <span class="flex items-center">
             <span class="inline-block w-2 h-2 rounded-full bg-white mr-2 animate-pulse"></span>
-            探索AI技术落地应用
+            {{ t('products.hero.badge') }}
           </span>
         </div>
-        <h1 class="text-white mb-4">我们的<span class="relative inline-block">
-          <span class="absolute inset-0 bg-white/10 transform -skew-x-12 -z-10 rounded"></span>产品
-        </span></h1>
-        <p class="text-white text-opacity-90 text-xl max-w-2xl">探索小华同学AI团队开发的创新产品，体验科技带来的智能生活方式</p>
+        
+        <!-- 优化标题效果，保持国际化支持 -->
+        <div class="mb-6">
+          <h1 class="text-white flex items-center flex-wrap">
+            <span v-if="locale === 'zh-CN'" class="title-first-part mr-3">我们的</span>
+            <span v-else class="title-first-part mr-3">Our</span>
+            <span class="relative inline-block title-highlight">
+              <!-- 背景效果 -->
+              <span class="absolute inset-0 bg-white/15 backdrop-blur-sm rounded-lg transform rotate-0 border border-white/20 title-bg-animate"></span>
+              
+              <!-- 微妙的装饰光点 -->
+              <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-white rounded-full opacity-70 animate-pulse"></span>
+              <span class="absolute -bottom-1 -left-1 w-2 h-2 bg-white rounded-full opacity-60" style="animation: pulse 2s infinite; animation-delay: 0.5s"></span>
+              
+              <!-- 文字内容 -->
+              <span class="relative inline-block px-5 py-1.5 text-white font-bold">
+                {{ locale === 'zh-CN' ? '产品' : 'Products' }}
+              </span>
+              
+              <!-- 底部装饰线 -->
+              <span class="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r from-secondary-300 to-primary-200 rounded-full title-underline-animate"></span>
+            </span>
+          </h1>
+        </div>
+        
+        <p class="text-white text-opacity-90 text-xl max-w-2xl">{{ t('products.hero.description') }}</p>
       </div>
     </section>
 
@@ -39,7 +61,7 @@
             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-primary-200/20 rounded-full blur-3xl"></div>
             <div class="flex items-center justify-center">
               <div class="w-1.5 h-1.5 rounded-full bg-primary-500 mr-2 animate-pulse"></div>
-              <span class="text-primary-700 font-semibold tracking-wide">分类浏览</span>
+              <span class="text-primary-700 font-semibold tracking-wide">{{ t('products.filter.title') }}</span>
               <div class="w-1.5 h-1.5 rounded-full bg-primary-500 ml-2 animate-pulse" style="animation-delay: 0.5s"></div>
             </div>
           </div>
@@ -62,7 +84,7 @@
             <!-- 选中项的闪光效果 -->
             <span v-if="activeCategory === category.id" class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 transform"></span>
             
-            <span class="relative z-10">{{ category.name }}</span>
+            <span class="relative z-10">{{ t(`products.filter.categories.${category.id}`) }}</span>
           </button>
         </div>
       </div>
@@ -78,7 +100,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div v-for="product in filteredProducts" :key="product.id" class="group relative">
             <!-- 卡片主体 -->
-            <div class="relative flex flex-col h-full bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-100">
+            <div class="relative flex flex-col h-full bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-100 cursor-pointer" @click="navigateToProduct(product.id)">
               <div class="h-52 bg-gray-100 overflow-hidden relative">
                 <!-- 产品图片 -->
                 <img :src="product.image" :alt="product.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -94,7 +116,9 @@
                   {{ product.title }}
                 </h3>
                 
-                <p class="text-gray-600 mb-6 flex-grow">{{ product.description }}</p>
+                <p class="text-gray-600 mb-6 flex-grow">
+                  {{ product.description }}
+                </p>
                 
                 <div class="flex justify-between items-center pt-4 border-t border-gray-100">
                   <div class="flex items-center">
@@ -102,25 +126,25 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      免费使用
+                      {{ t('products.productCard.free') }}
                     </span>
                     <span v-else class="flex items-center text-primary-600 font-medium bg-primary-50 px-3 py-1.5 rounded-full text-xs">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      付费产品
+                      {{ t('products.productCard.paid') }}
                     </span>
                   </div>
                   
-                  <router-link 
-                    :to="`/products/${product.id}`" 
+                  <button 
                     class="inline-flex items-center px-4 py-2 rounded-lg bg-primary-50 hover:bg-primary-100 text-primary-600 font-medium text-sm transition-all duration-200 hover:shadow-md"
+                    @click.stop="navigateToProduct(product.id)"
                   >
-                    了解详情
+                    {{ t('products.productCard.details') }}
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
-                  </router-link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -137,10 +161,10 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-gray-700 mb-2">暂无产品</h3>
-          <p class="text-gray-500 mb-6">该分类下暂时没有产品，请尝试其他分类。</p>
+          <h3 class="text-xl font-bold text-gray-700 mb-2">{{ t('products.noResults.title') }}</h3>
+          <p class="text-gray-500 mb-6">{{ t('products.noResults.description') }}</p>
           <button @click="activeCategory = 'all'" class="btn btn-outline mx-auto">
-            查看全部产品
+            {{ t('products.noResults.viewAll') }}
           </button>
         </div>
       </div>
@@ -161,20 +185,18 @@
           <div class="inline-block px-4 py-1 mb-6 rounded-full bg-white/20 backdrop-blur-sm text-white/90 text-sm font-medium">
             <span class="flex items-center">
               <span class="inline-block w-2 h-2 rounded-full bg-white mr-2 animate-pulse"></span>
-              个性化服务
+              {{ t('products.customService.badge') }}
             </span>
           </div>
           
-          <h2 class="mb-6 text-white">需要<span class="relative inline-block">
-            <span class="absolute inset-x-0 bottom-0 h-3 bg-white/20 -z-10 transform skew-x-3"></span>定制开发</span>？
-          </h2>
+          <h2 class="mb-6 text-white">{{ t('products.customService.title') }}</h2>
           
           <p class="text-white text-opacity-90 text-xl mb-8 max-w-2xl mx-auto">
-            除了现有产品外，我们还提供AI应用定制开发服务，根据您的需求打造专属解决方案。
+            {{ t('products.customService.description') }}
           </p>
           
           <router-link to="/about" class="btn bg-white text-primary-600 hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-1 active:translate-y-0">
-            联系我们
+            {{ t('products.customService.contactBtn') }}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
@@ -186,108 +208,129 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+
+const { t, locale } = useI18n()
+const router = useRouter()
+
+// 检查翻译键是否存在
+const hasTranslation = (key) => {
+  const message = t(key)
+  // 如果返回的是键名本身，说明没有对应的翻译
+  return message !== key && message !== ''
+}
 
 // 分类数据
 const categories = [
-  { id: 'all', name: '全部' },
-  { id: 'ai', name: 'AI工具' },
-  { id: 'data', name: '数据分析' },
-  { id: 'assist', name: '智能助手' },
-  { id: 'other', name: '其他' }
+  { id: 'all' },
+  { id: 'ai' },
+  { id: 'data' },
+  { id: 'assist' },
+  { id: 'other' }
 ]
 
 // 产品数据 - 添加更多详细信息
 const products = [
   {
     id: 'watermark',
-    title: '证件水印',
-    description: '智能证件水印防伪系统，为您的重要证件提供专业的数字水印保护，有效防止证件被盗用或篡改。',
-    image: 'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=1080',
     categoryId: 'assist',
     isFree: true
   },
   {
-    id: 'id-photo',
-    title: '小花证件照',
-    description: '智能证件照制作工具，一键生成符合各类规格的证件照。',
-    image: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    id: 'idPhoto',
     categoryId: 'assist',
     isFree: true
   },
   {
     id: 'fayan',
-    title: '法眼',
-    description: '智能法律文书分析和生成工具，为您提供专业的法律文书处理服务。',
-    image: 'https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1080',
     categoryId: 'assist',
     isFree: true
   },
   {
-    id: 'mcp-hub',
-    title: 'MCP中文资源中心',
-    description: '发现并推荐AI优质MCP服务，目前已收录4700+优质MCP服务。',
-    image: 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600',
+    id: 'mcpHub',
     categoryId: 'ai',
     isFree: true
   },
   {
-    id: 'ai-writing',
-    title: 'AI写作助手',
-    description: '基于大型语言模型的智能写作工具，提升您的文字创作效率。',
-    image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600',
+    id: 'aiWriting',
     categoryId: 'ai',
     isFree: false
   },
   {
-    id: 'legal-eye',
-    title: '法眼',
-    description: '法眼AI智能合同审核平台利用先进的人工智能技术，对合同进行全方位分析',
-    image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600',
+    id: 'legalEye',
     categoryId: 'ai',
     isFree: false
   },
   {
-    id: 'data-analysis',
-    title: '智能数据分析平台',
-    description: '利用AI处理和分析海量数据，发现隐藏的商业洞见，助力企业做出更明智的决策。',
-    image: 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    id: 'dataAnalysis',
     categoryId: 'data',
     isFree: false
   },
   {
-    id: 'voice-assistant',
-    title: '智能语音助手',
-    description: '自然交互的语音助手，为您提供全方位的智能服务，打造无缝的人机交互体验。',
-    image: 'https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    id: 'voiceAssistant',
     categoryId: 'assist',
     isFree: true
   },
   {
-    id: 'code-assistant',
-    title: '代码辅助工具',
-    description: '智能代码补全与优化工具，提高开发效率，减少错误，适合各种编程语言。',
-    image: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    id: 'codeAssistant',
     categoryId: 'ai',
     isFree: true
   },
   {
-    id: 'data-viz',
-    title: '数据可视化工具',
-    description: '直观展示复杂数据关系，定制各类图表与仪表盘，让数据更易理解。',
-    image: 'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    id: 'dataViz',
     categoryId: 'data',
     isFree: false
   },
   {
-    id: 'creative-inspiration',
-    title: '创意灵感生成器',
-    description: '突破创意瓶颈，获取新鲜灵感，适用于设计师、作家、营销人员等创意工作者。',
-    image: 'https://images.pexels.com/photos/3758105/pexels-photo-3758105.jpeg?auto=compress&cs=tinysrgb&w=1080',
+    id: 'creativeInspiration',
     categoryId: 'other',
     isFree: true
   }
-]
+].map(product => {
+  // 动态添加产品标题和描述，基于国际化文本
+  return {
+    ...product,
+    title: hasTranslation(`products.productItems.${product.id}.title`) ? 
+      t(`products.productItems.${product.id}.title`) : 
+      product.id,
+    description: hasTranslation(`products.productItems.${product.id}.description`) ? 
+      t(`products.productItems.${product.id}.description`) : 
+      '',
+    image: getProductImage(product.id)
+  }
+})
+
+// 获取产品图片
+function getProductImage(productId) {
+  switch(productId) {
+    case 'watermark':
+      return 'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'idPhoto':
+      return 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'fayan':
+      return 'https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'mcpHub':
+      return 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600'
+    case 'aiWriting':
+      return 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600'
+    case 'legalEye':
+      return 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600'
+    case 'dataAnalysis':
+      return 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'voiceAssistant':
+      return 'https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'codeAssistant':
+      return 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'dataViz':
+      return 'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'creativeInspiration':
+      return 'https://images.pexels.com/photos/3758105/pexels-photo-3758105.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    default:
+      return 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080'
+  }
+}
 
 // 当前活跃分类
 const activeCategory = ref('all')
@@ -302,12 +345,20 @@ const filteredProducts = computed(() => {
 
 // 获取分类名称
 const getCategoryName = (categoryId) => {
-  const category = categories.find(cat => cat.id === categoryId)
-  return category ? category.name : '未分类'
+  return categoryId ? t(`products.filter.categories.${categoryId}`) : t('products.filter.categories.other')
 }
 
+// 监听语言变化，重新生成结构化数据
+watch(locale, () => {
+  updateStructuredData()
+})
+
 // 添加结构化数据
-onMounted(() => {
+const updateStructuredData = () => {
+  // 移除之前的结构化数据脚本
+  const oldScripts = document.querySelectorAll('script[data-structured-data]')
+  oldScripts.forEach(script => script.remove())
+  
   // 商品集合结构化数据
   const productListSchema = {
     "@context": "https://schema.org",
@@ -340,13 +391,13 @@ onMounted(() => {
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "首页",
+        "name": t('nav.home'),
         "item": "https://xiahua-ai.com"
       },
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "产品",
+        "name": t('nav.products'),
         "item": "https://xiahua-ai.com/products"
       }
     ]
@@ -356,13 +407,32 @@ onMounted(() => {
   let productListScript = document.createElement('script');
   productListScript.type = 'application/ld+json';
   productListScript.textContent = JSON.stringify(productListSchema);
+  productListScript.setAttribute('data-structured-data', 'product-list');
   document.head.appendChild(productListScript);
   
   let breadcrumbScript = document.createElement('script');
   breadcrumbScript.type = 'application/ld+json';
   breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
+  breadcrumbScript.setAttribute('data-structured-data', 'breadcrumb');
   document.head.appendChild(breadcrumbScript);
+}
+
+// 初始化结构化数据
+onMounted(() => {
+  updateStructuredData();
 });
+
+// 添加产品点击处理函数
+const handleProductClick = (productId) => {
+  // 在这里可以添加产品点击后的处理逻辑
+  console.log(`Product ${productId} clicked`);
+}
+
+// 使用编程式导航跳转到产品详情页
+const navigateToProduct = (productId) => {
+  console.log(`Navigating to product: ${productId}`);
+  router.push(`/products/${productId}`);
+}
 </script>
 
 <style>
@@ -392,5 +462,75 @@ onMounted(() => {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* 新增标题样式 */
+.title-first-part {
+  font-size: 2.75rem;
+  line-height: 3rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title-highlight {
+  font-size: 2.75rem;
+  line-height: 3rem;
+  transition: all 0.3s ease;
+}
+
+.title-highlight:hover {
+  transform: translateY(-2px);
+}
+
+.title-highlight .absolute.bottom-0 {
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.title-highlight:hover .absolute.bottom-0 {
+  opacity: 1;
+  height: 2px;
+  transform: translateY(-1px);
+}
+
+/* 标题动画效果 */
+.title-bg-animate {
+  animation: subtle-float 6s ease-in-out infinite;
+}
+
+.title-underline-animate {
+  animation: glow-line 3s ease-in-out infinite;
+}
+
+@keyframes subtle-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-2px) rotate(0.5deg);
+  }
+}
+
+@keyframes glow-line {
+  0%, 100% {
+    opacity: 0.7;
+    width: 100%;
+  }
+  50% {
+    opacity: 1;
+    width: 95%;
+    margin-left: 2.5%;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 </style> 

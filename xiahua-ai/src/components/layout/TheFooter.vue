@@ -10,7 +10,7 @@
               <img src="@/assets/xiaohua-ai-bottom.svg" alt="小华同学AI" class="h-10" />
             </div>
           </div>
-          <p class="text-gray-400 mb-4">专注于AI应用开发与新媒体内容创作，致力于让科技更加贴近生活</p>
+          <p class="text-gray-400 mb-4">{{ t('footer.description') }}</p>
           <div class="flex space-x-4">
             <a href="#" class="text-gray-400 hover:text-primary-500 transition-colors">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -32,18 +32,18 @@
 
         <!-- 导航链接 -->
         <div>
-          <h3 class="text-white text-lg font-semibold mb-4">快速导航</h3>
+          <h3 class="text-white text-lg font-semibold mb-4">{{ t('footer.quickNav') }}</h3>
           <ul class="space-y-2">
-            <li><router-link to="/" class="text-gray-400 hover:text-primary-500 transition-colors">首页</router-link></li>
-            <li><router-link to="/products" class="text-gray-400 hover:text-primary-500 transition-colors">产品</router-link></li>
-            <li><router-link to="/projects" class="text-gray-400 hover:text-primary-500 transition-colors">开源项目</router-link></li>
-            <li><router-link to="/about" class="text-gray-400 hover:text-primary-500 transition-colors">关于我们</router-link></li>
+            <li><router-link to="/" class="text-gray-400 hover:text-primary-500 transition-colors">{{ t('nav.home') }}</router-link></li>
+            <li><router-link to="/products" class="text-gray-400 hover:text-primary-500 transition-colors">{{ t('nav.products') }}</router-link></li>
+            <li><router-link to="/projects" class="text-gray-400 hover:text-primary-500 transition-colors">{{ t('nav.projects') }}</router-link></li>
+            <li><router-link to="/about" class="text-gray-400 hover:text-primary-500 transition-colors">{{ t('nav.about') }}</router-link></li>
           </ul>
         </div>
 
         <!-- 联系方式 -->
         <div>
-          <h3 class="text-white text-lg font-semibold mb-4">联系我们</h3>
+          <h3 class="text-white text-lg font-semibold mb-4">{{ t('common.contact') }}</h3>
           <ul class="space-y-2">
             <li class="flex items-center gap-2 text-gray-400">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,20 +56,20 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span>中国，重庆</span>
+              <span>{{ t('footer.location') }}</span>
             </li>
           </ul>
         </div>
       </div>
 
       <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
-        <p>© {{ new Date().getFullYear() }} 小华同学AI. 保留所有权利.</p>
-        <p class="mt-2 text-sm text-gray-500">Designed by Xiaohua AI Team</p>
+        <p>© {{ new Date().getFullYear() }} {{ t('footer.copyright') }} {{ t('footer.allRightsReserved') }}</p>
+        <p class="mt-2 text-sm text-gray-500">{{ t('footer.designedBy') }}</p>
         <div class="mt-3 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
-          <router-link to="/sitemap.xml" class="hover:text-primary-500 transition-colors">网站地图</router-link>
-          <router-link to="/privacy" class="hover:text-primary-500 transition-colors">隐私政策</router-link>
-          <router-link to="/terms" class="hover:text-primary-500 transition-colors">服务条款</router-link>
-          <a href="https://beian.miit.gov.cn/" target="_blank" class="hover:text-primary-500 transition-colors">蜀ICP备15005232号</a>
+          <router-link to="/sitemap.xml" class="hover:text-primary-500 transition-colors">{{ t('footer.sitemap') }}</router-link>
+          <router-link to="/privacy" class="hover:text-primary-500 transition-colors">{{ t('footer.privacyPolicy') }}</router-link>
+          <router-link to="/terms" class="hover:text-primary-500 transition-colors">{{ t('footer.termsOfService') }}</router-link>
+          <a href="https://beian.miit.gov.cn/" target="_blank" class="hover:text-primary-500 transition-colors">{{ t('footer.icp') }}</a>
         </div>
       </div>
     </div>
@@ -77,5 +77,8 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+
 // 页脚组件逻辑
+const { t } = useI18n()
 </script> 

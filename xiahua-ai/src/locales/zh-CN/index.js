@@ -300,6 +300,149 @@ export default {
       cloud: '云端加密存储',
       highEncryption: '高级加密'
     },
+    scenarioTitles: {
+      document: '证件防伪',
+      lock: '文件保护',
+      copyright: '版权保护',
+      academic: '学术文档',
+      card: '证件照片',
+      briefcase: '商务文档',
+      template: '模板使用',
+      check: '质量检验'
+    },
+    idPhoto: {
+      features: {
+        aiBeautify: 'AI智能美颜',
+        autoSizing: '自动规格调整',
+        backgroundOptions: '多种背景可选',
+        batchProcessing: '批量处理',
+        cloudStorage: '云端存储',
+        freeUse: '免费使用',
+        noRegistration: '无需注册'
+      },
+      specs: {
+        supportedIdTypes: '支持证件类型',
+        processingTime: '处理时间',
+        photoSpecs: '照片规格',
+        usageLimit: '使用限制',
+        storageTime: '存储时间',
+        forever: '永久'
+      },
+      technical: {
+        aiBeauty: 'AI美颜',
+        backgroundReplacement: '背景替换',
+        batchProcessing: '批量处理',
+        cloudBackup: '云端备份',
+        freeUse: '永久免费'
+      },
+      useCases: {
+        idProcessing: '证件办理',
+        idDesc: '快速生成身份证、护照等标准证件照',
+        jobApplication: '求职应聘',
+        jobDesc: '制作专业简历照片',
+        studentId: '学生证件',
+        studentDesc: '制作学生证、校园卡等照片'
+      },
+      reviews: {
+        user1: '王小明',
+        review1: '完全免费的证件照工具，AI美颜效果自然，太棒了！',
+        user2: '李小',
+        review2: '使用很方便，照片修改很专业，省了不少钱。'
+      },
+      faqs: {
+        reallyFree: '真的完全免费吗？',
+        freeAnswer: '是的，小花证件照的所有功能都完全免费使用。',
+        officialUse: '照片适合官方文件使用吗？',
+        officialAnswer: '是的，我们的照片规格符合各种官方文件的标准要求。',
+        storageQuestion: '我的照片会保存多久？',
+        storageAnswer: '您的照片将永久保存在您的云账户中。'
+      },
+      techSpecs: {
+        supportedIdTypes: '支持证件类型',
+        processingTime: '处理时间',
+        photoSpecs: '照片规格',
+        storageTime: '存储时间',
+        aiBeauty: 'AI美颜',
+        backgroundReplacement: '背景替换',
+        batchProcessing: '批量处理',
+        cloudBackup: '云端备份',
+        freeUse: '免费使用',
+        standardCustom: '标准/自定义',
+        seconds: '秒内',
+        supported: '支持',
+        unlimited: '无限制'
+      }
+    },
+    watermark: {
+      features: {
+        smartEmbedding: '智能水印嵌入技术',
+        multiDocSupport: '支持多种证件类型',
+        batchProcessing: '批量处理功能',
+        verification: '水印验证系统',
+        antiCounterfeit: '防伪溯源',
+        freeUse: '完全免费使用',
+        noRegistration: '无需注册'
+      },
+      specs: {
+        supportedFormats: '支持格式',
+        processingSpeed: '处理速度',
+        maxFileSize: '最大文件大小',
+        usageLimit: '使用限制',
+        watermarkType: '水印类型',
+        invisibleDigital: '不可见数字水印'
+      },
+      technical: {
+        batchProcessing: '批量处理',
+        verification: '水印验证',
+        securityLevel: '安全级别',
+        bankGrade: '银行级',
+        dataEncryption: '数据加密',
+        freeUse: '永久免费'
+      },
+      useCases: {
+        certificateProtection: '证书防伪',
+        certificateDesc: '为学历证书、资格证书等重要文件添加防伪水印',
+        fileProtection: '文件保护',
+        fileDesc: '保护公司机密文件，防止泄露和篡改',
+        copyrightProtection: '版权保护',
+        copyrightDesc: '为数字作品添加版权水印，保护知识产权'
+      },
+      reviews: {
+        user1: '张经理',
+        review1: '完全免费还这么好用！水印完全不可见但又能轻松验证真伪。',
+        user2: '李老师',
+        review2: '学校用来处理学生证书，批量处理功能很方便，而且完全免费，节省了很多预算。'
+      },
+      faqs: {
+        reallyFree: '这款产品真的完全免费吗？',
+        freeAnswer: '是的，证件水印系统完全免费，所有功能都可以无需付费使用。',
+        affectAppearance: '水印会影响文档的外观吗？',
+        appearanceAnswer: '不会，我们使用不可见数字水印技术，不会影响文档的视觉外观。',
+        verification: '如何验证带水印的文档？',
+        verificationAnswer: '可以通过我们提供的验证器进行验证，只需扫描文档即可。'
+      },
+      sections: {
+        technicalSpecs: '技术规格',
+        generalInfo: '基本信息',
+        technicalParams: '技术参数',
+        coreFeatures: '核心功能',
+        pricingLicensing: '价格与授权'
+      },
+      techSpecs: {
+        supportFormats: '支持格式',
+        processingSpeed: '处理速度',
+        maxFileSize: '最大文件大小',
+        watermarkType: '水印类型',
+        batchProcessing: '批量处理',
+        watermarkVerification: '水印验证',
+        securityLevel: '安全级别',
+        dataEncryption: '数据加密',
+        freeUse: '免费使用',
+        internalVerifier: '内置验证器',
+        secsPerDoc: '秒/文档',
+        unlimited: '无限制'
+      }
+    },
     defaultFeature1Title: '智能AI处理',
     defaultFeature1Desc: '采用最新AI技术，提供智能化的处理流程和结果',
     defaultFeature2Title: '高效率运行',
@@ -367,6 +510,7 @@ export default {
       react: 'React',
       nodejs: 'Node.js',
       python: 'Python',
+      mcp: 'MCP协议',
       tensorflow: 'TensorFlow',
       aws: 'AWS',
       docker: 'Docker',
@@ -391,6 +535,11 @@ export default {
         name: '智能文档分析器',
         description: '智能文档分析工具，能够自动提取关键信息、分类文档、识别实体并生成摘要。',
         status: '测试阶段'
+      },
+      jimengAiMcp: {
+        name: '即梦AI多模态MCP',
+        description: '基于火山引擎即梦AI的多模态生成服务，支持图像生成、视频生成等功能，可通过MCP协议在多种客户端中使用',
+        status: '积极开发中'
       },
       litemes: {
         name: 'Litemes',

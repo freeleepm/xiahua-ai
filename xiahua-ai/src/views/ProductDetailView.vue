@@ -91,7 +91,13 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-500 mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="text-gray-700">{{ feature }}</span>
+                <span class="text-gray-700">
+                  {{ 
+                    product.id === 'watermark' && typeof feature === 'string' && t(`productDetail.watermark.features.${camelCase(feature)}`, feature) ||
+                    product.id === 'idPhoto' && typeof feature === 'string' && t(`productDetail.idPhoto.features.${camelCase(feature)}`, feature) ||
+                    typeof feature === 'string' ? feature : feature.title 
+                  }}
+                </span>
               </li>
             </ul>
           </div>
@@ -107,9 +113,15 @@
               <h3 class="text-lg font-bold group-hover:text-secondary-600 transition-colors">{{ t('productDetail.techSpecs') }}</h3>
             </div>
             <div class="space-y-3">
-              <div v-for="spec in product.specs" :key="spec.name" class="flex justify-between">
-                <span class="text-gray-600">{{ spec.name }}</span>
-                <span class="font-medium text-gray-900">{{ spec.value }}</span>
+              <div v-for="(value, name) in product.specs" :key="name" class="flex justify-between">
+                <span class="text-gray-600">
+                  {{ 
+                    product.id === 'watermark' ? t(`productDetail.watermark.specs.${camelCase(name)}`, name) :
+                    product.id === 'idPhoto' ? t(`productDetail.idPhoto.specs.${camelCase(name)}`, name) :
+                    name 
+                  }}
+                </span>
+                <span class="font-medium text-gray-900">{{ value }}</span>
               </div>
             </div>
           </div>
@@ -181,17 +193,83 @@
             </div>
             
             <!-- 使用场景 -->
-            <div>
-              <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ t('productDetail.useCases') }}</h3>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div v-for="scenario in product.useCases" :key="scenario.title" class="card p-6 hover:border-primary-100">
-                  <div class="flex items-center mb-3">
-                    <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center text-primary-500 mr-3">
-                      <span class="text-sm font-bold">{{ scenario.icon }}</span>
-                    </div>
-                    <h4 class="font-semibold text-lg">{{ scenario.title }}</h4>
+            <div v-if="activeTab === 'details'" class="mb-16">
+              <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ t('productDetail.applicationScenarios') }}</h3>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                  {{ t('productDetail.scenariosDescription') }}
+                </p>
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div v-for="(useCase, index) in product.useCases" :key="index" 
+                  class="card hover:shadow-md hover:border-primary-100 transition-all duration-300 p-6">
+                  <div class="mb-4 text-primary-600 flex items-center justify-center w-12 h-12 rounded-full bg-primary-50">
+                    <!-- 不同的应用场景图标 -->
+                    <svg v-if="useCase.icon === 'certificate' || useCase.title === '证书防伪' || useCase.title === 'Certificate Protection'" 
+                      xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    <svg v-else-if="useCase.icon === 'file' || useCase.title === '文件保护' || useCase.title === 'File Protection'" 
+                      xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <svg v-else-if="useCase.icon === 'copyright' || useCase.title === '版权保护' || useCase.title === 'Copyright Protection'" 
+                      xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 15v4a3 3 0 003 3l4-9V2H5.72a2 2 0 00-2 1.7l-1.38 9a2 2 0 002 2.3zm7-13h2.67A2.31 2.31 0 0122 4v7a2.31 2.31 0 01-2.33 2H17" />
+                    </svg>
+                    <svg v-else-if="useCase.icon === 'card' || useCase.title === '证件办理' || useCase.title === 'ID Document Processing'" 
+                      xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                    </svg>
+                    <svg v-else-if="useCase.icon === 'briefcase' || useCase.title === '求职应聘' || useCase.title === 'Job Applications'" 
+                      xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <svg v-else-if="useCase.icon === 'academic' || useCase.title === '学生证件' || useCase.title === 'Student ID Documents'" 
+                      xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                    </svg>
+                    <svg v-else 
+                      xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
                   </div>
-                  <p class="text-gray-600">{{ scenario.description }}</p>
+                  
+                  <h4 class="text-lg font-semibold mb-2 text-gray-800">
+                    {{ 
+                      product.id === 'watermark' && useCase.title === '证书防伪'
+                        ? t('productDetail.watermark.useCases.certificateProtection') :
+                      product.id === 'watermark' && useCase.title === '文件保护'
+                        ? t('productDetail.watermark.useCases.fileProtection') :
+                      product.id === 'watermark' && useCase.title === '版权保护'
+                        ? t('productDetail.watermark.useCases.copyrightProtection') :
+                      product.id === 'idPhoto' && useCase.title === '证件办理'
+                        ? t('productDetail.idPhoto.useCases.idProcessing') :
+                      product.id === 'idPhoto' && useCase.title === '求职应聘'
+                        ? t('productDetail.idPhoto.useCases.jobApplication') :
+                      product.id === 'idPhoto' && useCase.title === '学生证件'
+                        ? t('productDetail.idPhoto.useCases.studentId') :
+                      useCase.title 
+                    }}
+                  </h4>
+                  <p class="text-gray-600">
+                    {{ 
+                      product.id === 'watermark' && useCase.title === '证书防伪'
+                        ? t('productDetail.watermark.useCases.certificateDesc') :
+                      product.id === 'watermark' && useCase.title === '文件保护'
+                        ? t('productDetail.watermark.useCases.fileDesc') :
+                      product.id === 'watermark' && useCase.title === '版权保护'
+                        ? t('productDetail.watermark.useCases.copyrightDesc') :
+                      product.id === 'idPhoto' && useCase.title === '证件办理'
+                        ? t('productDetail.idPhoto.useCases.idDesc') :
+                      product.id === 'idPhoto' && useCase.title === '求职应聘'
+                        ? t('productDetail.idPhoto.useCases.jobDesc') :
+                      product.id === 'idPhoto' && useCase.title === '学生证件'
+                        ? t('productDetail.idPhoto.useCases.studentDesc') :
+                      useCase.description 
+                    }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -239,14 +317,74 @@
           <!-- 技术规格 -->
           <div v-if="activeTab === 'specs'" class="space-y-8">
             <div class="card p-6">
-              <h3 class="text-xl font-bold mb-4 text-gray-800">{{ t('productDetail.detailedSpecs') }}</h3>
+              <h3 class="text-xl font-bold mb-4 text-gray-800">
+                {{ product.id === 'watermark' ? t('productDetail.watermark.sections.technicalSpecs') : t('productDetail.detailedSpecs') }}
+              </h3>
               <div class="space-y-6">
                 <div v-for="category in product.specCategories" :key="category.name">
-                  <h4 class="text-lg font-semibold mb-3 pb-2 border-b border-gray-100">{{ category.name }}</h4>
+                  <h4 class="text-lg font-semibold mb-3 pb-2 border-b border-gray-100">
+                    {{ 
+                      product.id === 'watermark' && category.name === t('productDetail.specCategories.general') 
+                        ? t('productDetail.watermark.sections.generalInfo') : 
+                      product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') 
+                        ? t('productDetail.watermark.sections.technicalParams') : 
+                      category.name 
+                    }}
+                  </h4>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div v-for="spec in category.items" :key="spec.name" class="flex justify-between">
-                      <span class="text-gray-600">{{ spec.name }}</span>
-                      <span class="font-medium text-gray-900">{{ spec.value }}</span>
+                      <span class="text-gray-600">
+                        {{ 
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.general') && spec.name === '支持格式'
+                            ? t('productDetail.watermark.techSpecs.supportFormats') :
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.general') && spec.name === '处理速度'
+                            ? t('productDetail.watermark.techSpecs.processingSpeed') :
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.general') && spec.name === '最大文件大小'
+                            ? t('productDetail.watermark.techSpecs.maxFileSize') :
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.general') && spec.name === '水印类型'
+                            ? t('productDetail.watermark.techSpecs.watermarkType') :
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') && spec.name === '批量处理'
+                            ? t('productDetail.watermark.techSpecs.batchProcessing') :
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') && spec.name === '水印验证'
+                            ? t('productDetail.watermark.techSpecs.watermarkVerification') :
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') && spec.name === '安全级别'
+                            ? t('productDetail.watermark.techSpecs.securityLevel') :
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') && spec.name === '数据加密'
+                            ? t('productDetail.watermark.techSpecs.dataEncryption') :
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') && spec.name === '免费使用'
+                            ? t('productDetail.watermark.techSpecs.freeUse') :
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.general') 
+                            ? t(`productDetail.watermark.specs.${camelCase(spec.name)}`, spec.name) :
+                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical')  
+                            ? t(`productDetail.watermark.technical.${camelCase(spec.name)}`, spec.name) :
+                          product.id === 'idPhoto' && category.name === t('productDetail.specCategories.general') 
+                            ? t(`productDetail.idPhoto.specs.${camelCase(spec.name)}`, spec.name) :
+                          product.id === 'idPhoto' && category.name === t('productDetail.specCategories.technical')  
+                            ? t(`productDetail.idPhoto.technical.${camelCase(spec.name)}`, spec.name) :
+                          spec.name
+                        }}
+                      </span>
+                      <span class="font-medium text-gray-900">
+                        {{ 
+                          product.id === 'watermark' && spec.name === '水印类型' 
+                            ? t('productDetail.watermark.specs.invisibleDigital', spec.value) :
+                          product.id === 'watermark' && spec.name === '安全级别' 
+                            ? t('productDetail.watermark.technical.bankGrade', spec.value) :
+                          product.id === 'watermark' && spec.name === '处理速度' && spec.value === '2秒/文档'
+                            ? t('productDetail.watermark.techSpecs.secsPerDoc', '2') :
+                          product.id === 'watermark' && spec.name === '水印验证' && spec.value === '内置验证器'
+                            ? t('productDetail.watermark.techSpecs.internalVerifier', spec.value) :
+                          product.id === 'watermark' && spec.name === '使用限制' && spec.value === '无限制'
+                            ? t('productDetail.watermark.techSpecs.unlimited', spec.value) :
+                          product.id === 'watermark' && spec.name === '免费使用' 
+                            ? t('productDetail.watermark.technical.freeUse', spec.value) :
+                          product.id === 'idPhoto' && spec.name === '存储时间' 
+                            ? t('productDetail.idPhoto.specs.forever', spec.value) :
+                          product.id === 'idPhoto' && spec.name === '免费使用' 
+                            ? t('productDetail.idPhoto.technical.freeUse', spec.value) :
+                          spec.value
+                        }}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -284,7 +422,19 @@
                       </div>
                     </div>
                     <div>
-                      <div class="font-medium">{{ review.userName }}</div>
+                      <div class="font-medium">
+                        {{ 
+                          product.id === 'watermark' && review.id === 1 
+                            ? t('productDetail.watermark.reviews.user1') :
+                          product.id === 'watermark' && review.id === 2 
+                            ? t('productDetail.watermark.reviews.user2') :
+                          product.id === 'idPhoto' && review.id === 1 
+                            ? t('productDetail.idPhoto.reviews.user1') :
+                          product.id === 'idPhoto' && review.id === 2 
+                            ? t('productDetail.idPhoto.reviews.user2') :
+                          review.userName
+                        }}
+                      </div>
                       <div class="text-gray-500 text-sm">{{ review.date }}</div>
                     </div>
                   </div>
@@ -294,7 +444,19 @@
                     </svg>
                   </div>
                 </div>
-                <p class="text-gray-700">{{ review.content }}</p>
+                <p class="text-gray-700">
+                  {{ 
+                    product.id === 'watermark' && review.id === 1 
+                      ? t('productDetail.watermark.reviews.review1') :
+                    product.id === 'watermark' && review.id === 2 
+                      ? t('productDetail.watermark.reviews.review2') :
+                    product.id === 'idPhoto' && review.id === 1 
+                      ? t('productDetail.idPhoto.reviews.review1') :
+                    product.id === 'idPhoto' && review.id === 2 
+                      ? t('productDetail.idPhoto.reviews.review2') :
+                    review.content
+                  }}
+                </p>
               </div>
             </div>
           </div>
@@ -304,8 +466,40 @@
             <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ t('productDetail.commonQuestions') }}</h3>
             <div class="space-y-4">
               <div v-for="faq in product.faqs" :key="faq.question" class="card p-6 hover:border-primary-100">
-                <div class="font-semibold text-lg mb-2">{{ faq.question }}</div>
-                <p class="text-gray-700">{{ faq.answer }}</p>
+                <div class="font-semibold text-lg mb-2">
+                  {{ 
+                    product.id === 'watermark' && faq.question.includes('免费') 
+                      ? t('productDetail.watermark.faqs.reallyFree') :
+                    product.id === 'watermark' && faq.question.includes('外观') 
+                      ? t('productDetail.watermark.faqs.affectAppearance') :
+                    product.id === 'watermark' && faq.question.includes('验证') 
+                      ? t('productDetail.watermark.faqs.verification') :
+                    product.id === 'idPhoto' && faq.question.includes('免费') 
+                      ? t('productDetail.idPhoto.faqs.reallyFree') :
+                    product.id === 'idPhoto' && faq.question.includes('官方') 
+                      ? t('productDetail.idPhoto.faqs.officialUse') :
+                    product.id === 'idPhoto' && faq.question.includes('保存') 
+                      ? t('productDetail.idPhoto.faqs.storageQuestion') :
+                    faq.question
+                  }}
+                </div>
+                <p class="text-gray-700">
+                  {{ 
+                    product.id === 'watermark' && faq.question.includes('免费') 
+                      ? t('productDetail.watermark.faqs.freeAnswer') :
+                    product.id === 'watermark' && faq.question.includes('外观') 
+                      ? t('productDetail.watermark.faqs.appearanceAnswer') :
+                    product.id === 'watermark' && faq.question.includes('验证') 
+                      ? t('productDetail.watermark.faqs.verificationAnswer') :
+                    product.id === 'idPhoto' && faq.question.includes('免费') 
+                      ? t('productDetail.idPhoto.faqs.freeAnswer') :
+                    product.id === 'idPhoto' && faq.question.includes('官方') 
+                      ? t('productDetail.idPhoto.faqs.officialAnswer') :
+                    product.id === 'idPhoto' && faq.question.includes('保存') 
+                      ? t('productDetail.idPhoto.faqs.storageAnswer') :
+                    faq.answer
+                  }}
+                </p>
               </div>
             </div>
           </div>
@@ -414,11 +608,52 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import ImageViewer from '../components/ImageViewer.vue'
+import ImageViewer from '@/components/ImageViewer.vue'
 
+// 转换字符串为驼峰命名
+const camelCase = (str) => {
+  if (!str) return '';
+  // 处理中文字符串
+  if (/[\u4e00-\u9fa5]/.test(str)) {
+    // 水印类型 -> watermarkType
+    // 处理速度 -> processingSpeed
+    // 最大文件大小 -> maxFileSize
+    // 使用限制 -> usageLimit
+    // 批量处理 -> batchProcessing
+    // 水印验证 -> watermarkVerification
+    // 安全级别 -> securityLevel
+    // 数据加密 -> dataEncryption
+    // 免费使用 -> freeUse
+    const mapping = {
+      '支持格式': 'supportedFormats',
+      '支持证件类型': 'supportedIdTypes',
+      '处理速度': 'processingSpeed',
+      '最大文件大小': 'maxFileSize',
+      '水印类型': 'watermarkType',
+      '使用限制': 'usageLimit',
+      '照片规格': 'photoSpecs',
+      '存储时间': 'storageTime',
+      '批量处理': 'batchProcessing',
+      '水印验证': 'watermarkVerification',
+      '安全级别': 'securityLevel',
+      '数据加密': 'dataEncryption',
+      '免费使用': 'freeUse',
+      'AI美颜': 'aiBeauty',
+      '背景替换': 'backgroundReplacement',
+      '云端备份': 'cloudBackup'
+    };
+    return mapping[str] || str;
+  }
+  
+  // 处理英文字符串
+  return str.toLowerCase().replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) => {
+    return index === 0 ? letter.toLowerCase() : letter.toUpperCase();
+  }).replace(/\s+/g, '');
+};
+
+const { t, locale, availableLocales } = useI18n()
 const route = useRoute()
 const router = useRouter()
-const { t, locale } = useI18n()
 
 // 检查翻译键是否存在
 const hasTranslation = (key) => {
@@ -1134,6 +1369,67 @@ const handleSpecialProduct = (productId) => {
       ]
     }
   }
+}
+
+// 更新结构化数据
+const updateStructuredData = () => {
+  // 移除之前的结构化数据脚本
+  const oldScripts = document.querySelectorAll('script[data-structured-data]')
+  oldScripts.forEach(script => script.remove())
+  
+  // 产品结构化数据
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.value.title,
+    "description": product.value.description,
+    "image": product.value.image,
+    "offers": {
+      "@type": "Offer",
+      "price": product.value.isFree ? "0" : product.value.price,
+      "priceCurrency": "CNY",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  
+  // 面包屑导航结构化数据
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": t('nav.home'),
+        "item": "https://xiahua-ai.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": t('nav.products'),
+        "item": "https://xiahua-ai.com/products"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": product.value.title,
+        "item": `https://xiahua-ai.com/products/${product.value.id}`
+      }
+    ]
+  }
+  
+  // 注入结构化数据
+  let productScript = document.createElement('script')
+  productScript.type = 'application/ld+json'
+  productScript.textContent = JSON.stringify(productSchema)
+  productScript.setAttribute('data-structured-data', 'product')
+  document.head.appendChild(productScript)
+  
+  let breadcrumbScript = document.createElement('script')
+  breadcrumbScript.type = 'application/ld+json'
+  breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema)
+  breadcrumbScript.setAttribute('data-structured-data', 'breadcrumb')
+  document.head.appendChild(breadcrumbScript)
 }
 
 onMounted(() => {

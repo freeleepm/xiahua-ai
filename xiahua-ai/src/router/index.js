@@ -1,4 +1,69 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { nextTick } from 'vue'
+import i18n from '../i18n'
+
+const { t } = i18n.global
+
+// 添加updateMetaInfo方法，用于动态更新路由元信息
+const updateMetaInfo = (to) => {
+  // 根据路由名称和当前语言获取标题和描述
+  if (to.name) {
+    let title = '', description = ''
+    
+    switch (to.name) {
+      case 'home':
+        title = `${t('nav.home')} - ${t('home.hero.subtitle')}`
+        description = t('home.hero.description')
+        break
+      case 'products':
+        title = `${t('nav.products')} - ${t('products.subtitle')}`
+        description = t('products.description')
+        break
+      case 'product-detail':
+        // 产品详情页，标题需要结合动态参数
+        title = `${t('productDetail.overview')} - ${to.params.id}`
+        description = t('products.description')
+        break
+      case 'projects':
+        title = `${t('nav.projects')} - ${t('projects.subtitle')}`
+        description = t('projects.description')
+        break
+      case 'about':
+        title = `${t('nav.about')} - ${t('about.subtitle')}`
+        description = t('about.description')
+        break
+      case 'privacy':
+        title = `${t('privacy.title')}`
+        break
+      case 'terms':
+        title = `${t('terms.title')}`
+        break
+      case 'not-found':
+        title = t('notFound.title')
+        description = t('notFound.description')
+        break
+      default:
+        title = "Xiaohua AI"
+    }
+    
+    nextTick(() => {
+      document.title = title
+      
+      // 更新描述元标签
+      let descriptionMeta = document.querySelector('meta[name="description"]')
+      if (description) {
+        if (descriptionMeta) {
+          descriptionMeta.setAttribute('content', description)
+        } else {
+          descriptionMeta = document.createElement('meta')
+          descriptionMeta.setAttribute('name', 'description')
+          descriptionMeta.setAttribute('content', description)
+          document.head.appendChild(descriptionMeta)
+        }
+      }
+    })
+  }
+}
 
 const routes = [
   {
@@ -6,8 +71,8 @@ const routes = [
     name: 'home',
     component: () => import('../views/HomeView.vue'),
     meta: { 
-      title: '小华同学AI - 探索AI的无限可能打造智能化未来', 
-      description: '小华同学AI为您提供智能助手和AI技术解决方案，探索人工智能的无限可能，打造智能化未来。' 
+      title: '', // Will be set dynamically by updateMetaInfo
+      description: '' // Will be set dynamically by updateMetaInfo
     }
   },
   {
@@ -15,8 +80,8 @@ const routes = [
     name: 'products',
     component: () => import('../views/ProductsView.vue'),
     meta: { 
-      title: '产品 - 小华同学AI', 
-      description: '探索小华同学AI提供的创新产品和服务，包括智能对话系统、数据分析平台和定制化AI解决方案。' 
+      title: '', // Will be set dynamically by updateMetaInfo
+      description: '' // Will be set dynamically by updateMetaInfo
     }
   },
   {
@@ -24,8 +89,8 @@ const routes = [
     name: 'product-detail',
     component: () => import('../views/ProductDetailView.vue'),
     meta: { 
-      title: '产品详情 - 小华同学AI', 
-      description: '了解小华同学AI产品的详细信息、功能特点和技术规格，选择最适合您需求的智能解决方案。' 
+      title: '', // Will be set dynamically by updateMetaInfo
+      description: '' // Will be set dynamically by updateMetaInfo
     }
   },
   {
@@ -33,8 +98,8 @@ const routes = [
     name: 'projects',
     component: () => import('../views/ProjectsView.vue'),
     meta: { 
-      title: '开源项目 - 小华同学AI', 
-      description: '查看小华同学AI的开源项目，我们致力于促进AI技术的开源发展，提供丰富的开源工具和框架。' 
+      title: '', // Will be set dynamically by updateMetaInfo
+      description: '' // Will be set dynamically by updateMetaInfo
     }
   },
   {
@@ -42,8 +107,8 @@ const routes = [
     name: 'about',
     component: () => import('../views/AboutView.vue'),
     meta: { 
-      title: '关于我 - 小华同学AI', 
-      description: '了解小华同学AI的故事、团队和技术理念，以及我们如何通过技术创新推动行业发展。' 
+      title: '', // Will be set dynamically by updateMetaInfo
+      description: '' // Will be set dynamically by updateMetaInfo
     }
   },
   {
@@ -51,8 +116,8 @@ const routes = [
     name: 'privacy',
     component: () => import('../views/PrivacyView.vue'),
     meta: { 
-      title: '隐私政策 - 小华同学AI',
-      description: '了解小华同学AI如何保护您的隐私和个人信息，以及我们的数据收集和使用政策。' 
+      title: '', // Will be set dynamically by updateMetaInfo
+      description: '' // Will be set dynamically by updateMetaInfo
     }
   },
   {
@@ -60,8 +125,8 @@ const routes = [
     name: 'terms',
     component: () => import('../views/TermsView.vue'),
     meta: { 
-      title: '服务条款 - 小华同学AI',
-      description: '查看小华同学AI的服务条款，了解使用我们服务时的权利和义务。' 
+      title: '', // Will be set dynamically by updateMetaInfo
+      description: '' // Will be set dynamically by updateMetaInfo
     }
   },
   {
@@ -69,8 +134,8 @@ const routes = [
     name: 'not-found',
     component: () => import('../views/NotFoundView.vue'),
     meta: { 
-      title: '页面未找到 - 小华同学AI',
-      description: '抱歉，您请求的页面不存在。请返回首页继续浏览小华同学AI的内容。' 
+      title: '', // Will be set dynamically by updateMetaInfo
+      description: '' // Will be set dynamically by updateMetaInfo
     }
   }
 ]
@@ -87,10 +152,14 @@ const router = createRouter({
   }
 })
 
-// 设置页面标题
+// 路由导航守卫
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || '小华同学AI官网'
   next()
+})
+
+// 路由变化后更新元数据
+router.afterEach((to) => {
+  updateMetaInfo(to)
 })
 
 export default router 
