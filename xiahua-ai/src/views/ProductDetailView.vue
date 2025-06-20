@@ -18,7 +18,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
-          返回产品列表
+          {{ t('productDetail.backToProducts') }}
         </router-link>
         
         <div class="flex flex-col md:flex-row gap-8 items-center">
@@ -54,14 +54,14 @@
                 rel="noopener noreferrer" 
                 class="btn bg-white text-primary-600 hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 active:translate-y-0"
               >
-                立即体验
+                {{ t('productDetail.tryNow') }}
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
               
               <button class="btn btn-outline border-white text-white hover:bg-white/10 hover:shadow-lg hover:-translate-y-1 transition-all active:translate-y-0">
-                了解更多
+                {{ t('productDetail.learnMore') }}
               </button>
             </div>
           </div>
@@ -84,7 +84,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 class="text-lg font-bold group-hover:text-primary-600 transition-colors">核心功能</h3>
+              <h3 class="text-lg font-bold group-hover:text-primary-600 transition-colors">{{ t('productDetail.coreFeatures') }}</h3>
             </div>
             <ul class="space-y-2">
               <li v-for="feature in product.features" :key="feature" class="flex items-start">
@@ -104,7 +104,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                 </svg>
               </div>
-              <h3 class="text-lg font-bold group-hover:text-secondary-600 transition-colors">技术规格</h3>
+              <h3 class="text-lg font-bold group-hover:text-secondary-600 transition-colors">{{ t('productDetail.techSpecs') }}</h3>
             </div>
             <div class="space-y-3">
               <div v-for="spec in product.specs" :key="spec.name" class="flex justify-between">
@@ -122,20 +122,20 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 class="text-lg font-bold group-hover:text-accent-600 transition-colors">价格与授权</h3>
+              <h3 class="text-lg font-bold group-hover:text-accent-600 transition-colors">{{ t('productDetail.pricingAuth') }}</h3>
             </div>
-            <div class="text-center py-4">
+                          <div class="text-center py-4">
               <div v-if="product.isFree" class="flex flex-col items-center">
                 <span class="text-green-600 font-medium bg-green-50 px-4 py-2 rounded-full text-sm mb-2">
-                  免费使用
+                  {{ t('productDetail.freeToUse') }}
                 </span>
-                <p class="text-gray-600 text-sm">无需任何费用即可使用所有功能</p>
+                <p class="text-gray-600 text-sm">{{ t('productDetail.noFeeRequired') }}</p>
               </div>
               <div v-else class="flex flex-col items-center">
                 <div class="text-3xl font-bold text-primary-600 mb-2">¥{{ product.price }}</div>
                 <p class="text-gray-600 text-sm mb-4">{{ product.pricingModel }}</p>
                 <button class="btn btn-primary w-full hover:-translate-y-1 shadow-md hover:shadow-lg transition-all">
-                  立即购买
+                  {{ t('productDetail.buyNow') }}
                 </button>
               </div>
             </div>
@@ -159,7 +159,7 @@
             class="px-6 py-3 font-medium relative whitespace-nowrap"
             :class="activeTab === tab.id ? 'text-primary-600' : 'text-gray-500 hover:text-gray-700'"
           >
-            {{ tab.name }}
+            {{ t(tab.name) }}
             <div 
               class="absolute bottom-0 left-0 w-full h-0.5 transition-all duration-300"
               :class="activeTab === tab.id ? 'bg-primary-500' : 'bg-transparent'"
@@ -173,7 +173,7 @@
           <div v-if="activeTab === 'details'" class="space-y-8">
             <!-- 产品介绍 -->
             <div>
-              <h3 class="text-2xl font-bold mb-4 text-gray-800">产品介绍</h3>
+              <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ t('productDetail.productIntro') }}</h3>
               <div class="prose prose-lg max-w-none text-gray-700">
                 <p>{{ product.detailedDescription }}</p>
                 <!-- 可以使用v-html渲染富文本内容 -->
@@ -182,7 +182,7 @@
             
             <!-- 使用场景 -->
             <div>
-              <h3 class="text-2xl font-bold mb-4 text-gray-800">适用场景</h3>
+              <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ t('productDetail.useCases') }}</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div v-for="scenario in product.useCases" :key="scenario.title" class="card p-6 hover:border-primary-100">
                   <div class="flex items-center mb-3">
@@ -198,7 +198,7 @@
             
             <!-- 产品图片展示 -->
             <div>
-              <h3 class="text-2xl font-bold mb-4 text-gray-800">产品展示</h3>
+              <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ t('productDetail.productShowcase') }}</h3>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div 
                   v-for="(image, index) in product.images" 
@@ -220,7 +220,7 @@
                     </div>
                     <!-- 图片序号指示器 -->
                     <div class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
-                      {{ index + 1 }}/{{ product.images.length }}
+                      {{ t('productDetail.photoIndex', { current: index + 1, total: product.images.length }) }}
                     </div>
                   </div>
                 </div>
@@ -239,7 +239,7 @@
           <!-- 技术规格 -->
           <div v-if="activeTab === 'specs'" class="space-y-8">
             <div class="card p-6">
-              <h3 class="text-xl font-bold mb-4 text-gray-800">详细规格</h3>
+              <h3 class="text-xl font-bold mb-4 text-gray-800">{{ t('productDetail.detailedSpecs') }}</h3>
               <div class="space-y-6">
                 <div v-for="category in product.specCategories" :key="category.name">
                   <h4 class="text-lg font-semibold mb-3 pb-2 border-b border-gray-100">{{ category.name }}</h4>
@@ -257,7 +257,7 @@
           <!-- 用户评价 -->
           <div v-if="activeTab === 'reviews'" class="space-y-8">
             <div class="flex items-center justify-between mb-6">
-              <h3 class="text-2xl font-bold text-gray-800">用户评价</h3>
+              <h3 class="text-2xl font-bold text-gray-800">{{ t('productDetail.userReviews') }}</h3>
               <div class="flex items-center">
                 <div class="text-3xl font-bold text-primary-600 mr-2">{{ product.rating }}</div>
                 <div class="flex items-center">
@@ -267,7 +267,7 @@
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   </div>
-                  <span class="text-gray-600 ml-2">({{ product.reviewCount }}条评价)</span>
+                  <span class="text-gray-600 ml-2">({{ t('productDetail.reviewCount', { n: product.reviewCount }) }})</span>
                 </div>
               </div>
             </div>
@@ -301,7 +301,7 @@
           
           <!-- 常见问题 -->
           <div v-if="activeTab === 'faq'" class="space-y-6">
-                          <h3 class="text-2xl font-bold mb-4 text-gray-800">常见问题</h3>
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ t('productDetail.commonQuestions') }}</h3>
             <div class="space-y-4">
               <div v-for="faq in product.faqs" :key="faq.question" class="card p-6 hover:border-primary-100">
                 <div class="font-semibold text-lg mb-2">{{ faq.question }}</div>
@@ -320,8 +320,8 @@
       
       <div class="container-custom relative z-10">
         <div class="text-center mb-10">
-          <h2 class="mb-4 text-gray-800">相关产品推荐</h2>
-          <p class="text-gray-600 text-xl max-w-2xl mx-auto">探索更多与此相关的AI产品，开启智能化应用之旅</p>
+          <h2 class="mb-4 text-gray-800">{{ t('productDetail.relatedProductsTitle') }}</h2>
+          <p class="text-gray-600 text-xl max-w-2xl mx-auto">{{ t('productDetail.relatedProductsDesc') }}</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -355,7 +355,7 @@
                 class="btn-primary-outline btn-sm inline-flex items-center group hover:bg-primary-50 active:bg-primary-100"
                 @click.stop="handleProductClick(relatedProduct.id)"
               >
-                了解详情
+                {{ t('productDetail.learnMore') }}
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
@@ -382,27 +382,25 @@
             <div class="inline-block px-4 py-1 mb-4 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium">
               <span class="flex items-center">
                 <span class="inline-block w-2 h-2 rounded-full bg-white mr-2 animate-pulse"></span>
-                个性化咨询
+                {{ t('productDetail.customConsultation') }}
               </span>
             </div>
             
-            <h2 class="mb-4 text-white">需要<span class="relative inline-block">
-              <span class="absolute inset-0 bg-white/10 transform -skew-x-12 -z-10 rounded"></span>定制解决方案
-            </span>？</h2>
+            <h2 class="mb-4 text-white">{{ t('productDetail.needCustomSolution') }}</h2>
             <p class="text-white/90 text-xl max-w-2xl mx-auto mb-8">
-              联系我们的专业团队，获取针对您业务需求的个性化AI解决方案
+              {{ t('productDetail.customSolutionDesc') }}
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
               <button class="btn bg-white text-primary-600 hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 active:translate-y-0">
-                立即咨询
+                {{ t('productDetail.consultNow') }}
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </button>
               
               <router-link to="/about" class="btn btn-outline border-white text-white hover:bg-white/10 hover:shadow-lg hover:-translate-y-1 transition-all active:translate-y-0">
-                了解我们的服务
+                {{ t('productDetail.learnAboutServices') }}
               </router-link>
             </div>
           </div>
@@ -415,10 +413,19 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import ImageViewer from '../components/ImageViewer.vue'
 
 const route = useRoute()
 const router = useRouter()
+const { t, locale } = useI18n()
+
+// 检查翻译键是否存在
+const hasTranslation = (key) => {
+  const message = t(key)
+  // 如果返回的是键名本身，说明没有对应的翻译
+  return message !== key && message !== ''
+}
 
 // 产品数据
 const product = ref({
@@ -446,630 +453,48 @@ const product = ref({
 const isImageViewerOpen = ref(false)
 const currentImageIndex = ref(0)
 
-// 获取产品信息
-const fetchProductData = async (productId) => {
+// 获取产品数据
+const fetchProductData = (productId) => {
+  console.log(`开始获取产品数据: ${productId}`)
+  console.log(`当前时间: ${new Date().toISOString()}`)
+  
+  // 重置产品数据
+  product.value = {
+    id: productId,
+    title: '',
+    description: '',
+    features: [],
+    useCases: [],
+    testimonials: []
+  }
+
+  // 根据产品ID获取对应的数据
   try {
-    // 模拟API调用延迟
-    await new Promise(resolve => setTimeout(resolve, 300))
-    
-    // 根据产品ID获取不同的产品数据
-    let mockProduct = {
-      ...product.value,
-      id: productId
+    // 检查是否有特殊产品处理
+    if (productId === 'watermark' || productId === 'idPhoto' || productId === 'fayan') {
+      console.log(`处理特殊产品: ${productId}`)
+      // 这些产品有特殊处理逻辑
+      handleSpecialProduct(productId)
+    } else {
+      console.log(`处理一般产品: ${productId}`)
+      // 对于其他产品，使用通用处理逻辑
+      handleGeneralProduct(productId)
     }
     
-    // 根据不同的产品ID返回不同的数据
-    switch(productId) {
-      case 'watermark':
-        mockProduct = {
-          id: productId,
-          title: '证件水印',
-          categoryId: 'assist',
-          shortDescription: '智能证件水印防伪系统，为您的重要证件提供专业的数字水印保护，有效防止证件被盗用或篡改。',
-          detailedDescription: '证件水印系统采用先进的AI技术，能够为各类证件提供不可见的数字水印保护。系统支持多种证件类型，包括身份证、学历证书、资格证书等。通过独特的水印算法，可以有效防止证件被伪造或篡改，同时不影响证件的美观性。',
-          image: 'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=1080',
-          images: [
-            'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=1080',
-            'https://images.pexels.com/photos/5473950/pexels-photo-5473950.jpeg?auto=compress&cs=tinysrgb&w=1080',
-            'https://images.pexels.com/photos/5473952/pexels-photo-5473952.jpeg?auto=compress&cs=tinysrgb&w=1080'
-          ],
-          isFree: true,
-          price: 0,
-          pricingModel: '完全免费',
-          demoUrl: 'https://zjsy.leepm.com/',
-          rating: 4.8,
-          reviewCount: 156,
-          features: [
-            '智能水印嵌入技术',
-            '多种证件类型支持',
-            '批量处理功能',
-            '水印验证系统',
-            '防伪追溯功能',
-            '完全免费使用',
-            '无需注册登录'
-          ],
-          specs: [
-            { name: '支持格式', value: 'JPG, PNG, PDF' },
-            { name: '处理速度', value: '2秒/张' },
-            { name: '最大文件大小', value: '20MB' },
-            { name: '使用限制', value: '无限制' }
-          ],
-          specCategories: [
-            {
-              name: '基本规格',
-              items: [
-                { name: '支持格式', value: 'JPG, PNG, PDF' },
-                { name: '处理速度', value: '2秒/张' },
-                { name: '最大文件大小', value: '20MB' },
-                { name: '水印类型', value: '不可见数字水印' }
-              ]
-            },
-            {
-              name: '高级功能',
-              items: [
-                { name: '批量处理', value: '支持' },
-                { name: '水印验证', value: '内置验证器' },
-                { name: '防伪等级', value: '银行级' },
-                { name: '数据加密', value: 'AES-256' },
-                { name: '免费使用', value: '永久免费' }
-              ]
-            }
-          ],
-          useCases: [
-            {
-              title: '证书防伪',
-              description: '为学历证书、资格证书等重要证件添加防伪水印',
-              icon: '📜'
-            },
-            {
-              title: '文件保护',
-              description: '保护公司机密文件，防止泄露和篡改',
-              icon: '🔒'
-            },
-            {
-              title: '版权保护',
-              description: '为数字作品添加版权水印，保护知识产权',
-              icon: '©️'
-            }
-          ],
-          reviews: [
-            {
-              id: 1,
-              userName: '张经理',
-              userAvatar: '',
-              rating: 5,
-              date: '2024-02-15',
-              content: '完全免费还这么好用，太赞了！水印完全不可见但可以轻松验证真伪。'
-            },
-            {
-              id: 2,
-              userName: '李老师',
-              userAvatar: '',
-              rating: 5,
-              date: '2024-02-10',
-              content: '学校用来处理学生证书，批量处理功能很方便，而且完全免费，节省了很多经费。'
-            }
-          ],
-          faqs: [
-            {
-              question: '这个产品真的完全免费吗？',
-              answer: '是的，证件水印系统完全免费，无需付费即可使用所有功能。'
-            },
-            {
-              question: '水印会影响证件的外观吗？',
-              answer: '不会，我们使用的是不可见数字水印技术，不会对证件的视觉效果产生任何影响。'
-            },
-            {
-              question: '如何验证带水印的证件？',
-              answer: '可以通过我们提供的验证器进行验证，只需扫描证件即可。'
-            }
-          ]
-        }
-        break
-        
-      case 'id-photo':
-        mockProduct = {
-          id: productId,
-          title: '小花证件照',
-          categoryId: 'assist',
-          shortDescription: '智能证件照制作工具，一键生成符合各类规格的证件照。',
-          detailedDescription: '小花证件照是一款完全免费的智能证件照制作工具，采用先进的AI技术，能够快速生成符合各类规格的证件照。系统支持智能修图美化、背景更换、规格自动调整等功能，让用户轻松获得专业级证件照。适用于身份证、护照、签证等多种场景。',
-          image: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1080',
-          images: [
-            'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1080',
-            'https://images.pexels.com/photos/3785080/pexels-photo-3785080.jpeg?auto=compress&cs=tinysrgb&w=1080',
-            'https://images.pexels.com/photos/3785081/pexels-photo-3785081.jpeg?auto=compress&cs=tinysrgb&w=1080'
-          ],
-          isFree: true,
-          price: 0,
-          pricingModel: '完全免费',
-          demoUrl: 'https://zj.leepm.com/',
-          rating: 4.9,
-          reviewCount: 2156,
-          features: [
-            'AI智能美颜',
-            '自动规格调整',
-            '多种背景可选',
-            '批量处理',
-            '云端存储',
-            '免费使用',
-            '无需注册'
-          ],
-          specs: [
-            { name: '支持证件类型', value: '20+' },
-            { name: '处理时间', value: '3秒内' },
-            { name: '照片规格', value: '标准/定制' },
-            { name: '使用限制', value: '无限制' }
-          ],
-          specCategories: [
-            {
-              name: '基础功能',
-              items: [
-                { name: '支持证件类型', value: '20+' },
-                { name: '处理时间', value: '3秒内' },
-                { name: '照片规格', value: '标准/定制' },
-                { name: '存储时间', value: '永久' }
-              ]
-            },
-            {
-              name: '高级功能',
-              items: [
-                { name: 'AI美颜', value: '支持' },
-                { name: '背景替换', value: '支持' },
-                { name: '批量处理', value: '支持' },
-                { name: '云端备份', value: '支持' },
-                { name: '免费使用', value: '永久免费' }
-              ]
-            }
-          ],
-          useCases: [
-            {
-              title: '证件办理',
-              description: '快速生成身份证、护照等标准证件照',
-              icon: '📷'
-            },
-            {
-              title: '求职简历',
-              description: '制作专业的求职简历照片',
-              icon: '👔'
-            },
-            {
-              title: '学生证件',
-              description: '学生证、校园卡等证件照制作',
-              icon: '🎓'
-            }
-          ],
-          reviews: [
-            {
-              id: 1,
-              userName: '王小明',
-              userAvatar: '',
-              rating: 5,
-              date: '2024-02-18',
-              content: '完全免费的证件照工具，AI美颜效果自然，太赞了！'
-            },
-            {
-              id: 2,
-              userName: '李女士',
-              userAvatar: '',
-              rating: 5,
-              date: '2024-02-16',
-              content: '在家就能免费拍证件照，太方便了，而且效果很专业。'
-            }
-          ],
-          faqs: [
-            {
-              question: '使用这个工具需要付费吗？',
-              answer: '不需要，小花证件照完全免费，所有功能都可以免费使用。'
-            },
-            {
-              question: '照片是否符合官方要求？',
-              answer: '是的，我们的系统严格按照各类证件的官方规格要求进行照片处理。'
-            },
-            {
-              question: '多久能拿到照片？',
-              answer: '照片处理只需3秒，处理完成后可立即下载。'
-            }
-          ]
-        }
-        break
-
-      case 'legal-eye':
-        mockProduct = {
-          id: productId,
-          title: '法眼',
-          categoryId: 'ai',
-          shortDescription: '法眼AI智能合同审核平台利用先进的人工智能技术，对合同进行全方位分析',
-          detailedDescription: '法眼是一款免费的AI智能合同审核工具，能够快速识别合同中的潜在风险点，提供专业的法律建议。系统采用先进的自然语言处理技术，可以自动分析合同条款，识别不公平条款，并提供修改建议。',
-          image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600',
-          images: [
-            'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600',
-            'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600',
-            'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600'
-          ],
-          isFree: true,
-          price: 0,
-          pricingModel: '完全免费',
-          demoUrl: 'https://fayan.leepm.com/',
-          rating: 4.8,
-          reviewCount: 568,
-          features: [
-            'AI智能合同分析',
-            '风险条款识别',
-            '法律建议生成',
-            '合同对比分析',
-            '免费使用',
-            '无需注册'
-          ],
-          specs: [
-            { name: '支持合同类型', value: '50+' },
-            { name: '分析速度', value: '10秒内' },
-            { name: '准确率', value: '95%以上' }
-          ],
-          specCategories: [
-            {
-              name: '基础功能',
-              items: [
-                { name: '支持合同类型', value: '50+' },
-                { name: '分析速度', value: '10秒内' },
-                { name: '准确率', value: '95%以上' },
-                { name: '使用限制', value: '无限制' }
-              ]
-            },
-            {
-              name: '高级功能',
-              items: [
-                { name: '风险评估', value: '支持' },
-                { name: '条款比对', value: '支持' },
-                { name: '修改建议', value: '支持' },
-                { name: '免费使用', value: '永久免费' }
-              ]
-            }
-          ],
-          useCases: [
-            {
-              title: '合同审核',
-              description: '快速审核各类商业合同，识别潜在风险',
-              icon: '📋'
-            },
-            {
-              title: '法律咨询',
-              description: '获取专业的法律建议和解决方案',
-              icon: '⚖️'
-            },
-            {
-              title: '合同对比',
-              description: '比对不同版本合同，找出关键差异',
-              icon: '🔍'
-            }
-          ],
-          reviews: [
-            {
-              id: 1,
-              userName: '张律师',
-              userAvatar: '',
-              rating: 5,
-              date: '2024-02-20',
-              content: '非常专业的合同审核工具，而且完全免费，帮助我们提高了工作效率。'
-            },
-            {
-              id: 2,
-              userName: '王经理',
-              userAvatar: '',
-              rating: 5,
-              date: '2024-02-19',
-              content: '对于非法律专业人士来说特别有帮助，可以快速发现合同中的问题。'
-            }
-          ],
-          faqs: [
-            {
-              question: '使用法眼需要付费吗？',
-              answer: '不需要，法眼是完全免费的合同审核工具。'
-            },
-            {
-              question: '支持哪些类型的合同？',
-              answer: '支持劳动合同、租赁合同、买卖合同等50多种常见合同类型。'
-            },
-            {
-              question: '如何保护合同隐私？',
-              answer: '我们采用严格的加密措施保护用户数据，所有合同信息都经过脱敏处理。'
-            }
-          ]
-        }
-        break
-
-      case 'mcp-hub':
-        mockProduct = {
-          id: productId,
-          title: 'MCP中文资源中心',
-          categoryId: 'ai',
-          shortDescription: '发现并推荐AI优质MCP服务，目前已收录4700+优质MCP服务。',
-          detailedDescription: 'MCP中文资源中心是一个专注于收集和推荐优质MCP（Managed Cloud Platform）服务的平台。平台目前已收录超过4700个MCP服务，涵盖浏览器控制API、GitHub工具、数据分析、Playwright、聊天机器人等多个领域。我们为开发者和用户提供全方位的MCP服务管理和发现体验。',
-          image: 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600',
-          images: [
-            'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600',
-            'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600',
-            'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600'
-          ],
-          isFree: true,
-          price: 0,
-          pricingModel: '完全免费',
-          demoUrl: 'https://mcp.leepm.com/',
-          rating: 4.9,
-          reviewCount: 1280,
-          features: [
-            '4700+优质MCP服务',
-            '精选推荐服务',
-            '服务数据分析',
-            '活跃开发社区',
-            '定期数据更新',
-            '免费使用'
-          ],
-          specs: [
-            { name: '收录服务数量', value: '4700+' },
-            { name: '活跃开发者', value: '25K+' },
-            { name: '推荐满意度', value: '98%' },
-            { name: '月访问量', value: '350万+' }
-          ],
-          specCategories: [
-            {
-              name: '平台数据',
-              items: [
-                { name: '收录服务数量', value: '4700+' },
-                { name: '活跃开发者', value: '25K+' },
-                { name: '推荐满意度', value: '98%' },
-                { name: '月访问量', value: '350万+' }
-              ]
-            },
-            {
-              name: '服务类别',
-              items: [
-                { name: '浏览器控制', value: '支持' },
-                { name: 'GitHub工具', value: '支持' },
-                { name: '数据分析', value: '支持' },
-                { name: 'Playwright', value: '支持' },
-                { name: '聊天机器人', value: '支持' }
-              ]
-            }
-          ],
-          useCases: [
-            {
-              title: '发现MCP服务',
-              description: '快速找到适合您需求的MCP服务',
-              icon: '🔍'
-            },
-            {
-              title: '分享MCP服务',
-              description: '提交并分享您的MCP服务给更多用户',
-              icon: '🌟'
-            },
-            {
-              title: '数据分析',
-              description: '获取详细的服务使用数据和用户反馈',
-              icon: '📊'
-            }
-          ],
-          reviews: [
-            {
-              id: 1,
-              userName: '李开发',
-              userAvatar: '',
-              rating: 5,
-              date: '2024-02-21',
-              content: '非常棒的平台，帮我找到了很多有用的MCP服务，而且完全免费。'
-            },
-            {
-              id: 2,
-              userName: '张产品',
-              userAvatar: '',
-              rating: 5,
-              date: '2024-02-20',
-              content: '平台收录的服务质量都很高，推荐算法也很准确。'
-            }
-          ],
-          faqs: [
-            {
-              question: '使用平台需要付费吗？',
-              answer: '不需要，MCP中文资源中心是完全免费的服务发现平台。'
-            },
-            {
-              question: '如何提交自己的MCP服务？',
-              answer: '您可以通过平台的提交功能，填写相关信息即可分享您的MCP服务。'
-            },
-            {
-              question: '平台的数据多久更新一次？',
-              answer: '我们每天都会更新服务数据和用户反馈，确保信息的及时性。'
-            }
-          ]
-        }
-        break
-
-      case 'fayan':
-        mockProduct = {
-          id: productId,
-          title: '法眼',
-          categoryId: 'assist',
-          shortDescription: '智能法律文书分析和生成工具，为您提供专业的法律文书处理服务。',
-          detailedDescription: '法眼是一款专业的法律文书智能处理工具，采用先进的自然语言处理技术，能够快速分析和生成各类法律文书。系统支持合同审查、法律条款分析、文书智能生成等功能，帮助用户更高效地处理法律相关工作。',
-          image: 'https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1080',
-          images: [
-            'https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1080',
-            'https://images.pexels.com/photos/5668474/pexels-photo-5668474.jpeg?auto=compress&cs=tinysrgb&w=1080',
-            'https://images.pexels.com/photos/5668475/pexels-photo-5668475.jpeg?auto=compress&cs=tinysrgb&w=1080'
-          ],
-          isFree: true,
-          price: 0,
-          pricingModel: '完全免费',
-          demoUrl: 'https://fayan.leepm.com/',
-          rating: 4.7,
-          reviewCount: 892,
-          features: [
-            '智能合同审查',
-            '法律条款分析',
-            '文书智能生成',
-            '多语言支持',
-            '隐私保护',
-            '免费使用',
-            '无需注册'
-          ],
-          specs: [
-            {
-              name: '支持文件格式',
-              value: 'PDF, Word, TXT'
-            },
-            {
-              name: '处理速度',
-              value: '小于3秒/页'
-            },
-            {
-              name: '准确率',
-              value: '95%以上'
-            },
-            {
-              name: '并发处理',
-              value: '支持'
-            }
-          ],
-          specCategories: [
-            {
-              name: '基本功能',
-              items: [
-                {
-                  name: '文书类型',
-                  value: '合同、协议、诉讼文书等'
-                },
-                {
-                  name: '分析维度',
-                  value: '合规性、完整性、风险点'
-                },
-                {
-                  name: '处理语言',
-                  value: '中文、英文'
-                }
-              ]
-            },
-            {
-              name: '技术参数',
-              items: [
-                {
-                  name: 'API集成',
-                  value: '支持'
-                },
-                {
-                  name: '数据加密',
-                  value: 'AES-256'
-                },
-                {
-                  name: '并发用户数',
-                  value: '无限制'
-                }
-              ]
-            }
-          ],
-          useCases: [
-            {
-              title: '合同审查',
-              icon: '📄',
-              description: '快速识别合同中的关键条款和潜在风险点'
-            },
-            {
-              title: '文书生成',
-              icon: '✍️',
-              description: '根据模板和要求自动生成标准法律文书'
-            },
-            {
-              title: '法规遵从',
-              icon: '⚖️',
-              description: '确保文书符合最新的法律法规要求'
-            }
-          ],
-          reviews: [
-            {
-              userName: '李律师',
-              userAvatar: '',
-              rating: 5,
-              date: '2024-02-25',
-              content: '非常好用的法律文书工具，大大提高了工作效率。'
-            },
-            {
-              userName: '张经理',
-              userAvatar: '',
-              rating: 4,
-              date: '2024-02-20',
-              content: '界面简洁，功能强大，对于合同审查特别有帮助。'
-            },
-            {
-              userName: '王助理',
-              userAvatar: '',
-              rating: 5,
-              date: '2024-02-15',
-              content: '免费且专业，文书生成功能节省了大量时间。'
-            }
-          ],
-          faqs: [
-            {
-              question: '使用法眼需要付费吗？',
-              answer: '不需要，法眼是完全免费的法律文书处理工具。'
-            },
-            {
-              question: '如何保护文书数据安全？',
-              answer: '我们采用AES-256加密技术，确保所有文书数据的安全性。'
-            },
-            {
-              question: '支持哪些类型的文书？',
-              answer: '支持包括合同、协议、诉讼文书等在内的多种法律文书类型。'
-            },
-            {
-              question: '处理速度如何？',
-              answer: '单页文书处理时间通常少于3秒，批量处理也能保持较高效率。'
-            }
-          ]
-        }
-        break
-
-      default:
-        mockProduct = {
-          id: productId,
-          title: '未知产品',
-          categoryId: 'other',
-          shortDescription: '该产品信息暂未添加',
-          image: 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080',
-          images: [
-            'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080'
-          ],
-          isFree: false,
-          price: 0,
-          pricingModel: '暂未定价',
-          rating: 0,
-          reviewCount: 0,
-          features: [],
-          specs: [],
-          specCategories: [],
-          useCases: [],
-          reviews: [],
-          faqs: []
-        }
-    }
-    
-    // 更新产品数据
-    product.value = {
-      ...product.value,
-      ...mockProduct
-    }
-    
-    // 更新title
-    document.title = `${product.value.title} - 产品详情 - 小华同学AI`
-    
-    console.log(`Fetched product data for ID: ${productId}`)
+    // 更新结构化数据
+    updateStructuredData()
   } catch (error) {
-    console.error('Error fetching product data:', error)
-    router.push('/products')
+    console.error(`获取产品数据出错: ${error.message}`)
+    // 显示错误信息
+    product.value.title = t('productDetail.errorTitle')
+    product.value.description = t('productDetail.errorDescription')
   }
 }
 
 // 监听路由参数变化
 watch(() => route.params.id, (newId, oldId) => {
   if (newId && newId !== oldId) {
+    console.log(`路由参数变化: ${oldId} -> ${newId}`)
     fetchProductData(newId)
     // 滚动到页面顶部
     window.scrollTo({
@@ -1096,10 +521,10 @@ const closeImageViewer = () => {
 
 // 标签页数据
 const tabs = [
-  { id: 'details', name: '产品详情' },
-  { id: 'specs', name: '技术规格' },
-  { id: 'reviews', name: '用户评价' },
-  { id: 'faq', name: '常见问题' }
+  { id: 'details', name: 'productDetail.tabs.details' },
+  { id: 'specs', name: 'productDetail.tabs.specs' },
+  { id: 'reviews', name: 'productDetail.tabs.reviews' },
+  { id: 'faq', name: 'productDetail.tabs.faq' }
 ]
 const activeTab = ref('details')
 
@@ -1109,23 +534,23 @@ const relatedProducts = computed(() => {
   const currentCategory = product.value.categoryId
   return [
     {
-      id: 'voice-assistant',
-      title: '智能语音助手',
-      description: '自然交互的语音助手，为您提供全方位的智能服务，打造无缝的人机交互体验。',
+      id: 'voiceAssistant',
+      title: t('products.productItems.voiceAssistant.title'),
+      description: t('products.productItems.voiceAssistant.description'),
       image: 'https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg?auto=compress&cs=tinysrgb&w=1080',
       categoryId: 'assist'
     },
     {
-      id: 'data-viz',
-      title: '数据可视化工具',
-      description: '直观展示复杂数据关系，定制各类图表与仪表盘，让数据更易理解。',
+      id: 'dataViz',
+      title: t('products.productItems.dataViz.title'),
+      description: t('products.productItems.dataViz.description'),
       image: 'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=1080',
       categoryId: 'data'
     },
     {
-      id: 'code-assistant',
-      title: '代码辅助工具',
-      description: '智能代码补全与优化工具，提高开发效率，减少错误，适合各种编程语言。',
+      id: 'codeAssistant',
+      title: t('products.productItems.codeAssistant.title'),
+      description: t('products.productItems.codeAssistant.description'),
       image: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1080',
       categoryId: 'ai'
     }
@@ -1143,21 +568,584 @@ const handleProductClick = (productId) => {
 
 // 获取分类名称的方法
 const getCategoryName = (categoryId) => {
-  const categoryMap = {
-    'all': '全部',
-    'ai': 'AI工具',
-    'data': '数据分析',
-    'assist': '智能助手',
-    'other': '其他'
+  // 使用国际化翻译
+  return t(`products.filter.categories.${categoryId}`)
+}
+
+// 获取产品图片
+const getProductImage = (productId) => {
+  switch(productId) {
+    case 'watermark':
+      return 'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'idPhoto':
+      return 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'fayan':
+      return 'https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'mcpHub':
+      return 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600'
+    case 'aiWriting':
+      return 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600'
+    case 'legalEye':
+      return 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600'
+    case 'dataAnalysis':
+      return 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'voiceAssistant':
+      return 'https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'codeAssistant':
+      return 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'dataViz':
+      return 'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    case 'creativeInspiration':
+      return 'https://images.pexels.com/photos/3758105/pexels-photo-3758105.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    default:
+      return 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080'
   }
-  return categoryMap[categoryId] || categoryId
+}
+
+// 处理一般产品
+const handleGeneralProduct = (productId) => {
+  console.log(`处理一般产品: ${productId}`)
+  
+  // 设置基本产品信息
+  product.value = {
+    id: productId,
+    title: hasTranslation(`products.productItems.${productId}.title`) ? 
+      t(`products.productItems.${productId}.title`) : productId,
+    description: hasTranslation(`products.productItems.${productId}.description`) ? 
+      t(`products.productItems.${productId}.description`) : '',
+    shortDescription: hasTranslation(`products.productItems.${productId}.shortDescription`) ? 
+      t(`products.productItems.${productId}.shortDescription`) : '',
+    detailedDescription: hasTranslation(`products.productItems.${productId}.detailedDescription`) ? 
+      t(`products.productItems.${productId}.detailedDescription`) : '',
+    image: getProductImage(productId),
+    images: [
+      getProductImage(productId),
+      'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080',
+      'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=1080'
+    ],
+    categoryId: getCategoryIdForProduct(productId),
+    isFree: ['mcpHub', 'voiceAssistant', 'codeAssistant', 'creativeInspiration'].includes(productId),
+    price: ['mcpHub', 'voiceAssistant', 'codeAssistant', 'creativeInspiration'].includes(productId) ? 0 : 99,
+    pricingModel: ['mcpHub', 'voiceAssistant', 'codeAssistant', 'creativeInspiration'].includes(productId) ? 
+      t('productDetail.pricingModels.free') : t('productDetail.pricingModels.subscription'),
+    rating: 4.5,
+    reviewCount: 24,
+    
+    // 功能特点
+    features: [
+      {
+        title: hasTranslation(`products.productItems.${productId}.features.0.title`) ? 
+          t(`products.productItems.${productId}.features.0.title`) : t('productDetail.defaultFeature1Title'),
+        description: hasTranslation(`products.productItems.${productId}.features.0.description`) ? 
+          t(`products.productItems.${productId}.features.0.description`) : t('productDetail.defaultFeature1Desc'),
+        icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+      },
+      {
+        title: hasTranslation(`products.productItems.${productId}.features.1.title`) ? 
+          t(`products.productItems.${productId}.features.1.title`) : t('productDetail.defaultFeature2Title'),
+        description: hasTranslation(`products.productItems.${productId}.features.1.description`) ? 
+          t(`products.productItems.${productId}.features.1.description`) : t('productDetail.defaultFeature2Desc'),
+        icon: 'M13 10V3L4 14h7v7l9-11h-7z'
+      },
+      {
+        title: hasTranslation(`products.productItems.${productId}.features.2.title`) ? 
+          t(`products.productItems.${productId}.features.2.title`) : t('productDetail.defaultFeature3Title'),
+        description: hasTranslation(`products.productItems.${productId}.features.2.description`) ? 
+          t(`products.productItems.${productId}.features.2.description`) : t('productDetail.defaultFeature3Desc'),
+        icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4'
+      }
+    ],
+    
+    // 使用场景
+    useCases: [
+      {
+        title: hasTranslation(`products.productItems.${productId}.useCases.0.title`) ? 
+          t(`products.productItems.${productId}.useCases.0.title`) : t('productDetail.defaultUseCase1Title'),
+        description: hasTranslation(`products.productItems.${productId}.useCases.0.description`) ? 
+          t(`products.productItems.${productId}.useCases.0.description`) : t('productDetail.defaultUseCase1Desc'),
+        icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
+      },
+      {
+        title: hasTranslation(`products.productItems.${productId}.useCases.1.title`) ? 
+          t(`products.productItems.${productId}.useCases.1.title`) : t('productDetail.defaultUseCase2Title'),
+        description: hasTranslation(`products.productItems.${productId}.useCases.1.description`) ? 
+          t(`products.productItems.${productId}.useCases.1.description`) : t('productDetail.defaultUseCase2Desc'),
+        icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
+      }
+    ],
+    
+    // 规格分类
+    specCategories: [
+      {
+        name: t('productDetail.specCategories.general'),
+        items: [
+          { name: t('productDetail.specs.version'), value: '1.0.0' },
+          { name: t('productDetail.specs.lastUpdate'), value: '2023-10-15' },
+          { name: t('productDetail.specs.platform'), value: t('productDetail.specValues.multiPlatform') }
+        ]
+      },
+      {
+        name: t('productDetail.specCategories.technical'),
+        items: [
+          { name: t('productDetail.specs.apiAccess'), value: t('productDetail.specValues.available') },
+          { name: t('productDetail.specs.dataStorage'), value: t('productDetail.specValues.cloud') },
+          { name: t('productDetail.specs.security'), value: t('productDetail.specValues.highEncryption') }
+        ]
+      }
+    ],
+    
+    // 用户评价
+    reviews: [
+      {
+        id: 1,
+        userName: 'Alex Chen',
+        userAvatar: '',
+        date: '2023-09-12',
+        rating: 5,
+        content: t('productDetail.defaultReview1')
+      },
+      {
+        id: 2,
+        userName: 'Sarah Johnson',
+        userAvatar: '',
+        date: '2023-08-24',
+        rating: 4,
+        content: t('productDetail.defaultReview2')
+      }
+    ],
+    
+    // 常见问题
+    faqs: [
+      {
+        question: t('productDetail.defaultFAQ1Question'),
+        answer: t('productDetail.defaultFAQ1Answer')
+      },
+      {
+        question: t('productDetail.defaultFAQ2Question'),
+        answer: t('productDetail.defaultFAQ2Answer')
+      }
+    ]
+  }
+}
+
+// 获取产品的分类ID
+const getCategoryIdForProduct = (productId) => {
+  const productMap = {
+    watermark: 'assist',
+    idPhoto: 'assist',
+    fayan: 'assist',
+    mcpHub: 'ai',
+    aiWriting: 'ai',
+    legalEye: 'ai',
+    dataAnalysis: 'data',
+    voiceAssistant: 'assist',
+    codeAssistant: 'ai',
+    dataViz: 'data',
+    creativeInspiration: 'other'
+  }
+  
+  return productMap[productId] || 'other'
+}
+
+// 处理特殊产品
+const handleSpecialProduct = (productId) => {
+  console.log(`处理特殊产品: ${productId}`)
+  
+  // 根据产品ID获取特定产品的数据
+  if (productId === 'watermark') {
+    // 水印工具的特殊数据
+    product.value = {
+      id: 'watermark',
+      title: t('products.productItems.watermark.title'),
+      shortDescription: hasTranslation('products.productItems.watermark.shortDescription') ? 
+        t('products.productItems.watermark.shortDescription') : t('products.productItems.watermark.description'),
+      detailedDescription: hasTranslation('products.productItems.watermark.detailedDescription') ? 
+        t('products.productItems.watermark.detailedDescription') : t('products.productItems.watermark.description'),
+      description: t('products.productItems.watermark.description'),
+      image: getProductImage('watermark'),
+      images: [
+        getProductImage('watermark'),
+        'https://images.pexels.com/photos/5473950/pexels-photo-5473950.jpeg?auto=compress&cs=tinysrgb&w=1080',
+        'https://images.pexels.com/photos/5473956/pexels-photo-5473956.jpeg?auto=compress&cs=tinysrgb&w=1080'
+      ],
+      categoryId: 'assist',
+      isFree: true,
+      price: 0,
+      pricingModel: t('productDetail.pricingModels.free'),
+      rating: 4.8,
+      reviewCount: 36,
+      demoUrl: '#',
+      
+      // 核心功能
+      features: [
+        '智能水印嵌入技术',
+        '支持多种证件类型',
+        '批量处理功能',
+        '水印验证系统',
+        '防伪溯源',
+        '完全免费使用',
+        '无需注册'
+      ],
+      
+      // 产品规格
+      specs: {
+        '支持格式': 'JPG, PNG, PDF',
+        '处理速度': '2秒/文档',
+        '最大文件大小': '20MB',
+        '使用限制': '无限制'
+      },
+      
+      // 详细规格分类
+      specCategories: [
+        {
+          name: t('productDetail.specCategories.general'),
+          items: [
+            { name: '支持格式', value: 'JPG, PNG, PDF' },
+            { name: '处理速度', value: '2秒/文档' },
+            { name: '最大文件大小', value: '20MB' },
+            { name: '水印类型', value: '不可见数字水印' }
+          ]
+        },
+        {
+          name: t('productDetail.specCategories.technical'),
+          items: [
+            { name: '批量处理', value: '支持' },
+            { name: '水印验证', value: '内置验证器' },
+            { name: '安全级别', value: '银行级' },
+            { name: '数据加密', value: 'AES-256' },
+            { name: '免费使用', value: '永久免费' }
+          ]
+        }
+      ],
+      
+      // 使用场景
+      useCases: [
+        {
+          title: '证书防伪',
+          description: '为学历证书、资格证书等重要文件添加防伪水印',
+          icon: 'document'
+        },
+        {
+          title: '文件保护',
+          description: '保护公司机密文件，防止泄露和篡改',
+          icon: 'lock'
+        },
+        {
+          title: '版权保护',
+          description: '为数字作品添加版权水印，保护知识产权',
+          icon: 'copyright'
+        }
+      ],
+      
+      // 用户评价
+      reviews: [
+        {
+          id: 1,
+          userName: '张经理',
+          userAvatar: '',
+          date: '2023-10-15',
+          rating: 5,
+          content: '完全免费还这么好用！水印完全不可见但又能轻松验证真伪。'
+        },
+        {
+          id: 2,
+          userName: '李老师',
+          userAvatar: '',
+          date: '2023-09-20',
+          rating: 5,
+          content: '学校用来处理学生证书，批量处理功能很方便，而且完全免费，节省了很多预算。'
+        }
+      ],
+      
+      // 常见问题
+      faqs: [
+        {
+          question: '这款产品真的完全免费吗？',
+          answer: '是的，证件水印系统完全免费，所有功能都可以无需付费使用。'
+        },
+        {
+          question: '水印会影响文档的外观吗？',
+          answer: '不会，我们使用不可见数字水印技术，不会影响文档的视觉外观。'
+        },
+        {
+          question: '如何验证带水印的文档？',
+          answer: '可以通过我们提供的验证器进行验证，只需扫描文档即可。'
+        }
+      ]
+    }
+  } else if (productId === 'idPhoto') {
+    // 证件照工具的特殊数据
+    product.value = {
+      id: 'idPhoto',
+      title: t('products.productItems.idPhoto.title'),
+      shortDescription: hasTranslation('products.productItems.idPhoto.shortDescription') ? 
+        t('products.productItems.idPhoto.shortDescription') : t('products.productItems.idPhoto.description'),
+      detailedDescription: hasTranslation('products.productItems.idPhoto.detailedDescription') ? 
+        t('products.productItems.idPhoto.detailedDescription') : t('products.productItems.idPhoto.description'),
+      description: t('products.productItems.idPhoto.description'),
+      image: getProductImage('idPhoto'),
+      images: [
+        getProductImage('idPhoto'),
+        'https://images.pexels.com/photos/3785080/pexels-photo-3785080.jpeg?auto=compress&cs=tinysrgb&w=1080',
+        'https://images.pexels.com/photos/3785081/pexels-photo-3785081.jpeg?auto=compress&cs=tinysrgb&w=1080'
+      ],
+      categoryId: 'assist',
+      isFree: true,
+      price: 0,
+      pricingModel: t('productDetail.pricingModels.free'),
+      rating: 4.7,
+      reviewCount: 42,
+      demoUrl: '#',
+      
+      // 核心功能
+      features: [
+        'AI智能美颜',
+        '自动规格调整',
+        '多种背景可选',
+        '批量处理',
+        '云端存储',
+        '免费使用',
+        '无需注册'
+      ],
+      
+      // 产品规格
+      specs: {
+        '支持证件类型': '20+',
+        '处理时间': '3秒内',
+        '照片规格': '标准/自定义',
+        '使用限制': '无限制'
+      },
+      
+      // 详细规格分类
+      specCategories: [
+        {
+          name: t('productDetail.specCategories.general'),
+          items: [
+            { name: '支持证件类型', value: '20+' },
+            { name: '处理时间', value: '3秒内' },
+            { name: '照片规格', value: '标准/自定义' },
+            { name: '存储时间', value: '永久' }
+          ]
+        },
+        {
+          name: t('productDetail.specCategories.technical'),
+          items: [
+            { name: 'AI美颜', value: '支持' },
+            { name: '背景替换', value: '支持' },
+            { name: '批量处理', value: '支持' },
+            { name: '云端备份', value: '支持' },
+            { name: '免费使用', value: '永久免费' }
+          ]
+        }
+      ],
+      
+      // 使用场景
+      useCases: [
+        {
+          title: '证件办理',
+          description: '快速生成身份证、护照等标准证件照',
+          icon: 'card'
+        },
+        {
+          title: '求职应聘',
+          description: '制作专业简历照片',
+          icon: 'briefcase'
+        },
+        {
+          title: '学生证件',
+          description: '制作学生证、校园卡等照片',
+          icon: 'academic'
+        }
+      ],
+      
+      // 用户评价
+      reviews: [
+        {
+          id: 1,
+          userName: '王小明',
+          userAvatar: '',
+          date: '2023-10-05',
+          rating: 5,
+          content: '完全免费的证件照工具，AI美颜效果自然，太棒了！'
+        },
+        {
+          id: 2,
+          userName: '李小',
+          userAvatar: '',
+          date: '2023-09-18',
+          rating: 4,
+          content: '使用很方便，照片修改很专业，省了不少钱。'
+        }
+      ],
+      
+      // 常见问题
+      faqs: [
+        {
+          question: '真的完全免费吗？',
+          answer: '是的，小花证件照的所有功能都完全免费使用。'
+        },
+        {
+          question: '照片适合官方文件使用吗？',
+          answer: '是的，我们的照片规格符合各种官方文件的标准要求。'
+        },
+        {
+          question: '我的照片会保存多久？',
+          answer: '您的照片将永久保存在您的云账户中。'
+        }
+      ]
+    }
+  } else if (productId === 'fayan') {
+    // 法眼AI的特殊数据
+    product.value = {
+      id: 'fayan',
+      title: t('products.productItems.fayan.title'),
+      shortDescription: hasTranslation('products.productItems.fayan.shortDescription') ? 
+        t('products.productItems.fayan.shortDescription') : t('products.productItems.fayan.description'),
+      detailedDescription: hasTranslation('products.productItems.fayan.detailedDescription') ? 
+        t('products.productItems.fayan.detailedDescription') : t('products.productItems.fayan.description'),
+      description: t('products.productItems.fayan.description'),
+      image: getProductImage('fayan'),
+      images: [
+        getProductImage('fayan'),
+        'https://images.pexels.com/photos/5668475/pexels-photo-5668475.jpeg?auto=compress&cs=tinysrgb&w=1080',
+        'https://images.pexels.com/photos/5668474/pexels-photo-5668474.jpeg?auto=compress&cs=tinysrgb&w=1080'
+      ],
+      categoryId: 'assist',
+      isFree: true,
+      price: 0,
+      pricingModel: t('productDetail.pricingModels.free'),
+      rating: 4.6,
+      reviewCount: 28,
+      demoUrl: '#',
+      
+      // 核心功能
+      features: [
+        '智能条款分析',
+        '法律风险评估',
+        '基于模板的文档生成',
+        '法律资源库',
+        '多语言支持',
+        '免费使用'
+      ],
+      
+      // 产品规格
+      specs: {
+        '处理速度': '3秒/页',
+        '支持语言': '中文、英文',
+        '文档类型': '10+',
+        '文档存储': '加密云存储'
+      },
+      
+      // 详细规格分类
+      specCategories: [
+        {
+          name: t('productDetail.specCategories.general'),
+          items: [
+            { name: '文档分析', value: '支持' },
+            { name: '模板生成', value: '支持' },
+            { name: '语言支持', value: '中文、英文' },
+            { name: '文件格式', value: 'PDF, DOCX, TXT' }
+          ]
+        },
+        {
+          name: t('productDetail.specCategories.technical'),
+          items: [
+            { name: '风险评估', value: '支持' },
+            { name: '对比分析', value: '支持' },
+            { name: '历史追踪', value: '支持' },
+            { name: '团队协作', value: '支持' }
+          ]
+        },
+        {
+          name: '技术参数',
+          items: [
+            { name: 'API集成', value: '支持' },
+            { name: '数据加密', value: 'AES-256' },
+            { name: '并发用户', value: '无限制' }
+          ]
+        }
+      ],
+      
+      // 使用场景
+      useCases: [
+        {
+          title: '合同审查',
+          description: '快速识别合同中的关键条款和潜在风险点',
+          icon: 'document'
+        },
+        {
+          title: '文档生成',
+          description: '根据模板和要求自动生成标准法律文档',
+          icon: 'template'
+        },
+        {
+          title: '法规合规',
+          description: '确保文档符合最新的法律法规要求',
+          icon: 'check'
+        }
+      ],
+      
+      // 用户评价
+      reviews: [
+        {
+          id: 1,
+          userName: '李律师',
+          userAvatar: '',
+          date: '2023-10-12',
+          rating: 5,
+          content: '非常实用的法律文档工具，大大提高了工作效率。'
+        },
+        {
+          id: 2,
+          userName: '张经理',
+          userAvatar: '',
+          date: '2023-09-28',
+          rating: 4,
+          content: '界面清晰，功能强大，对合同审查特别有帮助。'
+        },
+        {
+          id: 3,
+          userName: '王助理',
+          userAvatar: '',
+          date: '2023-09-15',
+          rating: 5,
+          content: '免费又专业，文档生成功能节省了大量时间。'
+        }
+      ],
+      
+      // 常见问题
+      faqs: [
+        {
+          question: '使用法眼AI需要付费吗？',
+          answer: '不需要，法眼AI是一款完全免费的法律文档处理工具。'
+        },
+        {
+          question: '文档数据安全如何保障？',
+          answer: '我们使用AES-256加密技术确保所有文档数据的安全。'
+        },
+        {
+          question: '支持哪些类型的文档？',
+          answer: '支持各类法律文档，包括合同、协议、诉讼文书等。'
+        },
+        {
+          question: '处理速度有多快？',
+          answer: '单页文档处理通常不超过3秒，批量处理也能保持高效率。'
+        }
+      ]
+    }
+  }
 }
 
 onMounted(() => {
-  // 获取URL中的产品ID参数
-  const productId = route.params.id
-  if (productId) {
-    fetchProductData(productId)
+  console.log('ProductDetailView 组件已挂载')
+  console.log(`当前路由参数: ${route.params.id}`)
+  
+  // 如果路由参数存在，获取产品数据
+  if (route.params.id) {
+    fetchProductData(route.params.id)
+  } else {
+    console.error('未找到产品ID参数')
+    router.push('/products') // 如果没有ID参数，重定向到产品列表页
   }
 })
 </script>
