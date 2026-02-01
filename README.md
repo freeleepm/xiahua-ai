@@ -1,105 +1,420 @@
 # 小华同学AI官网
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
-[![GitHub stars](https://img.shields.io/github/stars/freeleepm/xiahua-ai.svg?style=social)](https://github.com/freeleepm/xiahua-ai) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)[![GitHub stars](https://img.shields.io/github/stars/freeleepm/xiahua-ai.svg?style=social)](https://github.com/freeleepm/xiahua-ai)[![GitHub stars](https://img.shields.io/github/stars/freeleepm/xiahua-ai.svg?style=social)](https://github.com/freeleepm/xiahua-ai)[![star](https://gitee.com/leepm/xiaohua-ai/badge/star.svg?theme=dark)](https://gitee.com/leepm/xiaohua-ai)[![fork](https://gitee.com/leepm/xiaohua-ai/badge/fork.svg?theme=dark)](https://gitee.com/leepm/xiaohua-ai)
 
 一个免费开源的现代化博客/官网模板，基于Vue 3 + Vite开发，帮助开发者快速搭建专业级网站。
 
 ## 项目概述
 
 本项目完全免费开源，旨在为个人开发者、创业团队和企业提供：
+
 - 🚀 **极速搭建**：5分钟即可部署的现代化网站解决方案
 - 🎨 **精美设计**：开箱即用的科技感UI，专业视觉呈现
-- 📝 **博客支持**：内置Markdown解析，轻松管理技术文章
+- 📝 **Markdown产品管理**：通过Markdown文件轻松管理产品内容
+- 🌐 **国际化支持**：内置中英双语切换，轻松扩展多语言
 - 🛠 **高度可定制**：模块化架构，快速适配品牌需求
 
 ## 核心优势
 
 ### 相比其他开源项目
+
 - 🌈 **现代设计语言**：融合AI元素与极简主义，提升品牌形象
 - ⚡ **极致性能**：Vite构建 + 自动代码分割，加载速度提升40%
 - 📱 **完美响应式**：从手机到4K大屏，呈现最佳视觉效果
 - 🔧 **可视化配置**：通过配置文件快速修改主题、菜单和SEO信息
 - 🆓 **完全免费**：MIT协议开源，商业项目也可免费使用
 
-### 博客特色功能
-- 支持Markdown语法 + 代码高亮
-- 自动生成文章目录导航
-- 文章分类/标签管理系统
-- 内置SEO优化方案
-- 多语言支持（开发中）
-- 暗黑模式切换
+### 产品管理特色 (新功能)
+
+- 📄 **Markdown驱动**：通过Markdown文件管理产品数据
+- 🏷️ **Frontmatter配置**：使用YAML格式定义产品属性
+- 🌍 **多语言内容**：单文件支持中英双语内容
+- 🔄 **热更新**：修改Markdown即时预览效果
+- 📂 **分类管理**：灵活的产品分类系统
 
 ## 快速开始
+
 ```bash
 # 1. 克隆仓库
 git clone https://github.com/freeleepm/xiahua-ai.git
 
-# 2. 安装依赖
+# 2. 进入项目目录
+cd xiahua-ai/xiahua-ai
+
+# 3. 安装依赖
 npm install
 
-# 3. 启动开发服务器
+# 4. 启动开发服务器
 npm run dev
 ```
 
-在`src/content/blogs`目录中添加你的Markdown文件即可创建新博客！🎉
+访问 `http://localhost:5173` 即可预览网站！🎉
 
-## 定制指南
-1. 修改`src/config/site.config.js`配置品牌信息
-2. 在`src/content`目录管理你的博客内容
-3. 通过`src/components/custom`添加自定义组件
-4. 修改`tailwind.config.js`调整设计样式
+## 项目结构
+
+```
+xiahua-ai/
+├── src/
+│   ├── assets/              # 静态资源（图标、Logo等）
+│   ├── components/          # 可复用组件
+│   │   ├── layout/          # 布局组件（Header、Footer）
+│   │   └── ui/              # UI组件（语言切换器等）
+│   ├── content/             # 内容管理目录
+│   │   └── products/        # 产品Markdown文件 ⭐新增
+│   ├── i18n/                # 国际化配置
+│   ├── locales/             # 语言包
+│   │   ├── en/              # 英文翻译
+│   │   └── zh-CN/           # 中文翻译
+│   ├── router/              # 路由配置
+│   ├── services/            # 服务层 ⭐新增
+│   │   └── productService.js # 产品数据服务
+│   ├── views/               # 页面视图
+│   └── style.css            # 全局样式
+├── public/                  # 公共资源
+└── vite.config.js          # Vite配置（含Markdown插件）
+```
+
+## 产品管理指南
+
+### 添加新产品
+
+在 `src/content/products/` 目录下创建新的 `.md` 文件：
+
+```yaml
+---
+id: myProduct                    # 产品唯一标识
+categoryId: ai                   # 分类：ai/data/assist/other
+isFree: true                     # 是否免费
+price: 0                         # 价格
+rating: 4.5                      # 评分
+reviewCount: 100                 # 评价数
+demoUrl: "https://demo.example.com"  # 演示地址
+image: https://example.com/cover.jpg # 封面图
+
+# 多语言内容
+i18n:
+  zh-CN:
+    title: 产品名称
+    shortDescription: 简短描述
+    description: 详细描述
+  en:
+    title: Product Name
+    shortDescription: Short description
+    description: Detailed description
+
+# 功能特性
+features:
+  - key: feature1
+    zh-CN: 功能一
+    en: Feature One
+  - key: feature2
+    zh-CN: 功能二
+    en: Feature Two
+
+# 使用场景
+useCases:
+  - icon: document
+    title:
+      zh-CN: 场景一
+      en: Use Case One
+    description:
+      zh-CN: 场景描述
+      en: Use case description
+
+# 用户评价
+reviews:
+  - id: 1
+    userName:
+      zh-CN: 用户A
+      en: User A
+    rating: 5
+    content:
+      zh-CN: 评价内容
+      en: Review content
+
+# 常见问题
+faqs:
+  - question:
+      zh-CN: 问题一？
+      en: Question One?
+    answer:
+      zh-CN: 回答内容
+      en: Answer content
+---
+
+## 产品介绍
+
+这里是Markdown正文内容，支持完整的Markdown语法...
+```
+
+### 产品分类
+
+| 分类ID     | 中文名   | 英文名          |
+| ---------- | -------- | --------------- |
+| `ai`     | AI工具   | AI Tools        |
+| `data`   | 数据分析 | Data Analysis   |
+| `assist` | 智能助手 | Smart Assistant |
+| `other`  | 其他     | Others          |
+
+## 🎯 开发者快速入门示例
+
+### 示例1：添加一个新产品（3分钟完成）
+
+**第一步**：在 `src/content/products/` 目录下创建 `myNewProduct.md` 文件
+
+```yaml
+---
+id: myNewProduct
+categoryId: ai
+isFree: true
+price: 0
+rating: 4.8
+reviewCount: 50
+demoUrl: "https://demo.example.com"
+image: https://images.pexels.com/photos/1234567/example.jpeg
+
+i18n:
+  zh-CN:
+    title: 我的新产品
+    shortDescription: 这是一个超棒的AI工具
+    description: 详细描述你的产品功能和特点
+  en:
+    title: My New Product
+    shortDescription: This is an awesome AI tool
+    description: Detailed description of your product
+
+features:
+  - key: feature1
+    zh-CN: 智能识别
+    en: Smart Recognition
+  - key: feature2
+    zh-CN: 一键处理
+    en: One-Click Processing
+  - key: feature3
+    zh-CN: 免费使用
+    en: Free to Use
+
+useCases:
+  - icon: document
+    title:
+      zh-CN: 日常办公
+      en: Daily Office
+    description:
+      zh-CN: 提升日常工作效率
+      en: Improve daily work efficiency
+
+reviews:
+  - id: 1
+    userName:
+      zh-CN: 张三
+      en: Zhang San
+    date: "2024-01-15"
+    rating: 5
+    content:
+      zh-CN: 非常好用，推荐！
+      en: Very useful, recommended!
+
+faqs:
+  - question:
+      zh-CN: 如何开始使用？
+      en: How to get started?
+    answer:
+      zh-CN: 直接访问演示地址即可开始使用
+      en: Just visit the demo URL to get started
+---
+
+## 产品介绍
+
+这是我的新产品，它可以帮助用户...
+
+### 主要功能
+
+- 功能一：xxx
+- 功能二：xxx
+```
+
+**第二步**：保存文件，刷新页面即可看到新产品！
+
+访问 `http://localhost:5173/products` 查看产品列表，点击进入 `http://localhost:5173/products/myNewProduct` 查看详情。
+
+---
+
+### 示例2：修改开源项目展示
+
+开源项目数据在 `src/locales/zh-CN/index.js` 的 `projects.projectItems` 中配置：
+
+```javascript
+// src/locales/zh-CN/index.js
+projects: {
+  projectItems: {
+    // 添加你的新项目
+    myProject: {
+      name: '我的开源项目',
+      description: '这是一个很棒的开源项目，用于xxx',
+      status: '积极开发中'
+    },
+    // ... 其他项目
+  }
+}
+```
+
+同时在 `src/locales/en/index.js` 添加英文翻译：
+
+```javascript
+// src/locales/en/index.js
+projects: {
+  projectItems: {
+    myProject: {
+      name: 'My Open Source Project',
+      description: 'This is a great open source project for xxx',
+      status: 'Active Development'
+    }
+  }
+}
+```
+
+---
+
+### 示例3：修改首页特色产品
+
+首页展示的特色产品在 `src/locales/zh-CN/index.js` 的 `home.featuredProducts` 中：
+
+```javascript
+// src/locales/zh-CN/index.js
+home: {
+  featuredProducts: {
+    // 修改或添加首页展示的产品
+    myProduct: {
+      title: '我的产品',
+      description: '产品简介，会显示在首页卡片上'
+    }
+  }
+}
+```
+
+---
+
+### 示例4：添加新的国际化翻译
+
+**第一步**：在 `src/locales/zh-CN/index.js` 添加中文：
+
+```javascript
+// 添加自定义翻译
+mySection: {
+  title: '我的标题',
+  description: '我的描述',
+  button: '点击这里'
+}
+```
+
+**第二步**：在 `src/locales/en/index.js` 添加英文：
+
+```javascript
+mySection: {
+  title: 'My Title',
+  description: 'My Description',
+  button: 'Click Here'
+}
+```
+
+**第三步**：在 Vue 组件中使用：
+
+```vue
+<template>
+  <div>
+    <h1>{{ t('mySection.title') }}</h1>
+    <p>{{ t('mySection.description') }}</p>
+    <button>{{ t('mySection.button') }}</button>
+  </div>
+</template>
+
+<script setup>
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+</script>
+```
+
+---
+
+### 示例5：修改网站品牌信息
+
+**修改 Logo**：替换 `src/assets/` 目录下的 SVG 文件
+
+**修改页脚信息**：编辑 `src/locales/zh-CN/index.js` 的 `footer` 部分
+
+```javascript
+footer: {
+  description: '你的公司/品牌简介',
+  location: '你的地址',
+  designedBy: '由xxx团队设计',
+  // ...
+}
+```
+
+---
+
+### 快速定制检查清单
+
+| 任务         | 文件位置                           | 说明                         |
+| ------------ | ---------------------------------- | ---------------------------- |
+| 添加新产品   | `src/content/products/xxx.md`    | 创建 Markdown 文件           |
+| 修改产品分类 | `src/services/productService.js` | 修改 `getCategories()`     |
+| 修改首页内容 | `src/locales/zh-CN/index.js`     | 编辑 `home` 对象           |
+| 修改开源项目 | `src/locales/zh-CN/index.js`     | 编辑 `projects` 对象       |
+| 修改关于页面 | `src/locales/zh-CN/index.js`     | 编辑 `about` 对象          |
+| 修改导航菜单 | `src/locales/zh-CN/index.js`     | 编辑 `nav` 对象            |
+| 修改页脚信息 | `src/locales/zh-CN/index.js`     | 编辑 `footer` 对象         |
+| 修改主题颜色 | `tailwind.config.js`             | 编辑 `theme.extend.colors` |
+| 修改 Logo    | `src/assets/`                    | 替换 SVG 文件                |
+
+## 国际化配置
+
+语言包位于 `src/locales/` 目录：
+
+```
+locales/
+├── en/index.js      # 英文翻译
+└── zh-CN/index.js   # 中文翻译
+```
+
+添加新翻译只需在对应文件中添加键值对即可。
 
 ## 特色功能
 
 - **现代化UI设计**：采用简约而富有科技感的设计风格，给用户带来极致的视觉体验
 - **响应式布局**：完美适配各种设备，从移动端到桌面端均有良好的显示效果
 - **流畅动画效果**：利用GSAP实现丝滑的页面过渡和交互动画
-- **SEO优化**：自动生成meta标签和Open Graph数据，提升搜索引擎可见性
+- **SEO优化**：自动生成meta标签和结构化数据，提升搜索引擎可见性
 - **组件化开发**：采用Vue 3组件化思想，提高代码复用性和可维护性
 - **Tailwind CSS**：使用Tailwind实现高效的样式开发，保持一致的设计语言
 - **科技感UI元素**：精心设计的科技感UI元素，包括动态粒子背景、浮动卡片和技术仪表盘
 - **性能优化**：采用懒加载和代码分割技术，确保网站的高性能表现
-- **智能交互体验**：直观的用户界面和动态响应，提供沉浸式的用户体验
-
-## 技术亮点
-
-### 前端技术
-
-- **组件化架构**：基于Vue 3的组件化架构，实现高度模块化和可复用的代码结构
-- **响应式系统**：利用Vue 3的Composition API构建响应式系统，提高代码可维护性
-- **动画实现**：结合GSAP和CSS动画，打造流畅的过渡效果和交互体验
-- **性能优化**：
-  - 路由懒加载
-  - 组件异步加载
-  - 图片优化与懒加载
-  - 关键CSS内联
-  - 代码分割
-
-### 设计创新
-
-- **未来科技感**：融合AI元素和现代设计语言，打造独特的品牌视觉形象
-- **微交互**：精心设计的微交互效果，提升用户体验和页面活力
-- **自适应设计**：流畅适配从手机到桌面的各种设备尺寸
-- **无障碍设计**：考虑多种用户群体的需求，增强网站可访问性
+- **Markdown产品系统**：通过Markdown文件管理产品，支持多语言和丰富的元数据
 
 ## 技术栈
 
-- **前端框架**：Vue 3 + Vite
-- **状态管理**：Pinia
-- **路由管理**：Vue Router
-- **UI框架**：Tailwind CSS
-- **动画库**：GSAP
-- **HTTP客户端**：Axios
+| 类别                   | 技术                 |
+| ---------------------- | -------------------- |
+| **前端框架**     | Vue 3 + Vite         |
+| **状态管理**     | Pinia                |
+| **路由管理**     | Vue Router           |
+| **国际化**       | Vue I18n             |
+| **UI框架**       | Tailwind CSS         |
+| **动画库**       | GSAP                 |
+| **Markdown解析** | gray-matter + marked |
+| **HTTP客户端**   | Axios                |
 
 ## 页面展示
 
 项目包含以下主要页面：
 
 1. **首页** - 展示公司愿景和主要产品
-2. **产品页** - 详细介绍AI相关产品服务
-3. **开源项目** - 展示公司的开源项目和贡献
-4. **关于我们** - 介绍团队和公司文化
+2. **产品页** - 产品列表与分类筛选
+3. **产品详情页** - 详细的产品介绍、规格、评价和FAQ
+4. **开源项目** - 展示公司的开源项目和贡献
+5. **关于我们** - 介绍团队和公司文化
+6. **隐私政策** - 隐私政策说明
+7. **服务条款** - 服务条款说明
 
 ## 安装与运行
 
@@ -126,15 +441,19 @@ npm run preview
 网站设计以现代科技感为主题，展示了小华同学AI的技术实力和产品理念。以下是各页面的截图：
 
 ### 首页截图
+
 ![首页](./xiahua-ai/public/images/screenshots/homepage.png)
 
 ### 产品页截图
+
 ![产品页](./xiahua-ai/public/images/screenshots/products.png)
 
 ### 开源项目页截图
+
 ![开源项目](./xiahua-ai/public/images/screenshots/projects.png)
 
 ### 关于我们页截图
+
 ![关于我们](./xiahua-ai/public/images/screenshots/about.png)
 
 ## 产品优势
@@ -148,17 +467,10 @@ npm run preview
 
 除了本项目 (小华同学AI官网) 外，我还维护了以下优秀的开源项目，欢迎大家 Star 和 Fork：
 
-- **[LiteMES](https://github.com/freeleepm/LiteMES)**: 免费开源MES(小型生产制造系统)，一款专为广大中小型企业量身打造的生产制造全链路执行系统。 <mcreference link="https://github.com/freeleepm/LiteMES" index="0">0</mcreference>
-  [![LiteMES Screenshot](https://via.placeholder.com/400x200.png?text=LiteMES)](https://github.com/freeleepm/LiteMES)
-
-- **[Mini-Contract](https://github.com/freeleepm/mini-contract)**: 商业级的免费开源电子合同产品，提供全方位的合同签署体验，独创“证据链”与“非证据链”两种签署模式。 <mcreference link="https://github.com/freeleepm/mini-contract" index="1">1</mcreference>
-  [![Mini-Contract Screenshot](https://via.placeholder.com/400x200.png?text=Mini-Contract)](https://github.com/freeleepm/mini-contract)
-
-- **[FreeSign](https://github.com/freeleepm/freesign)**: 方便签，一款创新的在线电子合同签署产品，集成金融级安全功能，如“人脸识别、人证对比”。 <mcreference link="https://github.com/freeleepm/freesign" index="3">3</mcreference>
-  [![FreeSign Screenshot](https://via.placeholder.com/400x200.png?text=FreeSign)](https://github.com/freeleepm/freesign)
-
-- **[EPUB to HTML Converter](https://github.com/freeleepm/epub-to-html)**: 一个 Python 脚本，用于将 EPUB 文件转换为 HTML 格式，支持单文件或多文件输出。 <mcreference link="https://github.com/freeleepm/epub-to-html" index="4">4</mcreference>
-  [![EPUB to HTML Screenshot](https://via.placeholder.com/400x200.png?text=EPUB+to+HTML)](https://github.com/freeleepm/epub-to-html)
+- **[LiteMES](https://github.com/freeleepm/LiteMES)**: 免费开源MES(小型生产制造系统)，一款专为广大中小型企业量身打造的生产制造全链路执行系统。
+- **[Mini-Contract](https://github.com/freeleepm/mini-contract)**: 商业级的免费开源电子合同产品，提供全方位的合同签署体验，独创"证据链"与"非证据链"两种签署模式。
+- **[FreeSign](https://github.com/freeleepm/freesign)**: 方便签，一款创新的在线电子合同签署产品，集成金融级安全功能，如"人脸识别、人证对比"。
+- **[EPUB to HTML Converter](https://github.com/freeleepm/epub-to-html)**: 一个 Python 脚本，用于将 EPUB 文件转换为 HTML 格式，支持单文件或多文件输出。
 
 *注：本项目 (小华同学AI官网) 的 GitHub 仓库是 [freeleepm/xiahua-ai](https://github.com/freeleepm/xiahua-ai)。*
 
@@ -174,23 +486,39 @@ npm run preview
 
 ## 许可证
 
-本项目采用MIT许可证，详情请参阅`LICENSE`文件。
+本项目采用MIT许可证，详情请参阅 `LICENSE`文件。
 
 ## 联系方式
 
 如有任何问题或建议，请通过以下方式联系我们：
 
-- 邮箱：[contact@xiahua-ai.com](mailto:contact@xiahua-ai.com)
-- 官网：[https://xiahua-ai.com](https://xiahua-ai.com)
+- 邮箱：[shawn@leepm.com](mailto:shawn@leepm.com)
+- 官网：[https://www.leepm.com](https://www.leepm.com)
 
 ## 技术交流
 
 如果你有任何对 xiaohua-ai 产品上的想法、意见或建议，或商务上的合作需求，请扫码添加 xiaohua-ai 项目团队进一步沟通：
+
 ![输入图片说明](./xiahua-ai/public/images/screenshots/shawn_huangxing_qrcode.png)
 
 ## 🚀 功能迭代计划
 
 作为一个不断成长的开源项目，我们规划了清晰的功能迭代路线图，确保小华同学AI官网持续提供更好的用户体验和开发者体验。
+
+### ✅ 已完成功能
+
+- [X] 📄 **Markdown产品管理系统**
+  - 通过Markdown文件管理产品数据
+  - 支持Frontmatter元数据配置
+  - 自动解析并渲染产品页面
+- [X] 🌐 **国际化支持**
+  - 中英双语切换
+  - 产品内容多语言支持
+  - Vue I18n集成
+- [X] 📱 **产品详情页**
+  - 产品介绍、规格、评价、FAQ标签页
+  - 图片查看器
+  - 相关产品推荐
 
 ### 🌱 近期计划 (1-3个月)
 
@@ -212,10 +540,6 @@ npm run preview
   - ✏️ 可视化编辑器
   - 📋 内容发布工作流
   - 🗂️ 媒体资源管理器
-- [ ] 🌐 **国际化支持**
-  - 🈂️ 多语言内容管理
-  - 🧩 i18n基础架构
-  - 🇨🇳 🇬🇧 初始支持中英双语
 - [ ] 🔌 **互动组件库**
   - 📊 交互式数据可视化
   - 📝 动态表单生成器
@@ -239,6 +563,96 @@ npm run preview
 ### 🌟 社区愿景
 
 我们期待与社区共同成长，欢迎贡献想法、代码或文档。如果您有建议或想参与开发，请通过Issues或Pull Requests与我们互动！
+
+## 📋 更新日志
+
+### v1.2.0 (2026-01-29)
+
+🎉 **重大更新：Markdown 产品管理系统**
+
+#### ✨ 新增功能
+
+- **Markdown 产品管理系统**
+
+  - 通过 Markdown 文件管理产品数据
+  - 支持 Frontmatter 元数据配置（标题、描述、价格、评分等）
+  - 自动解析并渲染产品列表和详情页
+  - 新增 `src/content/products/` 目录存放产品文件
+  - 新增 `src/services/productService.js` 产品数据服务
+- **产品详情页增强**
+
+  - 产品介绍、技术规格、用户评价、常见问题标签页
+  - 产品图片查看器（支持放大浏览）
+  - 相关产品推荐
+  - 应用场景展示
+- **国际化支持 (i18n)**
+
+  - 集成 Vue I18n 实现中英双语切换
+  - 产品内容支持多语言配置
+  - 语言切换器组件
+- **Vite Markdown 插件**
+
+  - 自定义 Vite 插件处理 Markdown 文件
+  - 构建时预处理，避免浏览器端运行 gray-matter
+
+#### 🐛 修复
+
+- 修复 `productDetail.applicationScenarios` 国际化翻译缺失问题
+- 修复 `productDetail.scenariosDescription` 国际化翻译缺失问题
+- 修复产品详情页"免费体验"按钮链接配置
+
+#### 📝 文档更新
+
+- 更新 README.md 项目文档
+- 新增开发者快速入门示例
+- 新增产品管理指南
+- 新增快速定制检查清单
+- 更新项目结构说明
+- 更新技术栈说明
+
+#### 🔧 配置更新
+
+- 优化 `.gitignore` 配置，增加更多忽略规则
+- 更新 `vite.config.js`，添加 Markdown 处理插件
+- 新增 `gray-matter` 和 `marked` 依赖
+
+---
+
+### v1.1.0 (2025-9-15)
+
+#### ✨ 新增功能
+
+- 产品列表页面
+- 产品分类筛选
+- 开源项目展示页面
+- 关于我们页面
+- 隐私政策页面
+- 服务条款页面
+- 404 页面
+
+#### 🎨 UI/UX 优化
+
+- 科技感 UI 设计
+- 响应式布局适配
+- GSAP 动画效果
+- 页面过渡动画
+
+---
+
+### v1.0.0 (2025-06-21)
+
+#### 🎉 首次发布
+
+- 基于 Vue 3 + Vite 构建
+- Tailwind CSS 样式框架
+- Vue Router 路由管理
+- Pinia 状态管理
+- 首页设计与实现
+- 基础组件库
+
+---
+
+> 💡 **提示**：查看完整的提交历史，请访问 [GitHub Commits](https://github.com/freeleepm/xiahua-ai/commits/main)
 
 ## 给个鼓励
 

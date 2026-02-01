@@ -211,126 +211,31 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import { getAllProducts, getCategories, getProductsByCategory } from '@/services/productService'
 
 const { t, locale } = useI18n()
 const router = useRouter()
 
-// 检查翻译键是否存在
-const hasTranslation = (key) => {
-  const message = t(key)
-  // 如果返回的是键名本身，说明没有对应的翻译
-  return message !== key && message !== ''
+// 分类数据 - 从服务获取
+const categories = getCategories()
+
+// 产品数据 - 响应式引用
+const products = ref([])
+
+// 加载产品数据
+const loadProducts = () => {
+  // 根据当前语言加载产品
+  const currentLocale = locale.value === 'en' ? 'en' : 'zh-CN'
+  products.value = getAllProducts(currentLocale)
 }
 
-// 分类数据
-const categories = [
-  { id: 'all' },
-  { id: 'ai' },
-  { id: 'data' },
-  { id: 'assist' },
-  { id: 'other' }
-]
+// 初始加载
+loadProducts()
 
-// 产品数据 - 添加更多详细信息
-const products = [
-  {
-    id: 'watermark',
-    categoryId: 'assist',
-    isFree: true
-  },
-  {
-    id: 'idPhoto',
-    categoryId: 'assist',
-    isFree: true
-  },
-  {
-    id: 'fayan',
-    categoryId: 'assist',
-    isFree: true
-  },
-  {
-    id: 'mcpHub',
-    categoryId: 'ai',
-    isFree: true
-  },
-  {
-    id: 'aiWriting',
-    categoryId: 'ai',
-    isFree: false
-  },
-  {
-    id: 'legalEye',
-    categoryId: 'ai',
-    isFree: false
-  },
-  {
-    id: 'dataAnalysis',
-    categoryId: 'data',
-    isFree: false
-  },
-  {
-    id: 'voiceAssistant',
-    categoryId: 'assist',
-    isFree: true
-  },
-  {
-    id: 'codeAssistant',
-    categoryId: 'ai',
-    isFree: true
-  },
-  {
-    id: 'dataViz',
-    categoryId: 'data',
-    isFree: false
-  },
-  {
-    id: 'creativeInspiration',
-    categoryId: 'other',
-    isFree: true
-  }
-].map(product => {
-  // 动态添加产品标题和描述，基于国际化文本
-  return {
-    ...product,
-    title: hasTranslation(`products.productItems.${product.id}.title`) ? 
-      t(`products.productItems.${product.id}.title`) : 
-      product.id,
-    description: hasTranslation(`products.productItems.${product.id}.description`) ? 
-      t(`products.productItems.${product.id}.description`) : 
-      '',
-    image: getProductImage(product.id)
-  }
+// 监听语言变化，重新加载产品数据
+watch(locale, () => {
+  loadProducts()
 })
-
-// 获取产品图片
-function getProductImage(productId) {
-  switch(productId) {
-    case 'watermark':
-      return 'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'idPhoto':
-      return 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'fayan':
-      return 'https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'mcpHub':
-      return 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600'
-    case 'aiWriting':
-      return 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600'
-    case 'legalEye':
-      return 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600'
-    case 'dataAnalysis':
-      return 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'voiceAssistant':
-      return 'https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'codeAssistant':
-      return 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'dataViz':
-      return 'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'creativeInspiration':
-      return 'https://images.pexels.com/photos/3758105/pexels-photo-3758105.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    default:
-      return 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080'
-  }
-}
 
 // 当前活跃分类
 const activeCategory = ref('all')
@@ -338,9 +243,9 @@ const activeCategory = ref('all')
 // 过滤产品
 const filteredProducts = computed(() => {
   if (activeCategory.value === 'all') {
-    return products
+    return products.value
   }
-  return products.filter(product => product.categoryId === activeCategory.value)
+  return products.value.filter(product => product.categoryId === activeCategory.value)
 })
 
 // 获取分类名称
@@ -350,6 +255,7 @@ const getCategoryName = (categoryId) => {
 
 // 监听语言变化，重新生成结构化数据
 watch(locale, () => {
+  loadProducts()
   updateStructuredData()
 })
 
@@ -363,7 +269,7 @@ const updateStructuredData = () => {
   const productListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "itemListElement": products.map((product, index) => ({
+    "itemListElement": products.value.map((product, index) => ({
       "@type": "ListItem",
       "position": index + 1,
       "item": {

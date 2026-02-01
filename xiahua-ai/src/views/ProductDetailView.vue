@@ -87,17 +87,11 @@
               <h3 class="text-lg font-bold group-hover:text-primary-600 transition-colors">{{ t('productDetail.coreFeatures') }}</h3>
             </div>
             <ul class="space-y-2">
-              <li v-for="feature in product.features" :key="feature" class="flex items-start">
+              <li v-for="(feature, index) in product.features" :key="index" class="flex items-start">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-500 mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="text-gray-700">
-                  {{ 
-                    product.id === 'watermark' && typeof feature === 'string' && t(`productDetail.watermark.features.${camelCase(feature)}`, feature) ||
-                    product.id === 'idPhoto' && typeof feature === 'string' && t(`productDetail.idPhoto.features.${camelCase(feature)}`, feature) ||
-                    typeof feature === 'string' ? feature : feature.title 
-                  }}
-                </span>
+                <span class="text-gray-700">{{ typeof feature === 'string' ? feature : feature.title }}</span>
               </li>
             </ul>
           </div>
@@ -114,13 +108,7 @@
             </div>
             <div class="space-y-3">
               <div v-for="(value, name) in product.specs" :key="name" class="flex justify-between">
-                <span class="text-gray-600">
-                  {{ 
-                    product.id === 'watermark' ? t(`productDetail.watermark.specs.${camelCase(name)}`, name) :
-                    product.id === 'idPhoto' ? t(`productDetail.idPhoto.specs.${camelCase(name)}`, name) :
-                    name 
-                  }}
-                </span>
+                <span class="text-gray-600">{{ name }}</span>
                 <span class="font-medium text-gray-900">{{ value }}</span>
               </div>
             </div>
@@ -236,40 +224,8 @@
                     </svg>
                   </div>
                   
-                  <h4 class="text-lg font-semibold mb-2 text-gray-800">
-                    {{ 
-                      product.id === 'watermark' && useCase.title === '证书防伪'
-                        ? t('productDetail.watermark.useCases.certificateProtection') :
-                      product.id === 'watermark' && useCase.title === '文件保护'
-                        ? t('productDetail.watermark.useCases.fileProtection') :
-                      product.id === 'watermark' && useCase.title === '版权保护'
-                        ? t('productDetail.watermark.useCases.copyrightProtection') :
-                      product.id === 'idPhoto' && useCase.title === '证件办理'
-                        ? t('productDetail.idPhoto.useCases.idProcessing') :
-                      product.id === 'idPhoto' && useCase.title === '求职应聘'
-                        ? t('productDetail.idPhoto.useCases.jobApplication') :
-                      product.id === 'idPhoto' && useCase.title === '学生证件'
-                        ? t('productDetail.idPhoto.useCases.studentId') :
-                      useCase.title 
-                    }}
-                  </h4>
-                  <p class="text-gray-600">
-                    {{ 
-                      product.id === 'watermark' && useCase.title === '证书防伪'
-                        ? t('productDetail.watermark.useCases.certificateDesc') :
-                      product.id === 'watermark' && useCase.title === '文件保护'
-                        ? t('productDetail.watermark.useCases.fileDesc') :
-                      product.id === 'watermark' && useCase.title === '版权保护'
-                        ? t('productDetail.watermark.useCases.copyrightDesc') :
-                      product.id === 'idPhoto' && useCase.title === '证件办理'
-                        ? t('productDetail.idPhoto.useCases.idDesc') :
-                      product.id === 'idPhoto' && useCase.title === '求职应聘'
-                        ? t('productDetail.idPhoto.useCases.jobDesc') :
-                      product.id === 'idPhoto' && useCase.title === '学生证件'
-                        ? t('productDetail.idPhoto.useCases.studentDesc') :
-                      useCase.description 
-                    }}
-                  </p>
+                  <h4 class="text-lg font-semibold mb-2 text-gray-800">{{ useCase.title }}</h4>
+                  <p class="text-gray-600">{{ useCase.description }}</p>
                 </div>
               </div>
             </div>
@@ -317,74 +273,14 @@
           <!-- 技术规格 -->
           <div v-if="activeTab === 'specs'" class="space-y-8">
             <div class="card p-6">
-              <h3 class="text-xl font-bold mb-4 text-gray-800">
-                {{ product.id === 'watermark' ? t('productDetail.watermark.sections.technicalSpecs') : t('productDetail.detailedSpecs') }}
-              </h3>
+              <h3 class="text-xl font-bold mb-4 text-gray-800">{{ t('productDetail.detailedSpecs') }}</h3>
               <div class="space-y-6">
-                <div v-for="category in product.specCategories" :key="category.name">
-                  <h4 class="text-lg font-semibold mb-3 pb-2 border-b border-gray-100">
-                    {{ 
-                      product.id === 'watermark' && category.name === t('productDetail.specCategories.general') 
-                        ? t('productDetail.watermark.sections.generalInfo') : 
-                      product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') 
-                        ? t('productDetail.watermark.sections.technicalParams') : 
-                      category.name 
-                    }}
-                  </h4>
+                <div v-for="(category, catIndex) in product.specCategories" :key="catIndex">
+                  <h4 class="text-lg font-semibold mb-3 pb-2 border-b border-gray-100">{{ category.name }}</h4>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div v-for="spec in category.items" :key="spec.name" class="flex justify-between">
-                      <span class="text-gray-600">
-                        {{ 
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.general') && spec.name === '支持格式'
-                            ? t('productDetail.watermark.techSpecs.supportFormats') :
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.general') && spec.name === '处理速度'
-                            ? t('productDetail.watermark.techSpecs.processingSpeed') :
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.general') && spec.name === '最大文件大小'
-                            ? t('productDetail.watermark.techSpecs.maxFileSize') :
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.general') && spec.name === '水印类型'
-                            ? t('productDetail.watermark.techSpecs.watermarkType') :
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') && spec.name === '批量处理'
-                            ? t('productDetail.watermark.techSpecs.batchProcessing') :
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') && spec.name === '水印验证'
-                            ? t('productDetail.watermark.techSpecs.watermarkVerification') :
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') && spec.name === '安全级别'
-                            ? t('productDetail.watermark.techSpecs.securityLevel') :
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') && spec.name === '数据加密'
-                            ? t('productDetail.watermark.techSpecs.dataEncryption') :
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical') && spec.name === '免费使用'
-                            ? t('productDetail.watermark.techSpecs.freeUse') :
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.general') 
-                            ? t(`productDetail.watermark.specs.${camelCase(spec.name)}`, spec.name) :
-                          product.id === 'watermark' && category.name === t('productDetail.specCategories.technical')  
-                            ? t(`productDetail.watermark.technical.${camelCase(spec.name)}`, spec.name) :
-                          product.id === 'idPhoto' && category.name === t('productDetail.specCategories.general') 
-                            ? t(`productDetail.idPhoto.specs.${camelCase(spec.name)}`, spec.name) :
-                          product.id === 'idPhoto' && category.name === t('productDetail.specCategories.technical')  
-                            ? t(`productDetail.idPhoto.technical.${camelCase(spec.name)}`, spec.name) :
-                          spec.name
-                        }}
-                      </span>
-                      <span class="font-medium text-gray-900">
-                        {{ 
-                          product.id === 'watermark' && spec.name === '水印类型' 
-                            ? t('productDetail.watermark.specs.invisibleDigital', spec.value) :
-                          product.id === 'watermark' && spec.name === '安全级别' 
-                            ? t('productDetail.watermark.technical.bankGrade', spec.value) :
-                          product.id === 'watermark' && spec.name === '处理速度' && spec.value === '2秒/文档'
-                            ? t('productDetail.watermark.techSpecs.secsPerDoc', '2') :
-                          product.id === 'watermark' && spec.name === '水印验证' && spec.value === '内置验证器'
-                            ? t('productDetail.watermark.techSpecs.internalVerifier', spec.value) :
-                          product.id === 'watermark' && spec.name === '使用限制' && spec.value === '无限制'
-                            ? t('productDetail.watermark.techSpecs.unlimited', spec.value) :
-                          product.id === 'watermark' && spec.name === '免费使用' 
-                            ? t('productDetail.watermark.technical.freeUse', spec.value) :
-                          product.id === 'idPhoto' && spec.name === '存储时间' 
-                            ? t('productDetail.idPhoto.specs.forever', spec.value) :
-                          product.id === 'idPhoto' && spec.name === '免费使用' 
-                            ? t('productDetail.idPhoto.technical.freeUse', spec.value) :
-                          spec.value
-                        }}
-                      </span>
+                    <div v-for="(spec, specIndex) in category.items" :key="specIndex" class="flex justify-between">
+                      <span class="text-gray-600">{{ spec.name }}</span>
+                      <span class="font-medium text-gray-900">{{ spec.value }}</span>
                     </div>
                   </div>
                 </div>
@@ -422,19 +318,7 @@
                       </div>
                     </div>
                     <div>
-                      <div class="font-medium">
-                        {{ 
-                          product.id === 'watermark' && review.id === 1 
-                            ? t('productDetail.watermark.reviews.user1') :
-                          product.id === 'watermark' && review.id === 2 
-                            ? t('productDetail.watermark.reviews.user2') :
-                          product.id === 'idPhoto' && review.id === 1 
-                            ? t('productDetail.idPhoto.reviews.user1') :
-                          product.id === 'idPhoto' && review.id === 2 
-                            ? t('productDetail.idPhoto.reviews.user2') :
-                          review.userName
-                        }}
-                      </div>
+                      <div class="font-medium">{{ review.userName }}</div>
                       <div class="text-gray-500 text-sm">{{ review.date }}</div>
                     </div>
                   </div>
@@ -444,19 +328,7 @@
                     </svg>
                   </div>
                 </div>
-                <p class="text-gray-700">
-                  {{ 
-                    product.id === 'watermark' && review.id === 1 
-                      ? t('productDetail.watermark.reviews.review1') :
-                    product.id === 'watermark' && review.id === 2 
-                      ? t('productDetail.watermark.reviews.review2') :
-                    product.id === 'idPhoto' && review.id === 1 
-                      ? t('productDetail.idPhoto.reviews.review1') :
-                    product.id === 'idPhoto' && review.id === 2 
-                      ? t('productDetail.idPhoto.reviews.review2') :
-                    review.content
-                  }}
-                </p>
+                <p class="text-gray-700">{{ review.content }}</p>
               </div>
             </div>
           </div>
@@ -465,41 +337,9 @@
           <div v-if="activeTab === 'faq'" class="space-y-6">
             <h3 class="text-2xl font-bold mb-4 text-gray-800">{{ t('productDetail.commonQuestions') }}</h3>
             <div class="space-y-4">
-              <div v-for="faq in product.faqs" :key="faq.question" class="card p-6 hover:border-primary-100">
-                <div class="font-semibold text-lg mb-2">
-                  {{ 
-                    product.id === 'watermark' && faq.question.includes('免费') 
-                      ? t('productDetail.watermark.faqs.reallyFree') :
-                    product.id === 'watermark' && faq.question.includes('外观') 
-                      ? t('productDetail.watermark.faqs.affectAppearance') :
-                    product.id === 'watermark' && faq.question.includes('验证') 
-                      ? t('productDetail.watermark.faqs.verification') :
-                    product.id === 'idPhoto' && faq.question.includes('免费') 
-                      ? t('productDetail.idPhoto.faqs.reallyFree') :
-                    product.id === 'idPhoto' && faq.question.includes('官方') 
-                      ? t('productDetail.idPhoto.faqs.officialUse') :
-                    product.id === 'idPhoto' && faq.question.includes('保存') 
-                      ? t('productDetail.idPhoto.faqs.storageQuestion') :
-                    faq.question
-                  }}
-                </div>
-                <p class="text-gray-700">
-                  {{ 
-                    product.id === 'watermark' && faq.question.includes('免费') 
-                      ? t('productDetail.watermark.faqs.freeAnswer') :
-                    product.id === 'watermark' && faq.question.includes('外观') 
-                      ? t('productDetail.watermark.faqs.appearanceAnswer') :
-                    product.id === 'watermark' && faq.question.includes('验证') 
-                      ? t('productDetail.watermark.faqs.verificationAnswer') :
-                    product.id === 'idPhoto' && faq.question.includes('免费') 
-                      ? t('productDetail.idPhoto.faqs.freeAnswer') :
-                    product.id === 'idPhoto' && faq.question.includes('官方') 
-                      ? t('productDetail.idPhoto.faqs.officialAnswer') :
-                    product.id === 'idPhoto' && faq.question.includes('保存') 
-                      ? t('productDetail.idPhoto.faqs.storageAnswer') :
-                    faq.answer
-                  }}
-                </p>
+              <div v-for="(faq, index) in product.faqs" :key="index" class="card p-6 hover:border-primary-100">
+                <div class="font-semibold text-lg mb-2">{{ faq.question }}</div>
+                <p class="text-gray-700">{{ faq.answer }}</p>
               </div>
             </div>
           </div>
@@ -609,58 +449,11 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import ImageViewer from '@/components/ImageViewer.vue'
-
-// 转换字符串为驼峰命名
-const camelCase = (str) => {
-  if (!str) return '';
-  // 处理中文字符串
-  if (/[\u4e00-\u9fa5]/.test(str)) {
-    // 水印类型 -> watermarkType
-    // 处理速度 -> processingSpeed
-    // 最大文件大小 -> maxFileSize
-    // 使用限制 -> usageLimit
-    // 批量处理 -> batchProcessing
-    // 水印验证 -> watermarkVerification
-    // 安全级别 -> securityLevel
-    // 数据加密 -> dataEncryption
-    // 免费使用 -> freeUse
-    const mapping = {
-      '支持格式': 'supportedFormats',
-      '支持证件类型': 'supportedIdTypes',
-      '处理速度': 'processingSpeed',
-      '最大文件大小': 'maxFileSize',
-      '水印类型': 'watermarkType',
-      '使用限制': 'usageLimit',
-      '照片规格': 'photoSpecs',
-      '存储时间': 'storageTime',
-      '批量处理': 'batchProcessing',
-      '水印验证': 'watermarkVerification',
-      '安全级别': 'securityLevel',
-      '数据加密': 'dataEncryption',
-      '免费使用': 'freeUse',
-      'AI美颜': 'aiBeauty',
-      '背景替换': 'backgroundReplacement',
-      '云端备份': 'cloudBackup'
-    };
-    return mapping[str] || str;
-  }
-  
-  // 处理英文字符串
-  return str.toLowerCase().replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) => {
-    return index === 0 ? letter.toLowerCase() : letter.toUpperCase();
-  }).replace(/\s+/g, '');
-};
+import { getProductById, getRelatedProducts as fetchRelatedProducts } from '@/services/productService'
 
 const { t, locale, availableLocales } = useI18n()
 const route = useRoute()
 const router = useRouter()
-
-// 检查翻译键是否存在
-const hasTranslation = (key) => {
-  const message = t(key)
-  // 如果返回的是键名本身，说明没有对应的翻译
-  return message !== key && message !== ''
-}
 
 // 产品数据
 const product = ref({
@@ -693,27 +486,21 @@ const fetchProductData = (productId) => {
   console.log(`开始获取产品数据: ${productId}`)
   console.log(`当前时间: ${new Date().toISOString()}`)
   
-  // 重置产品数据
-  product.value = {
-    id: productId,
-    title: '',
-    description: '',
-    features: [],
-    useCases: [],
-    testimonials: []
-  }
-
-  // 根据产品ID获取对应的数据
+  // 根据当前语言获取产品数据
+  const currentLocale = locale.value === 'en' ? 'en' : 'zh-CN'
+  
   try {
-    // 检查是否有特殊产品处理
-    if (productId === 'watermark' || productId === 'idPhoto' || productId === 'fayan') {
-      console.log(`处理特殊产品: ${productId}`)
-      // 这些产品有特殊处理逻辑
-      handleSpecialProduct(productId)
+    // 从 markdown 服务获取产品数据
+    const productData = getProductById(productId, currentLocale)
+    
+    if (productData) {
+      console.log(`成功获取产品数据: ${productId}`)
+      product.value = productData
     } else {
-      console.log(`处理一般产品: ${productId}`)
-      // 对于其他产品，使用通用处理逻辑
-      handleGeneralProduct(productId)
+      console.error(`未找到产品: ${productId}`)
+      // 重定向到产品列表页
+      router.push('/products')
+      return
     }
     
     // 更新结构化数据
@@ -763,33 +550,10 @@ const tabs = [
 ]
 const activeTab = ref('details')
 
-// 相关产品示例数据
+// 相关产品 - 从服务获取
 const relatedProducts = computed(() => {
-  // 根据当前产品的类别返回相关产品
-  const currentCategory = product.value.categoryId
-  return [
-    {
-      id: 'voiceAssistant',
-      title: t('products.productItems.voiceAssistant.title'),
-      description: t('products.productItems.voiceAssistant.description'),
-      image: 'https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg?auto=compress&cs=tinysrgb&w=1080',
-      categoryId: 'assist'
-    },
-    {
-      id: 'dataViz',
-      title: t('products.productItems.dataViz.title'),
-      description: t('products.productItems.dataViz.description'),
-      image: 'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=1080',
-      categoryId: 'data'
-    },
-    {
-      id: 'codeAssistant',
-      title: t('products.productItems.codeAssistant.title'),
-      description: t('products.productItems.codeAssistant.description'),
-      image: 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1080',
-      categoryId: 'ai'
-    }
-  ].filter(p => p.id !== product.value.id) // 过滤掉当前产品
+  const currentLocale = locale.value === 'en' ? 'en' : 'zh-CN'
+  return fetchRelatedProducts(product.value.id, currentLocale, 3)
 })
 
 // 处理产品点击
@@ -805,570 +569,6 @@ const handleProductClick = (productId) => {
 const getCategoryName = (categoryId) => {
   // 使用国际化翻译
   return t(`products.filter.categories.${categoryId}`)
-}
-
-// 获取产品图片
-const getProductImage = (productId) => {
-  switch(productId) {
-    case 'watermark':
-      return 'https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'idPhoto':
-      return 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'fayan':
-      return 'https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'mcpHub':
-      return 'https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&w=600'
-    case 'aiWriting':
-      return 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=600'
-    case 'legalEye':
-      return 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600'
-    case 'dataAnalysis':
-      return 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'voiceAssistant':
-      return 'https://images.pexels.com/photos/8438922/pexels-photo-8438922.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'codeAssistant':
-      return 'https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'dataViz':
-      return 'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    case 'creativeInspiration':
-      return 'https://images.pexels.com/photos/3758105/pexels-photo-3758105.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    default:
-      return 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080'
-  }
-}
-
-// 处理一般产品
-const handleGeneralProduct = (productId) => {
-  console.log(`处理一般产品: ${productId}`)
-  
-  // 设置基本产品信息
-  product.value = {
-    id: productId,
-    title: hasTranslation(`products.productItems.${productId}.title`) ? 
-      t(`products.productItems.${productId}.title`) : productId,
-    description: hasTranslation(`products.productItems.${productId}.description`) ? 
-      t(`products.productItems.${productId}.description`) : '',
-    shortDescription: hasTranslation(`products.productItems.${productId}.shortDescription`) ? 
-      t(`products.productItems.${productId}.shortDescription`) : '',
-    detailedDescription: hasTranslation(`products.productItems.${productId}.detailedDescription`) ? 
-      t(`products.productItems.${productId}.detailedDescription`) : '',
-    image: getProductImage(productId),
-    images: [
-      getProductImage(productId),
-      'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1080',
-      'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?auto=compress&cs=tinysrgb&w=1080'
-    ],
-    categoryId: getCategoryIdForProduct(productId),
-    isFree: ['mcpHub', 'voiceAssistant', 'codeAssistant', 'creativeInspiration'].includes(productId),
-    price: ['mcpHub', 'voiceAssistant', 'codeAssistant', 'creativeInspiration'].includes(productId) ? 0 : 99,
-    pricingModel: ['mcpHub', 'voiceAssistant', 'codeAssistant', 'creativeInspiration'].includes(productId) ? 
-      t('productDetail.pricingModels.free') : t('productDetail.pricingModels.subscription'),
-    rating: 4.5,
-    reviewCount: 24,
-    
-    // 功能特点
-    features: [
-      {
-        title: hasTranslation(`products.productItems.${productId}.features.0.title`) ? 
-          t(`products.productItems.${productId}.features.0.title`) : t('productDetail.defaultFeature1Title'),
-        description: hasTranslation(`products.productItems.${productId}.features.0.description`) ? 
-          t(`products.productItems.${productId}.features.0.description`) : t('productDetail.defaultFeature1Desc'),
-        icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
-      },
-      {
-        title: hasTranslation(`products.productItems.${productId}.features.1.title`) ? 
-          t(`products.productItems.${productId}.features.1.title`) : t('productDetail.defaultFeature2Title'),
-        description: hasTranslation(`products.productItems.${productId}.features.1.description`) ? 
-          t(`products.productItems.${productId}.features.1.description`) : t('productDetail.defaultFeature2Desc'),
-        icon: 'M13 10V3L4 14h7v7l9-11h-7z'
-      },
-      {
-        title: hasTranslation(`products.productItems.${productId}.features.2.title`) ? 
-          t(`products.productItems.${productId}.features.2.title`) : t('productDetail.defaultFeature3Title'),
-        description: hasTranslation(`products.productItems.${productId}.features.2.description`) ? 
-          t(`products.productItems.${productId}.features.2.description`) : t('productDetail.defaultFeature3Desc'),
-        icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4'
-      }
-    ],
-    
-    // 使用场景
-    useCases: [
-      {
-        title: hasTranslation(`products.productItems.${productId}.useCases.0.title`) ? 
-          t(`products.productItems.${productId}.useCases.0.title`) : t('productDetail.defaultUseCase1Title'),
-        description: hasTranslation(`products.productItems.${productId}.useCases.0.description`) ? 
-          t(`products.productItems.${productId}.useCases.0.description`) : t('productDetail.defaultUseCase1Desc'),
-        icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4'
-      },
-      {
-        title: hasTranslation(`products.productItems.${productId}.useCases.1.title`) ? 
-          t(`products.productItems.${productId}.useCases.1.title`) : t('productDetail.defaultUseCase2Title'),
-        description: hasTranslation(`products.productItems.${productId}.useCases.1.description`) ? 
-          t(`products.productItems.${productId}.useCases.1.description`) : t('productDetail.defaultUseCase2Desc'),
-        icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'
-      }
-    ],
-    
-    // 规格分类
-    specCategories: [
-      {
-        name: t('productDetail.specCategories.general'),
-        items: [
-          { name: t('productDetail.specs.version'), value: '1.0.0' },
-          { name: t('productDetail.specs.lastUpdate'), value: '2023-10-15' },
-          { name: t('productDetail.specs.platform'), value: t('productDetail.specValues.multiPlatform') }
-        ]
-      },
-      {
-        name: t('productDetail.specCategories.technical'),
-        items: [
-          { name: t('productDetail.specs.apiAccess'), value: t('productDetail.specValues.available') },
-          { name: t('productDetail.specs.dataStorage'), value: t('productDetail.specValues.cloud') },
-          { name: t('productDetail.specs.security'), value: t('productDetail.specValues.highEncryption') }
-        ]
-      }
-    ],
-    
-    // 用户评价
-    reviews: [
-      {
-        id: 1,
-        userName: 'Alex Chen',
-        userAvatar: '',
-        date: '2023-09-12',
-        rating: 5,
-        content: t('productDetail.defaultReview1')
-      },
-      {
-        id: 2,
-        userName: 'Sarah Johnson',
-        userAvatar: '',
-        date: '2023-08-24',
-        rating: 4,
-        content: t('productDetail.defaultReview2')
-      }
-    ],
-    
-    // 常见问题
-    faqs: [
-      {
-        question: t('productDetail.defaultFAQ1Question'),
-        answer: t('productDetail.defaultFAQ1Answer')
-      },
-      {
-        question: t('productDetail.defaultFAQ2Question'),
-        answer: t('productDetail.defaultFAQ2Answer')
-      }
-    ]
-  }
-}
-
-// 获取产品的分类ID
-const getCategoryIdForProduct = (productId) => {
-  const productMap = {
-    watermark: 'assist',
-    idPhoto: 'assist',
-    fayan: 'assist',
-    mcpHub: 'ai',
-    aiWriting: 'ai',
-    legalEye: 'ai',
-    dataAnalysis: 'data',
-    voiceAssistant: 'assist',
-    codeAssistant: 'ai',
-    dataViz: 'data',
-    creativeInspiration: 'other'
-  }
-  
-  return productMap[productId] || 'other'
-}
-
-// 处理特殊产品
-const handleSpecialProduct = (productId) => {
-  console.log(`处理特殊产品: ${productId}`)
-  
-  // 根据产品ID获取特定产品的数据
-  if (productId === 'watermark') {
-    // 水印工具的特殊数据
-    product.value = {
-      id: 'watermark',
-      title: t('products.productItems.watermark.title'),
-      shortDescription: hasTranslation('products.productItems.watermark.shortDescription') ? 
-        t('products.productItems.watermark.shortDescription') : t('products.productItems.watermark.description'),
-      detailedDescription: hasTranslation('products.productItems.watermark.detailedDescription') ? 
-        t('products.productItems.watermark.detailedDescription') : t('products.productItems.watermark.description'),
-      description: t('products.productItems.watermark.description'),
-      image: getProductImage('watermark'),
-      images: [
-        getProductImage('watermark'),
-        'https://images.pexels.com/photos/5473950/pexels-photo-5473950.jpeg?auto=compress&cs=tinysrgb&w=1080',
-        'https://images.pexels.com/photos/5473956/pexels-photo-5473956.jpeg?auto=compress&cs=tinysrgb&w=1080'
-      ],
-      categoryId: 'assist',
-      isFree: true,
-      price: 0,
-      pricingModel: t('productDetail.pricingModels.free'),
-      rating: 4.8,
-      reviewCount: 36,
-      demoUrl: '#',
-      
-      // 核心功能
-      features: [
-        '智能水印嵌入技术',
-        '支持多种证件类型',
-        '批量处理功能',
-        '水印验证系统',
-        '防伪溯源',
-        '完全免费使用',
-        '无需注册'
-      ],
-      
-      // 产品规格
-      specs: {
-        '支持格式': 'JPG, PNG, PDF',
-        '处理速度': '2秒/文档',
-        '最大文件大小': '20MB',
-        '使用限制': '无限制'
-      },
-      
-      // 详细规格分类
-      specCategories: [
-        {
-          name: t('productDetail.specCategories.general'),
-          items: [
-            { name: '支持格式', value: 'JPG, PNG, PDF' },
-            { name: '处理速度', value: '2秒/文档' },
-            { name: '最大文件大小', value: '20MB' },
-            { name: '水印类型', value: '不可见数字水印' }
-          ]
-        },
-        {
-          name: t('productDetail.specCategories.technical'),
-          items: [
-            { name: '批量处理', value: '支持' },
-            { name: '水印验证', value: '内置验证器' },
-            { name: '安全级别', value: '银行级' },
-            { name: '数据加密', value: 'AES-256' },
-            { name: '免费使用', value: '永久免费' }
-          ]
-        }
-      ],
-      
-      // 使用场景
-      useCases: [
-        {
-          title: '证书防伪',
-          description: '为学历证书、资格证书等重要文件添加防伪水印',
-          icon: 'document'
-        },
-        {
-          title: '文件保护',
-          description: '保护公司机密文件，防止泄露和篡改',
-          icon: 'lock'
-        },
-        {
-          title: '版权保护',
-          description: '为数字作品添加版权水印，保护知识产权',
-          icon: 'copyright'
-        }
-      ],
-      
-      // 用户评价
-      reviews: [
-        {
-          id: 1,
-          userName: '张经理',
-          userAvatar: '',
-          date: '2023-10-15',
-          rating: 5,
-          content: '完全免费还这么好用！水印完全不可见但又能轻松验证真伪。'
-        },
-        {
-          id: 2,
-          userName: '李老师',
-          userAvatar: '',
-          date: '2023-09-20',
-          rating: 5,
-          content: '学校用来处理学生证书，批量处理功能很方便，而且完全免费，节省了很多预算。'
-        }
-      ],
-      
-      // 常见问题
-      faqs: [
-        {
-          question: '这款产品真的完全免费吗？',
-          answer: '是的，证件水印系统完全免费，所有功能都可以无需付费使用。'
-        },
-        {
-          question: '水印会影响文档的外观吗？',
-          answer: '不会，我们使用不可见数字水印技术，不会影响文档的视觉外观。'
-        },
-        {
-          question: '如何验证带水印的文档？',
-          answer: '可以通过我们提供的验证器进行验证，只需扫描文档即可。'
-        }
-      ]
-    }
-  } else if (productId === 'idPhoto') {
-    // 证件照工具的特殊数据
-    product.value = {
-      id: 'idPhoto',
-      title: t('products.productItems.idPhoto.title'),
-      shortDescription: hasTranslation('products.productItems.idPhoto.shortDescription') ? 
-        t('products.productItems.idPhoto.shortDescription') : t('products.productItems.idPhoto.description'),
-      detailedDescription: hasTranslation('products.productItems.idPhoto.detailedDescription') ? 
-        t('products.productItems.idPhoto.detailedDescription') : t('products.productItems.idPhoto.description'),
-      description: t('products.productItems.idPhoto.description'),
-      image: getProductImage('idPhoto'),
-      images: [
-        getProductImage('idPhoto'),
-        'https://images.pexels.com/photos/3785080/pexels-photo-3785080.jpeg?auto=compress&cs=tinysrgb&w=1080',
-        'https://images.pexels.com/photos/3785081/pexels-photo-3785081.jpeg?auto=compress&cs=tinysrgb&w=1080'
-      ],
-      categoryId: 'assist',
-      isFree: true,
-      price: 0,
-      pricingModel: t('productDetail.pricingModels.free'),
-      rating: 4.7,
-      reviewCount: 42,
-      demoUrl: '#',
-      
-      // 核心功能
-      features: [
-        'AI智能美颜',
-        '自动规格调整',
-        '多种背景可选',
-        '批量处理',
-        '云端存储',
-        '免费使用',
-        '无需注册'
-      ],
-      
-      // 产品规格
-      specs: {
-        '支持证件类型': '20+',
-        '处理时间': '3秒内',
-        '照片规格': '标准/自定义',
-        '使用限制': '无限制'
-      },
-      
-      // 详细规格分类
-      specCategories: [
-        {
-          name: t('productDetail.specCategories.general'),
-          items: [
-            { name: '支持证件类型', value: '20+' },
-            { name: '处理时间', value: '3秒内' },
-            { name: '照片规格', value: '标准/自定义' },
-            { name: '存储时间', value: '永久' }
-          ]
-        },
-        {
-          name: t('productDetail.specCategories.technical'),
-          items: [
-            { name: 'AI美颜', value: '支持' },
-            { name: '背景替换', value: '支持' },
-            { name: '批量处理', value: '支持' },
-            { name: '云端备份', value: '支持' },
-            { name: '免费使用', value: '永久免费' }
-          ]
-        }
-      ],
-      
-      // 使用场景
-      useCases: [
-        {
-          title: '证件办理',
-          description: '快速生成身份证、护照等标准证件照',
-          icon: 'card'
-        },
-        {
-          title: '求职应聘',
-          description: '制作专业简历照片',
-          icon: 'briefcase'
-        },
-        {
-          title: '学生证件',
-          description: '制作学生证、校园卡等照片',
-          icon: 'academic'
-        }
-      ],
-      
-      // 用户评价
-      reviews: [
-        {
-          id: 1,
-          userName: '王小明',
-          userAvatar: '',
-          date: '2023-10-05',
-          rating: 5,
-          content: '完全免费的证件照工具，AI美颜效果自然，太棒了！'
-        },
-        {
-          id: 2,
-          userName: '李小',
-          userAvatar: '',
-          date: '2023-09-18',
-          rating: 4,
-          content: '使用很方便，照片修改很专业，省了不少钱。'
-        }
-      ],
-      
-      // 常见问题
-      faqs: [
-        {
-          question: '真的完全免费吗？',
-          answer: '是的，小花证件照的所有功能都完全免费使用。'
-        },
-        {
-          question: '照片适合官方文件使用吗？',
-          answer: '是的，我们的照片规格符合各种官方文件的标准要求。'
-        },
-        {
-          question: '我的照片会保存多久？',
-          answer: '您的照片将永久保存在您的云账户中。'
-        }
-      ]
-    }
-  } else if (productId === 'fayan') {
-    // 法眼AI的特殊数据
-    product.value = {
-      id: 'fayan',
-      title: t('products.productItems.fayan.title'),
-      shortDescription: hasTranslation('products.productItems.fayan.shortDescription') ? 
-        t('products.productItems.fayan.shortDescription') : t('products.productItems.fayan.description'),
-      detailedDescription: hasTranslation('products.productItems.fayan.detailedDescription') ? 
-        t('products.productItems.fayan.detailedDescription') : t('products.productItems.fayan.description'),
-      description: t('products.productItems.fayan.description'),
-      image: getProductImage('fayan'),
-      images: [
-        getProductImage('fayan'),
-        'https://images.pexels.com/photos/5668475/pexels-photo-5668475.jpeg?auto=compress&cs=tinysrgb&w=1080',
-        'https://images.pexels.com/photos/5668474/pexels-photo-5668474.jpeg?auto=compress&cs=tinysrgb&w=1080'
-      ],
-      categoryId: 'assist',
-      isFree: true,
-      price: 0,
-      pricingModel: t('productDetail.pricingModels.free'),
-      rating: 4.6,
-      reviewCount: 28,
-      demoUrl: '#',
-      
-      // 核心功能
-      features: [
-        '智能条款分析',
-        '法律风险评估',
-        '基于模板的文档生成',
-        '法律资源库',
-        '多语言支持',
-        '免费使用'
-      ],
-      
-      // 产品规格
-      specs: {
-        '处理速度': '3秒/页',
-        '支持语言': '中文、英文',
-        '文档类型': '10+',
-        '文档存储': '加密云存储'
-      },
-      
-      // 详细规格分类
-      specCategories: [
-        {
-          name: t('productDetail.specCategories.general'),
-          items: [
-            { name: '文档分析', value: '支持' },
-            { name: '模板生成', value: '支持' },
-            { name: '语言支持', value: '中文、英文' },
-            { name: '文件格式', value: 'PDF, DOCX, TXT' }
-          ]
-        },
-        {
-          name: t('productDetail.specCategories.technical'),
-          items: [
-            { name: '风险评估', value: '支持' },
-            { name: '对比分析', value: '支持' },
-            { name: '历史追踪', value: '支持' },
-            { name: '团队协作', value: '支持' }
-          ]
-        },
-        {
-          name: '技术参数',
-          items: [
-            { name: 'API集成', value: '支持' },
-            { name: '数据加密', value: 'AES-256' },
-            { name: '并发用户', value: '无限制' }
-          ]
-        }
-      ],
-      
-      // 使用场景
-      useCases: [
-        {
-          title: '合同审查',
-          description: '快速识别合同中的关键条款和潜在风险点',
-          icon: 'document'
-        },
-        {
-          title: '文档生成',
-          description: '根据模板和要求自动生成标准法律文档',
-          icon: 'template'
-        },
-        {
-          title: '法规合规',
-          description: '确保文档符合最新的法律法规要求',
-          icon: 'check'
-        }
-      ],
-      
-      // 用户评价
-      reviews: [
-        {
-          id: 1,
-          userName: '李律师',
-          userAvatar: '',
-          date: '2023-10-12',
-          rating: 5,
-          content: '非常实用的法律文档工具，大大提高了工作效率。'
-        },
-        {
-          id: 2,
-          userName: '张经理',
-          userAvatar: '',
-          date: '2023-09-28',
-          rating: 4,
-          content: '界面清晰，功能强大，对合同审查特别有帮助。'
-        },
-        {
-          id: 3,
-          userName: '王助理',
-          userAvatar: '',
-          date: '2023-09-15',
-          rating: 5,
-          content: '免费又专业，文档生成功能节省了大量时间。'
-        }
-      ],
-      
-      // 常见问题
-      faqs: [
-        {
-          question: '使用法眼AI需要付费吗？',
-          answer: '不需要，法眼AI是一款完全免费的法律文档处理工具。'
-        },
-        {
-          question: '文档数据安全如何保障？',
-          answer: '我们使用AES-256加密技术确保所有文档数据的安全。'
-        },
-        {
-          question: '支持哪些类型的文档？',
-          answer: '支持各类法律文档，包括合同、协议、诉讼文书等。'
-        },
-        {
-          question: '处理速度有多快？',
-          answer: '单页文档处理通常不超过3秒，批量处理也能保持高效率。'
-        }
-      ]
-    }
-  }
 }
 
 // 更新结构化数据
